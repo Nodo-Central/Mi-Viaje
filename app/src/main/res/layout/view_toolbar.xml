@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.MaterialToolbar
+    android:alpha="1000"
+    android:id="@+id/app_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorSurface"
+    app:titleTextColor="?attr/colorOnSurface"
+    app:popupTheme="@style/ThemeOverlay.MiViaje.PopupMenu"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageButton
+        android:id="@+id/toolbar_overflow_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/more_options"
+        android:padding="12dp"
+        android:src="@drawable/ic_more_vert"
+        android:visibility="invisible"
+        app:tint="?attr/colorOnPrimaryContainer"
+        />
+</com.google.android.material.appbar.MaterialToolbar>

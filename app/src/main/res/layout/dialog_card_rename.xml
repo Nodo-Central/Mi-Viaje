@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textfield.TextInputLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog_card_alias_input_layout"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/card_alias_hint"
+    app:boxCornerRadiusBottomStart="30dp"
+    app:boxCornerRadiusBottomEnd="30dp"
+    app:boxCornerRadiusTopStart="30dp"
+    app:boxCornerRadiusTopEnd="30dp"
+    app:boxBackgroundMode="outline"
+    app:endIconMode="clear_text"
+    app:endIconDrawable="@drawable/ic_close"
+    app:startIconDrawable="@drawable/ic_signature">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/dialog_card_alias_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:imeOptions="actionDone"
+        android:inputType="textCapSentences"
+        android:maxLines="1" />
+
+</com.google.android.material.textfield.TextInputLayout>

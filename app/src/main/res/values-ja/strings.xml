@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="settings">設定</string>
+    <string name="about_app">Mi Viaje について</string>
+    <string name="help">ヘルプ</string>
+    <string name="help_intro_title">まず大事なこと</string>
+    <string name="help_intro">長いマニュアルではありません。Mi Viaje が何を読み取り、どのデータを解釈し、なぜ路線名や駅名がときどき変に見えるのかをすばやく確認するための答えです。</string>
+    <string name="help_section_basic">基本的な使い方</string>
+    <string name="help_section_routes">路線と利用履歴</string>
+    <string name="help_section_technical">技術データ</string>
+    <string name="help_section_project">プロジェクト</string>
+    <string name="help_balance_question">残高は信頼できますか？</string>
+    <string name="help_balance_answer">はい。残高はカードの価値ファイルから読み取られます。この読み取りが全体的に間違っているなら、問題はこのアプリよりはるかに大きく、運賃収受システム自体に影響します。不完全または近似になり得るのは、通常、路線、駅、バリデーター、サービス名の解釈です。</string>
+    <string name="help_card_expiration_question">なぜカードに有効期限があるのですか？</string>
+    <string name="help_card_expiration_answer">スマートカードは永遠には使えません。年数がたつと、チップが情報を保持したり書き込んだりする信頼性が下がることがあります。そのため、多くの銀行カードや物理メディアと同じように有効期限があります。Mi Viaje はその日付を表示するだけで、延長や変更はできません。</string>
+    <string name="help_no_write_question">カードにチャージ、変更、ロック解除はできますか？</string>
+    <string name="help_no_write_answer">いいえ。Mi Viaje はローカルで読める情報だけを読み取ります。残高の追加、データ変更、ユーザー認証、公式窓口の代替は行いません。</string>
+    <string name="help_saved_data_question">アプリはどんなデータを保存しますか？</string>
+    <string name="help_saved_data_answer">スキャンしたカード、別名、読み取った利用履歴、支払い方法、カスタマイズを端末内に保存します。JSONバックアップやログも書き出せます。これらのファイルにはカード識別子や利用履歴が含まれる場合があるため、共有する前に確認してください。</string>
+    <string name="help_routes_wrong_question">路線や駅が少し変に表示されるのはなぜですか？</string>
+    <string name="help_routes_wrong_answer">カードには、地図や駅、案内表示で見るような読みやすい名前が常に保存されているわけではありません。技術的な識別子が保存されています。Mi Viaje はそれを分かりやすい名前に変換しようとしますが、一部のバリデーターは珍しい設定だったり、曖昧なデータを報告したりします。これは特に Mi Macro Periférico や、特殊なバリデーター、複数メーカーのバリデーターを使う路線で起こります。</string>
+    <string name="help_route_label_question">幹線 T08 に乗ったのに、カードが補完路線 C08 を作り出したのですか？</string>
+    <string name="help_route_label_answer">一部の路線は番号を共有したり、設定が変わったり、サービスを完全に判別するには足りない識別子を報告したりします。十分な根拠がない場合、アプリは既知の最も近い候補を表示することがあります。利用履歴と残高はカードから来ています。不確かなのは人間向けのラベルです。</string>
+    <string name="help_events_missing_question">古い利用履歴が表示されないのはなぜですか？</string>
+    <string name="help_events_missing_answer">カードが保持できるイベント数には限りがあります。通常は最近の利用履歴や一部の内部記録を保持します。Mi Viaje はスキャン後にローカル履歴を保存しますが、カード上にもう存在しないイベントは復元できません。</string>
+    <string name="help_cards_differ_question">カードによって表示される情報量が違うのはなぜですか？</string>
+    <string name="help_cards_differ_answer">各カードがNFCで読ませる情報、支払い方法の種類、古さ、設定、最近の利用履歴によって変わります。カードが公開していないデータをアプリが作り出すことはできません。</string>
+    <string name="help_technical_button_question">技術データボタンは何をしますか？</string>
+    <string name="help_technical_button_answer">カードやバリデーターが内部で記録する内容に近い情報を表示します。Mi Viaje が路線、駅、運行者、交通種別をなぜそう表示したのか理解したいときに役立ちます。興味がなければ、気にせず無視して大丈夫です。</string>
+    <string name="help_technical_fields_question">SAM UID、SAM Sequence、Route ID、Device ID は何ですか？</string>
+    <string name="help_technical_fields_answer">SAM UID はバリデーターの安全モジュール、つまり取引に署名した機器の識別子のようなものです。SAM Sequence はそのバリデーターでのイベント順序です。Route ID は報告された路線識別子です。Device ID は取引を行った具体的な機器を識別します。</string>
+    <string name="help_transport_type_question">TransportType: BUS (BRT) のような表示は何ですか？</string>
+    <string name="help_transport_type_answer">元のデータはバスを示していましたが、アプリが文脈からおそらくBRTバリデーターだと判断した、という意味です。Mi Viaje は、ラベルが読み取ったデータそのものから来たのか、推論から来たのかを確認できるように技術的な手がかりを残します。</string>
+    <string name="help_not_official_question">これは公式アプリですか？</string>
+    <string name="help_not_official_answer">いいえ。Mi Viaje はオープンソースのコミュニティプロジェクトです。Mi Movilidad、SITEUR、ハリスコ州政府、運行事業者、関連機関とは提携していません。</string>
+    <string name="help_internet_question">アプリは分析情報やデータをサーバーに送りますか？</string>
+    <string name="help_internet_answer">いいえ。アプリはインターネット権限を宣言しておらず、リモートテレメトリ、Crashlytics、分析機能も使っていません。バックアップ、スクリーンショット、ログを共有する場合、それはユーザーまたはOSによる操作であり、Mi Viaje が開始する送信ではありません。</string>
+    <string name="help_contribute_question">路線、駅、バリデーターの改善に協力できますか？</string>
+    <string name="help_contribute_answer">はい。役立つ報告には、利用履歴のスクリーンショット、期待される路線、駅または停留所、おおよその日付、必要であれば技術データが含まれます。抵抗がある場合は、個人情報や識別子を共有しないでください。</string>
+    <string name="help_support_question">プロジェクトは貢献や支援を受け付けていますか？</string>
+    <string name="help_support_answer">はい。Mi Viaje はオープンソースで、調査、実カードでのテスト、データ整理、インターフェース設計にかなりの作業が必要でした。貢献、よく整理された報告、任意の支援は保守と改善に役立ちますが、支払いなしでもアプリは使い続けられます。</string>
+    <string name="support_kofi_title">プロジェクトを支援</string>
+    <string name="support_kofi_body">Mi Viaje が疑問や不安、バリデーターへの心の旅を少しでも減らしたなら、Ko-fi で開発を支援できます。任意で、ありがたく、そして大げさではありません。</string>
+    <string name="support_kofi_button">Ko-fi で支援</string>
+    <string name="more_options">その他のオプション</string>
+
+    <string name="about_credits">クレジット</string>
+    <string name="about_libraries_credits">使用ライブラリ</string>
+    <string name="about_licenses">ライセンス</string>
+    <string name="about_libraries_search_hint">ライブラリを検索…</string>
+    <string name="about_libraries_empty">その条件に一致するライブラリは見つかりませんでした。</string>
+    <string name="about_libraries_version">v%1$s</string>
+    <string name="about_libraries_license">ライセンス: %1$s</string>
+    <string name="about_libraries_open_link_error">リンクを開けませんでした</string>
+    <string name="about_licenses_search_hint">ライセンスを検索…</string>
+    <string name="about_licenses_empty">その条件に一致するライセンスは見つかりませんでした。</string>
+    <string name="about_licenses_copy_all">すべてコピー</string>
+    <string name="about_licenses_copied">ライセンスをコピーしました</string>
+    <string name="about_licenses_used_by">使用元: %1$s</string>
+
+    <string name="app_name">ミビアーヘ</string>
+    <string name="activity_card">カード詳細</string>
+    <string name="activity_artwork_picker">カード画像</string>
+
+    <string name="settings_customization">カスタマイズ</string>
+    <string name="system_default">システムのデフォルト</string>
+    <string name="setting_dark_mode">テーマ</string>
+    <string name="setting_dark_mode_light">ライト</string>
+    <string name="setting_dark_mode_dark">ダーク</string>
+    <string name="system_short">システム</string>
+    <string name="setting_pure_dark">ピュアダーク</string>
+    <string name="setting_app_language">アプリの言語</string>
+    <string name="app_language_spanish">Español (スペイン語)</string>
+    <string name="app_language_english">English (英語)</string>
+    <string name="app_language_japanese">日本語</string>
+    <string name="app_language_korean">한국어 (韓国語)</string>
+    <string name="app_language_chinese">中文 (中国語)</string>
+
+    <string name="setting_show_more_data">詳細データを表示</string>
+    <string name="setting_show_technical_data">デバッグデータを表示</string>
+    <string name="setting_show_technical_data_summary">カードにデバッグデータを表示します。好奇心のあるユーザー向け。</string>
+
+    <string name="setting_show_more_data_summary">追加の技術データを表示します。運営者・実装者・上級ユーザー・開発者向け。</string>
+
+    <string name="yes">はい</string>
+    <string name="cancel">キャンセル</string>
+    <string name="continue_action">続行</string>
+
+    <string name="unspecified">未指定</string>
+
+    <string name="payment_method_type_credit">クレジット</string>
+    <string name="payment_method_type_wallet">ウォレット</string>
+    <string name="payment_method_type_discount_ticket">割引チケット</string>
+
+    <string name="payment_method_status_active">有効</string>
+    <string name="payment_method_status_initialized">初期化済み</string>
+    <string name="payment_method_status_suspended">停止中</string>
+
+    <string name="event_fare_payment">運賃支払い</string>
+    <string name="event_top_up">チャージ</string>
+    <string name="event_transfer">乗換</string>
+
+    <string name="event_refund">返金</string>
+    <string name="numbered_event_format">%1$d.</string>
+    <string name="event_location">場所: %1$s</string>
+    <string name="bus_unit_id_format">U-%1$02d</string>
+
+    <string name="device_id_format">デバイス: %1$s</string>
+    <string name="event_card_emission">カード発行</string>
+
+    <string name="card_status_initialized">初期化済み</string>
+    <string name="card_status_active">有効</string>
+    <string name="card_status_blocked">ブロック済み</string>
+    <string name="card_status_deactivated">無効</string>
+
+    <string name="card_scan_add">カードを追加または更新</string>
+    <string name="card_scan_title_waiting">カードを近づけてください</string>
+    <string name="card_scan_message_waiting">Mi Viaje が読み取りを終えるまで、カードをスマートフォンの背面に動かさずに当ててください。</string>
+    <string name="card_scan_detail_waiting">残高、支払い方法、最近の利用履歴を、データを送信せずに読み取ります。</string>
+    <string name="card_scan_title_reading">カードを読み取り中</string>
+    <string name="card_scan_message_reading">カードをそのまま動かさないでください。通常は数秒で完了します。</string>
+    <string name="card_scan_detail_reading">カード情報を保存しています…</string>
+    <string name="card_scan_title_success">読み取り成功</string>
+    <string name="card_scan_message_success_added">カードを Mi Viaje に追加しました。</string>
+    <string name="card_scan_message_success_updated">最新の読み取り内容でカードを更新しました。</string>
+    <string name="card_scan_title_error">読み取れませんでした</string>
+    <string name="card_scan_message_error">カードをいったん離し、もう一度近づけて、読み取りが終わるまで動かさないでください。</string>
+    <string name="card_scan_detail_error">エラー: %1$s</string>
+    <string name="card_scan_action_view_card">カードを見る</string>
+    <string name="card_scan_action_scan_again">別のカードを読む</string>
+    <string name="card_scan_action_try_again">再試行</string>
+    <string name="card_scan_action_name_card">カードに名前を付ける</string>
+    <string name="card_scan_action_save_name">名前を保存</string>
+    <string name="card_scan_action_done">完了</string>
+    <string name="card_scan_alias_helper">短い別名を付けると、このカードを見分けやすくなります。</string>
+    <string name="card_scan_alias_saved">名前を保存しました</string>
+    <string name="card_scan_alias_cleared">名前を削除しました</string>
+    <string name="card_scan_alias_saving">名前を保存しています…</string>
+    <string name="card_scan_alias_error">名前を保存できませんでした</string>
+    <string name="card_scan_icon_content_description">NFCカード</string>
+    <string name="card_scan_success_icon_content_description">読み取り完了</string>
+
+    <string name="card_expiration">%1$s まで有効</string>
+
+    <string name="card_products">支払い方法</string>
+    <string name="card_event_history">利用履歴</string>
+    <string name="events_filter_all">すべて</string>
+    <string name="events_filter_transport">交通</string>
+    <string name="events_filter_event_type">イベント</string>
+    <string name="events_filter_date">日付</string>
+    <string name="events_filter_more">その他</string>
+    <string name="events_filter_sheet_title">利用履歴を絞り込む</string>
+    <string name="events_filter_clear_all">すべてクリア</string>
+    <string name="events_filter_transport_type">交通の種類</string>
+    <string name="transport_brt">BRT</string>
+    <string name="transport_bus">バス</string>
+    <string name="transport_train_feeder">電車連絡バス</string>
+    <string name="events_filter_route">ルート</string>
+    <string name="events_filter_station">車両 / 駅</string>
+    <string name="events_filter_station_hint">車両または駅を検索...</string>
+    <string name="events_filter_date_today">今日</string>
+    <string name="events_filter_date_week">今週</string>
+    <string name="events_filter_date_month">今月</string>
+    <string name="events_filter_date_range">期間</string>
+    <string name="events_filter_date_range_picker_title">期間を選択</string>
+    <string name="events_filter_operator">運行者</string>
+    <string name="events_filter_event_type_full">イベントの種類</string>
+    <string name="events_filter_apply">フィルターを適用</string>
+
+    <string name="card_emission_info">カード情報</string>
+    <string name="card_network_info">交通ネットワーク情報</string>
+    <string name="card_user_info">ユーザー情報</string>
+
+    <string name="transport_train">電車</string>
+    <string name="transport_direction">%1$s 方面</string>
+    <string name="transport_complementary">補完路線 C%1$02d%2$s</string>
+
+    <string name="device_validator">バリデーター</string>
+    <string name="device_turnstile">改札機</string>
+
+    <string name="device_turnstile_numbered_debug">改札機 %1$d (%2$d)</string>
+    <string name="device_turnstile_numbered">改札機 %1$d</string>
+
+    <string name="device_ticket_vending_machine">カード販売・チャージ機 (VRT)</string>
+    <string name="device_attention_module">案内モジュール</string>
+    <string name="device_smartphone">モバイル端末</string>
+    <string name="device_point_of_sale">販売店</string>
+
+    <string name="profile_student">学生</string>
+    <string name="profile_single_card">タルヘタ・ウニカ（共通カード）</string>
+    <string name="profile_general_fare">一般運賃</string>
+    <string name="profile_visually_impaired">視覚障がい</string>
+    <string name="profile_hearing_impaired">聴覚障がい</string>
+    <string name="profile_employee">従業員</string>
+    <string name="profile_speech_impaired">発話障がい</string>
+    <string name="profile_child_5_to_12">5歳から12歳の子ども</string>
+    <string name="profile_disability">障がい</string>
+    <string name="profile_senior_citizen">高齢者</string>
+    <string name="profile_teacher">教員</string>
+    <string name="profile_security">警備</string>
+    <string name="profile_service_animal">補助動物</string>
+    <string name="profile_police">警察</string>
+    <string name="profile_visitor_provider">訪問者/業者</string>
+    <string name="profile_business">業務通行</string>
+    <string name="profile_bicycle">自転車</string>
+    <string name="profile_social_service">社会奉仕</string>
+    <string name="profile_mentally_impaired">知的・精神障がい</string>
+    <string name="profile_mobility_impaired">肢体不自由</string>
+    <string name="profile_child_under_5">5歳未満の子ども</string>
+    <string name="profile_family_member">家族</string>
+    <string name="profile_cleaning_staff">清掃スタッフ</string>
+    <string name="profile_supervisor">監督者</string>
+
+    <plurals name="ticket_count">
+        <item quantity="other">%1$d 枚</item>
+    </plurals>
+    <plurals name="ticket_count_plus">
+        <item quantity="other">+%1$d 枚</item>
+    </plurals>
+    <string name="free_of_charge">無料</string>
+
+    <string name="operator_id_format">オペレーター %1$d</string>
+
+    <string name="import_data">データをインポート</string>
+    <string name="export_data">データをエクスポート</string>
+
+    <string name="export_log">ログのエクスポート</string>
+    <string name="unknown">不明</string>
+    <string name="loading">読み込み中…</string>
+    <string name="none">なし</string>
+
+    <string name="count_badge_format">%1$d</string>
+    <string name="card_actions_applied">カード変更回数</string>
+
+    <string name="network_app_version">交通アプリ</string>
+    <string name="network_id">ネットワークID</string>
+
+    <string name="network_app_expiration">アプリ有効期限</string>
+
+    <string name="user_name">名前</string>
+    <string name="user_birth_date">生年月日</string>
+    <string name="user_profile_type">プロフィール</string>
+    <string name="user_profile_expiration">有効期限</string>
+
+    <string name="card_production_date">製造日</string>
+    <string name="card_country">国</string>
+    <string name="system_sn">システムシリアル番号</string>
+    <string name="card_expiration_date">カード有効期限</string>
+
+    <string name="network_owner_id">交通ネットワーク所有者</string>
+    <string name="network_company_id">交通ネットワーク会社</string>
+
+    <string name="network_issuer_id">発行ネットワークID</string>
+    <string name="network_distributor_id">カード配布ID</string>
+
+    <string name="sam_id">セキュリティモジュールID</string>
+    <string name="sam_algorithm_id">セキュリティアルゴリズムID</string>
+
+    <string name="write_keys_version">書き込みキーのバージョン</string>
+
+    <string name="credits_intro">インターネット接続なしで、公共交通カードの残高と利用履歴を簡単に確認できます。</string>
+    <string name="credits_developer_title">開発</string>
+    <string name="credits_repo">github.com/Nodo-Central/Mi-Viaje</string>
+    <string name="credits_mascot">マスコット: Víctor “Vi” Puentes</string>
+    <string name="credits_copyright">© 2026 Mi Viaje — 無断転載禁止</string>
+    <string name="credits_acknowledgements_title">謝辞</string>
+    <string name="credits_acknowledgement_early_users">• 初期バージョンを信頼してくれた皆さま</string>
+    <string name="credits_acknowledgement_cucei">• CUCEIの学生コミュニティ</string>
+    <string name="credits_acknowledgement_dialogue">• 大学内の対話と自治のための集まり</string>
+    <string name="credits_acknowledgement_open_data">• 公共交通データの公開を推進した人々</string>
+    <string name="credits_acknowledgement_routes">• 今日も街を動かし続ける路線と運行者</string>
+    <string name="credits_inspiration_title">着想</string>
+    <string name="credits_inspiration">シンプルな代替手段。広告なし、不要な依存関係なし、ユーザーが主導する設計。</string>
+    <string name="rename">名前を変更する</string>
+    <string name="copy_uid">UIDをコピー</string>
+    <string name="delete">削除</string>
+    <string name="change_background">背景画像をカスタマイズする</string>
+    <string name="delete_card_confirm">このカードを削除しますか？</string>
+    <string name="rename_card_title">カード名を変更</string>
+    <string name="card_alias_hint">カードの別名</string>
+    <string name="save">保存</string>
+    <string name="toast_alias_updated">別名を更新しました</string>
+    <string name="toast_alias_cleared">別名を削除しました</string>
+    <string name="toast_alias_update_error">別名を更新できませんでした</string>
+    <string name="toast_uid_copied">UIDをコピーしました: %1$s</string>
+    <string name="card_background_title">カード背景を選択</string>
+    <string name="manage_imported_backgrounds_title">インポート画像を管理</string>
+    <string name="delete_imported_background_title">インポート画像を削除</string>
+    <string name="delete_imported_background_confirm">\"%1$s\" をギャラリーから削除しますか？</string>
+    <string name="artwork_option_default">自動デザインを使用</string>
+    <string name="artwork_option_imported_named">インポート済み: %1$s</string>
+    <string name="artwork_option_import">ギャラリーからインポート...</string>
+    <string name="artwork_option_manage">インポート画像を管理...</string>
+    <string name="artwork_manager_entry">%1$s（%2$d 枚のカードで使用）</string>
+    <string name="artwork_default_name">名称未設定の画像</string>
+    <string name="artwork_picker_import">画像をインポート</string>
+    <string name="artwork_import_as_is">そのままインポート</string>
+    <string name="artwork_crop_title">画像を切り抜き</string>
+    <string name="artwork_selected">選択中</string>
+    <string name="artwork_usage_count">%1$d 枚のカードで使用中</string>
+    <string name="artwork_action_menu">画像の操作</string>
+    <string name="rename_imported_artwork_title">画像名を変更</string>
+    <string name="artwork_name_hint">画像名</string>
+    <string name="artwork_delete_in_use_warning_title">使用中の画像</string>
+    <string name="artwork_delete_in_use_warning_message">\"%1$s\" は %2$d 枚のカードで使用中です。削除すると、それらのカードは自動デザインに戻ります。</string>
+    <string name="artwork_delete_in_use_final_title">それでも削除</string>
+    <string name="artwork_delete_in_use_final_message">\"%1$s\" を削除します。この操作は元に戻せません。</string>
+    <string name="artwork_builtin_2020_general">ミーモヴィリダッド</string>
+    <string name="artwork_builtin_2020_subsidy_50">ミパサヘアマリジョ</string>
+    <string name="artwork_builtin_2020_subsidy_100">ミパサヘベルデ</string>
+    <string name="artwork_builtin_2025_general">2025ミーモヴィリダッド</string>
+    <string name="artwork_builtin_2025_subsidy_50">ヨハリスコ50%補助</string>
+    <string name="artwork_builtin_2025_subsidy_100">ヨハリスコ100%補助</string>
+    <string name="artwork_builtin_2026_social">タルヘタウーニカ</string>
+    <string name="toast_background_updated">背景を更新しました</string>
+    <string name="toast_background_update_error">背景を更新できませんでした</string>
+    <string name="toast_background_imported">画像をインポートして適用しました</string>
+    <string name="toast_background_import_invalid_image">選択した画像は無効か、破損しています</string>
+    <string name="toast_background_import_error">画像をインポートできませんでした</string>
+    <string name="toast_background_crop_error">画像を切り抜けませんでした</string>
+    <string name="toast_background_sanitized">最適化された背景: %1$d。削除された互換性のない背景: %2$d</string>
+    <string name="toast_background_sanitize_error">一部のインポート画像を検証できませんでした</string>
+    <string name="toast_background_deleted">画像を削除しました</string>
+    <string name="toast_background_delete_error">画像を削除できませんでした</string>
+    <string name="toast_artwork_renamed">画像名を変更しました</string>
+    <string name="toast_artwork_rename_error">画像名を変更できませんでした</string>
+    <string name="toast_artwork_in_use">削除不可: 使用中の画像です</string>
+    <string name="toast_no_imported_backgrounds">インポート画像はありません</string>
+    <string name="main_cards_empty_tip">カードボタンを押して新しいカードをスキャンしてください</string>
+    <string name="toast_nfc_not_supported">このデバイスにはNFC機能は搭載されていません。</string>
+    <string name="toast_nfc_disabled">NFCは無効になっています。有効にしてください。</string>
+    <string name="vrt_id_format">VRT-%1$02d</string>
+    <string name="export_card">このカードをエクスポートする</string>
+    <string name="toast_log_export_success">ログのエクスポートに成功しました</string>
+    <string name="toast_log_export_capture_error">ログを取得できませんでした</string>
+    <string name="toast_log_export_save_error">ログファイルを保存できませんでした</string>
+    <string name="toast_log_export_clear_error">ログはエクスポートされましたが、バッファをクリアできません。</string>
+    <string name="profile_disability_assisted">介助付き障がい者</string>
+    <string name="profile_missing_person_relative">行方不明者の家族</string>
+    <string name="profile_women_support">女性支援</string>
+    <string name="profile_zapopan">サポパンがあなたを運ぶ</string>
+    <string name="setting_rebel_mode">Zen モード</string>
+    <string name="setting_rebel_mode_summary">以前の大量輸送システムの名称を使用します。</string>
+    <string name="transport_brt_feeder">BRT連絡バス</string>
+    <string name="about_libraries_repo">コード</string>
+    <string name="about_libraries_docs">ドキュメント</string>
+    <string name="about_libraries_license_button">ライセンス</string>
+    <string name="credits_developer_name">ノド・セントラル</string>
+    <string name="credits_origin">トラホムルコから、心臓の力で作りました 🫀</string>
+    <string name="event_card_activation">カード有効化</string>
+    <string name="event_fare_refund">運賃払い戻し</string>
+    <string name="payment_method_summary">支払い方法</string>
+    <string name="payment_method_restrictions">制限</string>
+    <string name="payment_method_activity">利用状況</string>
+    <string name="payment_method_technical">技術データ</string>
+    <string name="payment_method_value">現在の値</string>
+    <string name="payment_method_valid_from">有効開始日</string>
+    <string name="payment_method_valid_until">有効期限</string>
+    <string name="payment_method_valid_time">利用可能時間</string>
+    <string name="payment_method_daily_trips_by_week">今週の利用回数</string>
+    <string name="payment_method_max_trips_per_week">利用回数の上限</string>
+    <string name="payment_method_allowed_transfers">許可された乗換</string>
+    <string name="payment_method_transfer_time_limit">乗換可能時間</string>
+    <string name="payment_method_allowed_passbacks">許可された再利用</string>
+    <string name="payment_method_passback_min_time">再利用防止時間</string>
+    <string name="payment_method_restricted_days">利用不可日</string>
+    <string name="payment_method_week_number">最終利用週</string>
+    <string name="payment_method_total_uses">合計利用回数</string>
+    <string name="payment_method_last_validation">最終検証</string>
+    <string name="payment_method_last_operator">最終利用時の運行者</string>
+    <string name="payment_method_last_route_or_station">最終利用時の路線/駅</string>
+    <string name="payment_method_last_device">最終利用時のデバイス</string>
+    <string name="payment_method_priority">支払い方法の優先度</string>
+    <string name="payment_method_id">方法ID</string>
+    <string name="payment_method_distributor_network_id">配布者ネットワークID</string>
+    <string name="payment_method_distributor_company_id">配布会社ID</string>
+    <string name="payment_method_distribution_date">配布日</string>
+    <string name="payment_method_sam_id">配布者SAM</string>
+    <string name="payment_method_distributor_device_id">配布デバイス</string>
+    <string name="payment_method_row_format">%1$s: %2$s</string>
+    <string name="payment_method_no_restrictions">制限なし</string>
+    <string name="payment_method_no_activity">記録された利用はありません</string>
+    <string name="payment_method_no_technical_data">技術データなし</string>
+    <string name="setting_color_theme">カラーテーマ</string>
+    <string name="color_theme_metro_l1">ミトレン L1</string>
+    <string name="color_theme_metro_l2">ミトレン L2</string>
+    <string name="color_theme_metro_l3">ミトレン L3</string>
+    <string name="color_theme_metro_l4">ミトレン L4</string>
+    <string name="color_theme_macro_aeropuerto">ミマクロ・アエロプエルト</string>
+    <string name="color_theme_macro_calzada">ミマクロ・カルサーダ</string>
+    <string name="color_theme_macro_periferico">ミマクロ・ペリフェリコ</string>
+    <string name="color_theme_mi_transporte">ミトランスポルテ</string>
+    <string name="color_theme_corporate">コーポレート</string>
+    <string name="user_holder_id">所有者ID</string>
+    <string name="transport_trunk">幹線 T%1$02d%2$s</string>
+    <string name="transport_route">路線 %1$s</string>
+    <string name="transport_feeder">支線 A%1$02d%2$s</string>
+    <string name="transport_station">%1$s駅</string>
+</resources>

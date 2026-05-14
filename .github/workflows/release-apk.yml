@@ -1,0 +1,184 @@
+name: Release signed APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: Release tag to create, for example v0.3.4
+        required: true
+        type: string
+      release_name:
+        description: Release title. Defaults to the tag name.
+        required: false
+        type: string
+      draft:
+        description: Create the release as a draft.
+        required: true
+        default: true
+        type: boolean
+      prerelease:
+        description: Mark the release as a prerelease.
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ inputs.tag_name }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build signed APK and create release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Decode release keystore
+        env:
+          RELEASE_KEYSTORE_BASE64: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
+          RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+
+          missing=0
+          for name in RELEASE_KEYSTORE_BASE64 RELEASE_KEYSTORE_PASSWORD RELEASE_KEY_ALIAS RELEASE_KEY_PASSWORD; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Missing required secret: ${name}"
+              missing=1
+            fi
+          done
+
+          if [ "${missing}" -ne 0 ]; then
+            exit 1
+          fi
+
+          printf '%s' "${RELEASE_KEYSTORE_BASE64}" | base64 --decode > "${RUNNER_TEMP}/release-keystore.jks"
+          chmod 600 "${RUNNER_TEMP}/release-keystore.jks"
+
+      - name: Build signed release APK
+        env:
+          RELEASE_KEYSTORE_FILE: ${{ runner.temp }}/release-keystore.jks
+          RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+        run: ./gradlew clean test assembleRelease
+
+      - name: Prepare release assets
+        env:
+          EXPECTED_RELEASE_CERT_SHA256: ${{ secrets.EXPECTED_RELEASE_CERT_SHA256 }}
+          TAG_NAME: ${{ inputs.tag_name }}
+        run: |
+          set -euo pipefail
+
+          mkdir -p release-assets
+
+          apk="$(find app/build/outputs/apk/release -maxdepth 1 -type f -name '*.apk' ! -name '*unsigned*' | head -n 1)"
+          if [ -z "${apk}" ]; then
+            echo "::error::No signed release APK found."
+            find app/build/outputs/apk/release -maxdepth 1 -type f -print
+            exit 1
+          fi
+
+          android_sdk_root="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}"
+          if [ -z "${android_sdk_root}" ]; then
+            echo "::error::Neither ANDROID_HOME nor ANDROID_SDK_ROOT is set."
+            exit 1
+          fi
+
+          apksigner="$(find "${android_sdk_root}/build-tools" -type f -name apksigner | sort -V | tail -n 1)"
+          if [ -z "${apksigner}" ]; then
+            echo "::error::apksigner was not found in ANDROID_HOME."
+            exit 1
+          fi
+
+          "${apksigner}" verify --print-certs "${apk}" | tee release-assets/SIGNING_CERTIFICATE.txt
+
+          actual_sha256="$("${apksigner}" verify --print-certs "${apk}" \
+            | awk -F': ' '/Signer #1 certificate SHA-256 digest/ { print $2; exit }')"
+          if [ -z "${actual_sha256}" ]; then
+            echo "::error::Could not read the APK signing certificate SHA-256 digest."
+            exit 1
+          fi
+
+          if [ -n "${EXPECTED_RELEASE_CERT_SHA256}" ]; then
+            normalized_actual="$(printf '%s' "${actual_sha256}" | tr '[:lower:]' '[:upper:]' | tr -d ':')"
+            normalized_expected="$(printf '%s' "${EXPECTED_RELEASE_CERT_SHA256}" | tr '[:lower:]' '[:upper:]' | tr -d ':')"
+            if [ "${normalized_actual}" != "${normalized_expected}" ]; then
+              echo "::error::APK signing certificate SHA-256 does not match EXPECTED_RELEASE_CERT_SHA256."
+              exit 1
+            fi
+          fi
+
+          cp "${apk}" "release-assets/Mi-Viaje-${TAG_NAME}.apk"
+
+          (
+            cd release-assets
+            sha256sum *.apk > SHA256SUMS.txt
+          )
+
+          ls -la release-assets
+
+      - name: Create Git tag
+        env:
+          TAG_NAME: ${{ inputs.tag_name }}
+        run: |
+          set -euo pipefail
+
+          tag="${TAG_NAME}"
+          if git rev-parse --verify --quiet "refs/tags/${tag}" >/dev/null; then
+            echo "Tag ${tag} already exists."
+          else
+            git tag "${tag}" "${GITHUB_SHA}"
+            git push origin "${tag}"
+          fi
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DRAFT_RELEASE: ${{ inputs.draft }}
+          PRERELEASE: ${{ inputs.prerelease }}
+          RELEASE_NAME: ${{ inputs.release_name }}
+          TAG_NAME: ${{ inputs.tag_name }}
+        run: |
+          set -euo pipefail
+
+          tag="${TAG_NAME}"
+          title="${RELEASE_NAME}"
+          if [ -z "${title}" ]; then
+            title="${tag}"
+          fi
+
+          args=(
+            "${tag}"
+            release-assets/*
+            --title "${title}"
+            --notes "Signed release APK built from ${GITHUB_SHA}."
+          )
+
+          if [ "${DRAFT_RELEASE}" = "true" ]; then
+            args+=(--draft)
+          fi
+
+          if [ "${PRERELEASE}" = "true" ]; then
+            args+=(--prerelease)
+          fi
+
+          gh release create "${args[@]}"

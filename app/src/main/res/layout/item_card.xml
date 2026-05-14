@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?><!-- MiViaje.Card Balance Section -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/MiViaje.Card"
+        android:id="@+id/card_item"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/MiViaje.Card.Layout"
+            android:id="@+id/card_item_layout"
+            tools:background="@drawable/card_2026_single_card"
+            >
+
+            <TextView
+                android:id="@+id/card_item_alias"
+                style="@style/MiViaje.Card.Title"
+                android:textIsSelectable="true"
+                android:visibility="gone"
+                android:layout_width="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/card_item_status"
+                tools:visibility="visible"
+                tools:text="Tarjeta #5: Escuela"
+                />
+
+            <TextView
+                android:id="@+id/card_item_uid"
+                style="@style/MiViaje.Card.TitleMedium"
+                android:textIsSelectable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_item_alias"
+                tools:text="UID: 046587C2192390" />
+
+            <TextView
+                android:id="@+id/card_item_status"
+                style="@style/MiViaje.Card.TitleMedium"
+                android:background="@drawable/bg_chip"
+                android:padding="5dp"
+                android:text="@string/card_status_active"
+                android:textColor="#fff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/card_item_alias"
+                tools:backgroundTint="@color/miviaje_success"
+                />
+
+            <TextView
+                android:id="@+id/card_item_cash"
+                style="@style/MiViaje.Card.Title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/card_item_tickets"
+                tools:text="$12.50" />
+
+            <TextView
+                style="@style/MiViaje.Card.Title"
+                android:id="@+id/card_item_tickets"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/card_item_expiry"
+                tools:visibility="visible"
+                tools:text="220 boletos"
+                />
+
+            <TextView
+                style="@style/MiViaje.Card.TitleMedium"
+                android:id="@+id/card_item_expiry"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="Expira el 31 de septiembre de 2030" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

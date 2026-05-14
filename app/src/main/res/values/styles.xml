@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MiViaje">
+
+    </style>
+
+    <style name="MiViaje.Dashboard" />
+
+    <style name="MiViaje.Chip" parent="@style/TextAppearance.Material3.LabelMedium">
+        <item name="android:background">@drawable/bg_chip</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:paddingHorizontal">8dp</item>
+        <item name="android:paddingVertical">4dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">6dp</item>
+    </style>
+    <style name="MiViaje.TextField">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginTop">4dp</item>
+    </style>
+
+    <style name="MiViaje.Dashboard.SectionHeader" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MiViaje.Dashboard.Panel" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">?attr/colorOutlineVariant</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
+    </style>
+
+    <style name="MiViaje.Dashboard.FieldLabel" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:alpha">0.72</item>
+    </style>
+
+    <style name="MiViaje.Dashboard.FieldValue" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:layout_marginTop">3dp</item>
+    </style>
+
+    <style name="MiViaje.Dashboard.Badge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:background">@drawable/bg_chip</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minWidth">36dp</item>
+        <item name="android:paddingHorizontal">10dp</item>
+        <item name="android:paddingVertical">5dp</item>
+    </style>
+
+    <style name="MiViaje.Dashboard.InfoRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:minHeight">44dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:paddingVertical">8dp</item>
+    </style>
+
+    <style name="MiViaje.Dashboard.InfoIcon">
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
+        <item name="tint">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="MiViaje.Dashboard.InfoLabel" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:alpha">0.74</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="MiViaje.Dashboard.InfoValue" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MiViaje.Dashboard.Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?attr/colorOutlineVariant</item>
+        <item name="android:alpha">0.55</item>
+    </style>
+
+    <style name="MiViaje.PaymentMethod" />
+
+    <style name="MiViaje.PaymentMethod.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">12dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="MiViaje.PaymentMethod.Section">
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="MiViaje.PaymentMethod.Title" parent="TextAppearance.Material3.TitleMedium.Emphasized">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MiViaje.PaymentMethod.SectionTitle" parent="TextAppearance.Material3.TitleSmall.Emphasized">
+        <item name="android:layout_marginBottom">6dp</item>
+    </style>
+
+    <style name="MiViaje.PaymentMethod.Status" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:paddingHorizontal">8dp</item>
+        <item name="android:paddingVertical">4dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+    </style>
+
+    <style name="MiViaje.PaymentMethod.Value" parent="TextAppearance.Material3.TitleLarge.Emphasized">
+        <item name="android:layout_marginTop">6dp</item>
+    </style>
+
+    <style name="MiViaje.PaymentMethod.Row" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:layout_marginTop">4dp</item>
+    </style>
+
+    <style name="MiViaje.PaymentMethod.Empty" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:alpha">0.72</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="MiViaje.Help" />
+
+    <style name="MiViaje.Help.IntroTitle" parent="TextAppearance.Material3.TitleLarge.Emphasized">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MiViaje.Help.Intro" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:alpha">0.80</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+    </style>
+
+    <style name="MiViaje.Help.SectionHeader">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="MiViaje.Help.SectionIcon">
+        <item name="android:layout_width">28dp</item>
+        <item name="android:layout_height">28dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:contentDescription">@null</item>
+        <item name="android:importantForAccessibility">no</item>
+        <item name="tint">?attr/colorPrimary</item>
+    </style>
+
+    <style name="MiViaje.Help.Section" parent="TextAppearance.Material3.TitleLarge.Emphasized">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MiViaje.Help.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
+        <item name="strokeColor">?attr/colorOutlineVariant</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="MiViaje.Help.CardContent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="MiViaje.Help.Question" parent="TextAppearance.Material3.TitleMedium.Emphasized">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MiViaje.Help.Answer" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:alpha">0.78</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+    </style>
+
+    <style name="MiViaje.Card" parent="CardView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="layout_constraintDimensionRatio">16:10</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="MiViaje.Card.Layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:paddingVertical">8dp</item>
+    </style>
+
+    <style name="MiViaje.Card.Title" parent="TextAppearance.Material3.TitleLarge.Emphasized">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:shadowColor">#D000</item>
+        <item name="android:shadowRadius">5</item>
+        <item name="android:shadowDx">-1.5</item>
+        <item name="android:shadowDy">1.5</item>
+        <item name="android:textColor">?attr/colorSecondaryFixed</item>
+    </style>
+
+    <style name="MiViaje.Card.TitleMedium" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:shadowColor">#D000</item>
+        <item name="android:shadowRadius">5</item>
+        <item name="android:shadowDx">-1.5</item>
+        <item name="android:shadowDy">1.5</item>
+        <item name="android:textColor">?attr/colorSecondaryFixed</item>
+    </style>
+</resources>

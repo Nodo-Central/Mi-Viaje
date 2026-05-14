@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/payment_method_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="20dp">
+
+    <View
+        android:id="@+id/payment_method_drag_handle"
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/bg_chip"
+        android:backgroundTint="?attr/colorOutline" />
+
+    <LinearLayout
+        android:id="@+id/payment_method_sheet_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/item_pm_title_basic"
+            style="@style/MiViaje.PaymentMethod.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/payment_method_summary"
+            tools:text="@string/payment_method_type_wallet" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/item_pm_status"
+            style="@style/MiViaje.PaymentMethod.Status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_method_status_active" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/payment_method_sheet_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:fillViewport="false"
+        android:paddingTop="12dp">
+
+        <LinearLayout
+            android:id="@+id/payment_method_sheet_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:paddingBottom="8dp">
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/MiViaje.PaymentMethod.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="?attr/colorSurfaceContainer"
+                app:cardElevation="1dp"
+                app:strokeColor="?attr/colorOutlineVariant"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    style="@style/MiViaje.PaymentMethod.Section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_value"
+                        style="@style/MiViaje.PaymentMethod.Value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/money_mxn_format" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_valid_from"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_valid_from" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_valid_until"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_valid_until" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_valid_time"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_valid_time" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/MiViaje.PaymentMethod.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="0dp"
+                app:strokeColor="?attr/colorOutlineVariant"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    style="@style/MiViaje.PaymentMethod.Section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/MiViaje.PaymentMethod.SectionTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_restrictions" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_daily_trips_by_week"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_daily_trips_by_week" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_max_trips_per_week"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_max_trips_per_week" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_allowed_transfers"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_allowed_transfers" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_transfer_time_limit"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_transfer_time_limit" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_max_passbacks"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_allowed_passbacks" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_passback_min_time"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_passback_min_time" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_restricted_days"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_restricted_days" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_restrictions_empty"
+                        style="@style/MiViaje.PaymentMethod.Empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_no_restrictions"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/item_pm_section_advanced"
+                style="@style/MiViaje.PaymentMethod.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:cardElevation="0dp"
+                app:strokeColor="?attr/colorOutlineVariant"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    style="@style/MiViaje.PaymentMethod.Section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/MiViaje.PaymentMethod.SectionTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_activity" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_week_number"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_week_number" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_total_uses"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_total_uses" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_last_validation"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_last_validation" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_last_operator"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_last_operator" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_last_route_or_station"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_last_route_or_station" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_last_device"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_last_device" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_priority"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_priority" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_advanced_empty"
+                        style="@style/MiViaje.PaymentMethod.Empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_no_activity"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/item_pm_section_technical"
+                style="@style/MiViaje.PaymentMethod.Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:cardElevation="0dp"
+                app:strokeColor="?attr/colorOutlineVariant"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    style="@style/MiViaje.PaymentMethod.Section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/MiViaje.PaymentMethod.SectionTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_technical" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_id"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_id" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_distributor_network_id"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_distributor_network_id" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_distributor_company_id"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_distributor_company_id" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_distribution_date"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_distribution_date" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_sam_id"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_sam_id" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_distributor_device_id"
+                        style="@style/MiViaje.PaymentMethod.Row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_distributor_device_id" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/item_pm_technical_empty"
+                        style="@style/MiViaje.PaymentMethod.Empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_method_no_technical_data"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

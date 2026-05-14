@@ -1,0 +1,166 @@
+package org.nodocentral.miviaje.domain.mimovilidad;
+
+import org.nodocentral.miviaje.domain.mimovilidad.card.Event.TransportType;
+
+public enum Station {
+    // Route 1
+    PERIFERICO_SUR(Route.LINE_1),
+    SANTUARIO_MARTIRES(Route.LINE_1),
+    ESPANNA(Route.LINE_1),
+    PATRIA(Route.LINE_1),
+    ISLA_RAZA(Route.LINE_1),
+    _18_DE_MARZO(Route.LINE_1),
+    URDANETA(Route.LINE_1),
+    UNIDAD_DEPORTIVA(Route.LINE_1),
+    SANTA_FILOMENA(Route.LINE_1),
+    WASHINGTON(Route.LINE_1),
+    MEXICALTZINGO(Route.LINE_1),
+    JUAREZ_I(Route.LINE_1),
+    REFUGIO(Route.LINE_1),
+    MEZQUITAN(Route.LINE_1),
+    AVILA_CAMACHO(Route.LINE_1),
+    DIVISION_DEL_NORTE(Route.LINE_1),
+    ATEMAJAC(Route.LINE_1),
+    DERMATOLOGICO(Route.LINE_1),
+    PERIFERICO_NORTE(Route.LINE_1),
+    AUDITORIO(Route.LINE_1),
+
+    // Route 2
+    TETLAN(Route.LINE_2),
+    LA_AURORA(Route.LINE_2),
+    SAN_JACINTO(Route.LINE_2),
+    SAN_ANDRES(Route.LINE_2),
+    CRISTOBAL_DE_ONNATE(Route.LINE_2),
+    OBLATOS(Route.LINE_2),
+    BELISARIO_DOMINGUEZ(Route.LINE_2),
+    SAN_JUAN_DE_DIOS(Route.LINE_2),
+    PLAZA_UNIVERSIDAD(Route.LINE_2),
+    JUAREZ_II(Route.LINE_2),
+
+    // Route 3
+    ARCOS_DE_ZAPOPAN(Route.LINE_3),
+    PERIFERICO_BELENES(Route.LINE_3),
+    MERCADO_DEL_MAR(Route.LINE_3),
+    ZAPOPAN_CENTRO(Route.LINE_3),
+    PLAZA_PATRIA(Route.LINE_3),
+    CIRCUNVALACION_COUNTRY(Route.LINE_3),
+    AVILA_CAMACHO_II(Route.LINE_3),
+    LA_NORMAL(Route.LINE_3),
+    SANTUARIO(Route.LINE_3),
+    GUADALAJARA_CENTRO(Route.LINE_3),
+    INDEPENDENCIA(Route.LINE_3),
+    PLAZA_DE_LA_BANDERA(Route.LINE_3),
+    CUCEI(Route.LINE_3),
+    REVOLUCION(Route.LINE_3),
+    RIO_NILO(Route.LINE_3),
+    TLAQUEPAQUE_CENTRO(Route.LINE_3),
+    LAZARO_CARDENAS(Route.LINE_3),
+    CENTRAL_DE_AUTOBUSES(Route.LINE_3),
+
+    // Route 4
+    LAS_JUNTAS(Route.LINE_4),
+    LOMAS_DEL_CUATRO(Route.LINE_4),
+    JALISCO_200_ANNOS(Route.LINE_4),
+    REAL_DEL_VALLE(Route.LINE_4),
+    CONCEPCION_DEL_VALLE(Route.LINE_4),
+    EL_CUERVO(Route.LINE_4),
+    LOMAS_DEL_SUR(Route.LINE_4),
+    CUTLAJO(Route.LINE_4),
+    TLAJOMULCO_CENTRO(Route.LINE_4),
+
+    // Route 6
+    LAS_JUNTAS_II(Route.LINE_6),
+    FRAY_ANGELICO(Route.LINE_6),
+    ESCULTURAS(Route.LINE_6),
+    ARTES_PLASTICAS(Route.LINE_6),
+    CLEMENTE_OROZCO(Route.LINE_6),
+    LOPEZ_DE_LEGAZPI(Route.LINE_6),
+    ZONA_INDUSTRIAL(Route.LINE_6),
+    EL_DEAN(Route.LINE_6),
+    COLON_INDUSTRIAL(Route.LINE_6),
+    HEROES_DE_NACOZARI(Route.LINE_6),
+    CIPRES(Route.LINE_6),
+    AGUA_AZUL(Route.LINE_6),
+    NINOS_HEROES(Route.LINE_6),
+    LA_PAZ(Route.LINE_6),
+    BICENTENARIO(Route.LINE_6),
+    SAN_JUAN_DE_DIOS_II(Route.LINE_6),
+    ALAMEDA(Route.LINE_6),
+    JUAN_ALVAREZ(Route.LINE_6),
+    CIENCIAS_DE_LA_SALUD(Route.LINE_6),
+    CIRCUNVALACION(Route.LINE_6),
+    MONTE_OLIVETE(Route.LINE_6),
+    MONUMENTAL(Route.LINE_6),
+    IGUALDAD(Route.LINE_6),
+    SAN_PATRICIO(Route.LINE_6),
+    INDEPENDENCIA_NORTE(Route.LINE_6),
+    ZOOLOGICO(Route.LINE_6),
+    HUENTITAN(Route.LINE_6),
+    MIRADOR(Route.LINE_6),
+
+    // Route 7
+    CARRETERA_A_CHAPALA(Route.LINE_7),
+    LAS_PINTAS(Route.LINE_7),
+    ARTESANOS(Route.LINE_7),
+    JALISCO_200_ANNOS_II(Route.LINE_7),
+    ADOLF_HORN(Route.LINE_7),
+    TOLUQUILLA(Route.LINE_7),
+    _8_DE_JULIO(Route.LINE_7),
+    SAN_SEBASTIANITO(Route.LINE_7),
+    PERIFERICO_SUR_II(Route.LINE_7),
+    TERMINAL_SUR_DE_AUTOBUSES(Route.LINE_7),
+    ITESO(Route.LINE_7),
+    LOPEZ_MATEOS(Route.LINE_7),
+    AGRICOLA(Route.LINE_7),
+    EL_BRISENNO(Route.LINE_7),
+    MARIANO_OTERO(Route.LINE_7),
+    MIRAMAR(Route.LINE_7),
+    FELIPE_RUVALCABA(Route.LINE_7),
+    EL_COLLI(Route.LINE_7),
+    CHAPALITA_INN(Route.LINE_7),
+    PARQUE_METROPOLITANO(Route.LINE_7),
+    CIUDAD_GRANJA(Route.LINE_7),
+    CIUDAD_JUDICIAL(Route.LINE_7),
+    ESTADIO_CHIVAS(Route.LINE_7),
+    VALLARTA(Route.LINE_7),
+    SAN_JUAN_DE_OCOTAN(Route.LINE_7),
+    _5_DE_MAYO(Route.LINE_7),
+    ACUEDUCTO(Route.LINE_7),
+    SANTA_MARGARITA(Route.LINE_7),
+    LA_TUZANIA(Route.LINE_7),
+    PERIFERICO_BELENES_II(Route.LINE_7),
+    SAN_ISIDRO(Route.LINE_7),
+    CENTRO_CULTURAL_UNIVERSITARIO(Route.LINE_7),
+    CONSTITUCION(Route.LINE_7),
+    TABACHINES(Route.LINE_7),
+    LA_CANTERA(Route.LINE_7),
+    PERIFERICO_NORTE_II(Route.LINE_7),
+    EL_BATAN(Route.LINE_7),
+    LA_EXPERIENCIA(Route.LINE_7),
+    RANCHO_NUEVO(Route.LINE_7),
+    LOMAS_DEL_PARAISO(Route.LINE_7),
+    INDEPENDENCIA_NORTE_II(Route.LINE_7),
+    ARENA_GUADALAJARA(Route.LINE_7),
+    BARRANCA_DE_HUENTITAN(Route.LINE_7),
+    VICENTE_FERNANDEZ(Route.LINE_7),
+    COMISARIA_DE_GUADALAJARA(Route.LINE_7),
+    BETANIA(Route.LINE_7),
+    COLONIA_JALISCO(Route.LINE_7),
+    ZAPOTLANEJO(Route.LINE_7),
+    LOS_CONEJOS(Route.LINE_7),
+    ;
+
+    private final Route route;
+
+    Station(Route route) {
+        this.route = route;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public TransportType getTransportType() {
+        return route.getTransportType();
+    }
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="miviaje_mm_mc">#0097A7</color>
+    <color name="miviaje_mm_mp">#673AB7</color>
+
+    <color name="miviaje_card_green">#33691E</color>
+
+    <color name="miviaje_success">#3C9F40</color>
+    <color name="miviaje_warning">#FFA726</color>
+
+</resources>

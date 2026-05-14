@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/about_credits">
+
+    <fragment
+        android:id="@+id/about_credits"
+        android:name="org.nodocentral.miviaje.presentation.about.CreditsFragment"
+        android:label="@string/about_credits"
+        tools:layout="@layout/fragment_credits" />
+
+    <fragment
+        android:id="@+id/about_external_credits"
+        android:name="org.nodocentral.miviaje.presentation.about.UsedLibrariesFragment"
+        android:label="@string/about_libraries_credits"
+        tools:layout="@layout/fragment_used_libraries" />
+
+    <fragment
+        android:id="@+id/about_licenses"
+        android:name="org.nodocentral.miviaje.presentation.about.LicensesFragment"
+        android:label="@string/about_licenses"
+        tools:layout="@layout/fragment_licenses" />
+</navigation>

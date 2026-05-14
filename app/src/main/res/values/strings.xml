@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings">Ajustes</string>
+    <string name="about_app">Acerca de Mi Viaje</string>
+    <string name="help">Ayuda</string>
+    <string name="more_options">Más opciones</string>
+
+    <string name="help_intro_title">Primero lo importante</string>
+    <string name="help_intro">No es un manual eterno: solo respuestas rápidas para entender qué lee Mi Viaje, qué datos interpreta y por qué a veces los nombres de rutas o estaciones pueden no coincidir con lo esperado.</string>
+    <string name="help_section_basic">Uso básico</string>
+    <string name="help_section_routes">Rutas y movimientos</string>
+    <string name="help_section_technical">Datos técnicos</string>
+    <string name="help_section_project">Proyecto</string>
+    <string name="help_balance_question">¿El saldo sí es confiable?</string>
+    <string name="help_balance_answer">Sí. El saldo viene de los archivos de valor de la tarjeta. Si esa lectura estuviera mal de forma general, el problema sería mucho más grande que esta app: afectaría al sistema de cobro. Lo que puede ser incompleto o aproximado suele ser la interpretación de rutas, estaciones, validadores o nombres de servicios.</string>
+    <string name="help_card_expiration_question">¿Por qué mi tarjeta tiene fecha de vencimiento?</string>
+    <string name="help_card_expiration_answer">Las tarjetas inteligentes no duran para siempre. Con los años, el chip puede perder confiabilidad para conservar o escribir información. Por eso existen fechas de vigencia, igual que en muchas tarjetas bancarias u otros medios físicos. Mi Viaje solo muestra esa fecha; no puede extenderla ni cambiarla.</string>
+    <string name="help_no_write_question">¿Puedo recargar, modificar o desbloquear mi tarjeta?</string>
+    <string name="help_no_write_answer">No. Mi Viaje solo lee información disponible localmente. No recarga saldo, no modifica datos, no autentica usuarios y no reemplaza canales oficiales.</string>
+    <string name="help_saved_data_question">¿Qué datos guarda la app?</string>
+    <string name="help_saved_data_answer">Guarda localmente las tarjetas que escaneas, alias, movimientos leídos, productos y personalización. También puedes exportar respaldos JSON o logs. Esos archivos pueden contener identificadores de tarjeta y movimientos, así que revísalos antes de compartirlos.</string>
+    <string name="help_routes_wrong_question">¿Por qué una ruta o estación no coincide con lo esperado?</string>
+    <string name="help_routes_wrong_answer">La tarjeta no siempre guarda una etiqueta clara como la que ves en mapas, estaciones o letreros. Guarda identificadores técnicos. Mi Viaje intenta convertirlos a nombres entendibles, pero algunos validadores están configurados de forma poco común o reportan datos ambiguos. Esto pasa especialmente en Mi Macro Periférico y en rutas con validadores poco comunes o de distintos fabricantes.</string>
+    <string name="help_route_label_question">¿Mi tarjeta se inventó una Complementaria C08 si tomé Troncal T08?</string>
+    <string name="help_route_label_answer">Algunas rutas comparten números, cambian de configuración o reportan identificadores que no bastan para distinguir el servicio con total certeza. Cuando la app no tiene suficiente evidencia, puede mostrar la mejor coincidencia conocida. El movimiento y el saldo siguen viniendo de la tarjeta; lo que está en duda es la etiqueta humana.</string>
+    <string name="help_events_missing_question">¿Por qué algunos movimientos antiguos no aparecen?</string>
+    <string name="help_events_missing_answer">La tarjeta tiene espacio limitado para eventos. Normalmente conserva movimientos recientes o ciertos registros internos. Mi Viaje guarda historial local después de escanear, pero no puede recuperar eventos que la tarjeta ya no tenga.</string>
+    <string name="help_cards_differ_question">¿Por qué algunas tarjetas muestran más información que otras?</string>
+    <string name="help_cards_differ_answer">Depende de lo que cada tarjeta permite leer por NFC, su tipo de producto, antigüedad, configuración y movimientos recientes. La app no puede inventar datos que la tarjeta no expone.</string>
+    <string name="help_technical_button_question">¿Qué hace ese botón de datos técnicos?</string>
+    <string name="help_technical_button_answer">Muestra información más cercana a lo que la tarjeta y los validadores registran internamente. Es útil si quieres entender por qué Mi Viaje decidió mostrar una ruta, estación, operador o tipo de transporte. Si no te interesa, puedes ignorarlo tranquilamente.</string>
+    <string name="help_technical_fields_question">¿Qué significan SAM UID, SAM Sequence, Route ID y Device ID?</string>
+    <string name="help_technical_fields_answer">SAM UID identifica el módulo seguro del validador, algo así como el identificador del equipo que firmó la transacción. SAM Sequence es la secuencia del evento para ese validador. Route ID es el identificador de ruta reportado. Device ID identifica el dispositivo específico que hizo la transacción.</string>
+    <string name="help_transport_type_question">¿Qué significa algo como TransportType: BUS (BRT)?</string>
+    <string name="help_transport_type_answer">Significa que el dato original apuntaba a bus, pero la app detectó por contexto que probablemente era un validador BRT. Mi Viaje conserva pistas técnicas para que puedas ver cuándo una etiqueta viene directamente del dato leído y cuándo viene de una inferencia.</string>
+    <string name="help_not_official_question">¿Es una app oficial?</string>
+    <string name="help_not_official_answer">No. Mi Viaje es un proyecto comunitario de código abierto. No está afiliado a Mi Movilidad, SITEUR, Gobierno de Jalisco, operadores ni instituciones relacionadas.</string>
+    <string name="help_internet_question">¿La app manda analíticas o datos a servidores?</string>
+    <string name="help_internet_answer">No. La app no declara permiso de internet, no usa telemetría remota, Crashlytics ni analíticas. Si compartes un respaldo, captura o log, eso ya es una acción tuya o del sistema operativo, no una transmisión iniciada por Mi Viaje.</string>
+    <string name="help_contribute_question">¿Puedo ayudar a mejorar rutas, estaciones o validadores?</string>
+    <string name="help_contribute_answer">Sí. Los reportes útiles suelen incluir captura del movimiento, ruta esperada, estación o parada, fecha aproximada y, si quieres, datos técnicos. Evita compartir información personal o identificadores si no te sientes cómodo.</string>
+    <string name="help_support_question">¿El proyecto acepta contribuciones o apoyo?</string>
+    <string name="help_support_answer">Sí. Mi Viaje es de código abierto y ha requerido bastante trabajo de investigación, pruebas con tarjetas reales, limpieza de datos y diseño de interfaz. Las contribuciones, reportes bien documentados y apoyo voluntario ayudan a mantenerlo y mejorarlo, pero la app seguirá siendo usable sin pagar nada.</string>
+    <string name="support_kofi_url" translatable="false">https://ko-fi.com/nodocentral</string>
+    <string name="support_kofi_title">Apoyar el proyecto</string>
+    <string name="support_kofi_body">Si Mi Viaje te ahorró una duda, un susto o una visita mental al validador, puedes apoyar su desarrollo en Ko-fi. Es opcional, apreciado y nada dramático.</string>
+    <string name="support_kofi_button">Apoyar en Ko-fi</string>
+
+    <string name="about_credits">Créditos</string>
+    <string name="about_libraries_credits">Bibliotecas utilizadas</string>
+    <string name="about_licenses">Licencias</string>
+    <string name="about_libraries_search_hint">Buscar biblioteca…</string>
+    <string name="about_libraries_empty">No encontramos bibliotecas con ese criterio.</string>
+    <string name="about_libraries_repo">Código</string>
+    <string name="about_libraries_docs">Documentación</string>
+    <string name="about_libraries_license_button">Licencia</string>
+    <string name="about_libraries_version">v%1$s</string>
+    <string name="about_libraries_license">Licencia: %1$s</string>
+    <string name="about_libraries_open_link_error">No se pudo abrir el enlace</string>
+    <string name="about_licenses_search_hint">Buscar licencia…</string>
+    <string name="about_licenses_empty">No encontramos licencias con ese criterio.</string>
+    <string name="about_licenses_copy_all">Copiar todo</string>
+    <string name="about_licenses_copied">Licencia copiada</string>
+    <string name="about_licenses_used_by">Usada por: %1$s</string>
+
+    <string name="app_name">Mi Viaje</string>
+    <string name="activity_card">Detalles de la tarjeta</string>
+    <string name="activity_artwork_picker">Arte de tarjeta</string>
+
+    <string name="settings_customization">Personalización</string>
+    <string name="system_default">Predeterminado del sistema</string>
+    <string name="setting_dark_mode">Tema</string>
+    <string name="setting_dark_mode_light">Claro</string>
+    <string name="setting_dark_mode_dark">Oscuro</string>
+    <string name="system_short">Sistema</string>
+    <string name="setting_color_theme">Tema de color</string>
+    <string name="color_theme_metro_l1">Mi Tren L1</string>
+    <string name="color_theme_metro_l2">Mi Tren L2</string>
+    <string name="color_theme_metro_l3">Mi Tren L3</string>
+    <string name="color_theme_metro_l4">Mi Tren L4</string>
+    <string name="color_theme_macro_aeropuerto">Mi Macro Aeropuerto</string>
+    <string name="color_theme_macro_calzada">Mi Macro Calzada</string>
+    <string name="color_theme_macro_periferico">Mi Macro Periférico</string>
+    <string name="color_theme_mi_transporte">Mi Transporte</string>
+    <string name="color_theme_corporate">Corporativo</string>
+    <string name="setting_pure_dark">Oscuro puro</string>
+    <string name="setting_app_language">Idioma de la aplicación</string>
+    <string name="app_language_spanish">Español</string>
+    <string name="app_language_english">English (Inglés)</string>
+    <string name="app_language_japanese">日本語 (Japonés)</string>
+    <string name="app_language_korean">한국어 (Coreano)</string>
+    <string name="app_language_chinese">中文 (Chino)</string>
+    <string name="setting_show_more_data">Mostrar datos avanzados</string>
+    <string name="setting_show_technical_data_summary">Muestra datos de depuración en la tarjeta. Para usuarios curiosos.</string>
+    <string name="setting_show_technical_data">Mostrar datos de depuración</string>
+    <string name="setting_show_more_data_summary">Muestra datos técnicos adicionales. Útil para operadores, implementadores, usuarios avanzados y desarrolladores.</string>
+
+    <string name="yes">Sí</string>
+    <string name="cancel">Cancelar</string>
+    <string name="continue_action">Continuar</string>
+
+    <string name="unspecified">No especificado</string>
+
+    <string name="payment_method_type_credit">Crédito</string>
+    <string name="payment_method_type_wallet">Monedero</string>
+    <string name="payment_method_type_discount_ticket">Boletos de descuento</string>
+    <string name="payment_method_status_active">Activo</string>
+    <string name="payment_method_status_initialized">Inicializado</string>
+    <string name="payment_method_status_suspended">Suspendido</string>
+    <string name="payment_method_summary">Método de pago</string>
+    <string name="payment_method_restrictions">Restricciones</string>
+    <string name="payment_method_activity">Actividad</string>
+    <string name="payment_method_technical">Datos técnicos</string>
+    <string name="payment_method_value">Valor actual</string>
+    <string name="payment_method_valid_from">Vigente desde</string>
+    <string name="payment_method_valid_until">Vigente hasta</string>
+    <string name="payment_method_valid_time">Horario de uso</string>
+    <string name="payment_method_daily_trips_by_week">Viajes usados esta semana</string>
+    <string name="payment_method_max_trips_per_week">Límite de viajes</string>
+    <string name="payment_method_allowed_transfers">Transbordos permitidos</string>
+    <string name="payment_method_transfer_time_limit">Ventana de transbordo</string>
+    <string name="payment_method_allowed_passbacks">Reusos permitidos</string>
+    <string name="payment_method_passback_min_time">Tiempo anti-reuso</string>
+    <string name="payment_method_restricted_days">Días no permitidos</string>
+    <string name="payment_method_week_number">Semana del último uso</string>
+    <string name="payment_method_total_uses">Usos totales</string>
+    <string name="payment_method_last_validation">Última validación</string>
+    <string name="payment_method_last_operator">Operador del último uso</string>
+    <string name="payment_method_last_route_or_station">Ruta/estación del último uso</string>
+    <string name="payment_method_last_device">Dispositivo del último uso</string>
+    <string name="payment_method_priority">Prioridad del método</string>
+    <string name="payment_method_id">ID del método</string>
+    <string name="payment_method_distributor_network_id">ID de red del distribuidor</string>
+    <string name="payment_method_distributor_company_id">ID de compañía distribuidora</string>
+    <string name="payment_method_distribution_date">Fecha de distribución</string>
+    <string name="payment_method_sam_id">SAM del distribuidor</string>
+    <string name="payment_method_distributor_device_id">Dispositivo distribuidor</string>
+    <string name="payment_method_row_format">%1$s: %2$s</string>
+    <string name="payment_method_no_restrictions">Sin restricciones</string>
+    <string name="payment_method_no_activity">Sin actividad registrada</string>
+    <string name="payment_method_no_technical_data">Sin datos técnicos</string>
+
+    <string name="event_card_activation">Activación de tarjeta</string>
+    <string name="event_fare_payment">Pago de pasaje</string>
+    <string name="event_top_up">Recarga</string>
+    <string name="event_transfer">Transferencia</string>
+    <string name="event_refund">Reembolso</string>
+
+    <string name="numbered_event_format">%1$d.</string>
+    <string name="event_location">Ubicación: %1$s</string>
+    <string name="bus_unit_id_format">U-%1$02d</string>
+    <string name="vrt_id_format">VRT-%1$02d</string>
+    <string name="device_id_format">Dispositivo: %1$s</string>
+    <string name="event_card_emission">Emisión de tarjeta</string>
+
+    <string name="card_status_initialized">Inicializada</string>
+    <string name="card_status_active">Activa</string>
+    <string name="card_status_blocked">Bloqueada</string>
+    <string name="card_status_deactivated">Desactivada</string>
+
+    <string name="card_scan_add">Añadir o actualizar una tarjeta</string>
+    <string name="card_scan_title_waiting">Acerca tu tarjeta</string>
+    <string name="card_scan_message_waiting">Mantén la tarjeta quieta detrás del teléfono hasta que Mi Viaje termine de leerla.</string>
+    <string name="card_scan_detail_waiting">Leemos saldo, productos y movimientos recientes sin enviar tus datos.</string>
+    <string name="card_scan_title_reading">Leyendo tarjeta</string>
+    <string name="card_scan_message_reading">Mantén la tarjeta en su lugar. Esto suele tomar unos segundos.</string>
+    <string name="card_scan_detail_reading">Guardando la información de la tarjeta…</string>
+    <string name="card_scan_title_success">Lectura exitosa</string>
+    <string name="card_scan_message_success_added">Tarjeta añadida a Mi Viaje.</string>
+    <string name="card_scan_message_success_updated">Tarjeta actualizada con la lectura más reciente.</string>
+    <string name="card_scan_title_error">No pudimos leerla</string>
+    <string name="card_scan_message_error">Separa la tarjeta, acércala de nuevo y evita moverla mientras termina la lectura.</string>
+    <string name="card_scan_detail_error">Error: %1$s</string>
+    <string name="card_scan_action_view_card">Ver tarjeta</string>
+    <string name="card_scan_action_scan_again">Leer otra</string>
+    <string name="card_scan_action_try_again">Intentar de nuevo</string>
+    <string name="card_scan_action_name_card">Nombrar tarjeta</string>
+    <string name="card_scan_action_save_name">Guardar nombre</string>
+    <string name="card_scan_action_done">Listo</string>
+    <string name="card_scan_alias_helper">Un alias corto ayuda a reconocer esta tarjeta más rápido.</string>
+    <string name="card_scan_alias_saved">Nombre guardado</string>
+    <string name="card_scan_alias_cleared">Nombre eliminado</string>
+    <string name="card_scan_alias_saving">Guardando nombre…</string>
+    <string name="card_scan_alias_error">No se pudo guardar el nombre</string>
+    <string name="card_scan_icon_content_description">Tarjeta NFC</string>
+    <string name="card_scan_success_icon_content_description">Lectura completada</string>
+    <string name="card_expiration">Expira el %1$s</string>
+    <string name="card_products">Métodos de pago</string>
+    <string name="card_event_history">Historial de movimientos</string>
+    <string name="events_filter_all">Todos</string>
+    <string name="events_filter_transport">Transporte</string>
+    <string name="events_filter_event_type">Evento</string>
+    <string name="events_filter_date">Fecha</string>
+    <string name="events_filter_more">Más</string>
+    <string name="events_filter_sheet_title">Filtrar movimientos</string>
+    <string name="events_filter_clear_all">Limpiar todo</string>
+    <string name="events_filter_transport_type">Tipo de transporte</string>
+    <string name="transport_brt">Mi Macro</string>
+    <string name="transport_bus">Autobús</string>
+    <string name="transport_train_feeder">PreTren</string>
+    <string name="events_filter_route">Ruta</string>
+    <string name="events_filter_station">Unidad / Estación</string>
+    <string name="events_filter_station_hint">Buscar unidad o estación...</string>
+    <string name="events_filter_date_today">Hoy</string>
+    <string name="events_filter_date_week">Esta semana</string>
+    <string name="events_filter_date_month">Este mes</string>
+    <string name="events_filter_date_range">Rango</string>
+    <string name="events_filter_date_range_picker_title">Seleccionar rango de fechas</string>
+    <string name="events_filter_operator">Operador</string>
+    <string name="events_filter_event_type_full">Tipo de evento</string>
+    <string name="events_filter_apply">Aplicar filtros</string>
+    <string name="card_emission_info">Información de la tarjeta</string>
+    <string name="card_network_info">Información de la red de transporte</string>
+    <string name="card_user_info">Información del usuario</string>
+
+    <string name="transport_train">Mi Tren</string>
+    <string name="transport_direction">Hacia %1$s</string>
+    <string name="transport_complementary">Complementaria C%1$02d%2$s</string>
+
+    <string name="station_periferico_sur" translatable="false">Periférico Sur</string>
+    <string name="station_santuario_martires" translatable="false">Santuario Mártires de Cristo Rey</string>
+    <string name="station_espanna" translatable="false">España</string>
+    <string name="station_patria" translatable="false">Patria</string>
+    <string name="station_isla_raza" translatable="false">Isla Raza</string>
+    <string name="station_18_de_marzo" translatable="false">18 de Marzo</string>
+    <string name="station_urdaneta" translatable="false">Urdaneta</string>
+    <string name="station_unidad_deportiva" translatable="false">Unidad Deportiva</string>
+    <string name="station_santa_filomena" translatable="false">Santa Filomena</string>
+    <string name="station_washington" translatable="false">Washington</string>
+    <string name="station_mexicaltzingo" translatable="false">Mexicaltzingo</string>
+    <string name="station_juarez_i" translatable="false">Juárez I</string>
+    <string name="station_refugio" translatable="false">Refugio</string>
+    <string name="station_mezquitan" translatable="false">Mezquitán</string>
+    <string name="station_avila_camacho" translatable="false">Ávila Camacho</string>
+    <string name="station_division_del_norte" translatable="false">División del Norte</string>
+    <string name="station_atemajac" translatable="false">Atemajac</string>
+    <string name="station_dermatologico" translatable="false">Dermatológico</string>
+    <string name="station_periferico_norte" translatable="false">Periférico Norte</string>
+    <string name="station_tetlan" translatable="false">Tetlán</string>
+    <string name="station_la_aurora" translatable="false">La Aurora</string>
+    <string name="station_san_jacinto" translatable="false">San Jacinto</string>
+    <string name="station_san_andres" translatable="false">San Andrés</string>
+    <string name="station_cristobal_de_onnate" translatable="false">Cristóbal de Oñate</string>
+    <string name="station_oblatos" translatable="false">Oblatos</string>
+    <string name="station_belisario_dominguez" translatable="false">Belisario Domínguez</string>
+    <string name="station_san_juan_de_dios" translatable="false">San Juan de Dios</string>
+    <string name="station_plaza_universidad" translatable="false">Plaza Universidad</string>
+    <string name="station_juarez_ii" translatable="false">Juárez II</string>
+    <string name="station_auditorio" translatable="false">Auditorio</string>
+    <string name="station_arcos_de_zapopan" translatable="false">Arcos de Zapopan</string>
+    <string name="station_periferico_belenes" translatable="false">Periférico Belenes</string>
+    <string name="station_mercado_del_mar" translatable="false">Mercado del Mar</string>
+    <string name="station_zapopan_centro" translatable="false">Zapopan Centro</string>
+    <string name="station_plaza_patria" translatable="false">Plaza Patria</string>
+    <string name="station_circunvalacion_country" translatable="false">Circunvalación Country</string>
+    <string name="station_la_normal" translatable="false">La Normal</string>
+    <string name="station_santuario" translatable="false">Santuario</string>
+    <string name="station_guadalajara_centro" translatable="false">Guadalajara Centro</string>
+    <string name="station_independencia" translatable="false">Independencia</string>
+    <string name="station_plaza_de_la_bandera" translatable="false">Plaza de la Bandera</string>
+    <string name="station_cucei" translatable="false">CUCEI</string>
+    <string name="station_revolucion" translatable="false">Revolución</string>
+    <string name="station_rio_nilo" translatable="false">Río Nilo</string>
+    <string name="station_tlaquepaque_centro" translatable="false">Tlaquepaque Centro</string>
+    <string name="station_lazaro_cardenas" translatable="false">Lázaro Cárdenas</string>
+    <string name="station_central_de_autobuses" translatable="false">Central de Autobuses</string>
+    <string name="station_fray_angelico" translatable="false">Fray Angélico</string>
+    <string name="station_esculturas" translatable="false">Esculturas</string>
+    <string name="station_artes_plasticas" translatable="false">Artes Plásticas</string>
+    <string name="station_clemente_orozco" translatable="false">Clemente Orozco</string>
+    <string name="station_lopez_de_legazpi" translatable="false">López de Legazpi</string>
+    <string name="station_zona_industrial" translatable="false">Zona Industrial</string>
+    <string name="station_el_dean" translatable="false">El Deán</string>
+    <string name="station_colon_industrial" translatable="false">Lázaro Cárdenas</string>
+    <string name="station_heroes_de_nacozari" translatable="false">Héroes de Nacozari</string>
+    <string name="station_cipres" translatable="false">Ciprés</string>
+    <string name="station_agua_azul" translatable="false">Agua Azul</string>
+    <string name="station_ninos_heroes" translatable="false">Niños Héroes</string>
+    <string name="station_la_paz" translatable="false">La Paz</string>
+    <string name="station_bicentenario" translatable="false">Bicentenario</string>
+    <string name="station_alameda" translatable="false">Alameda</string>
+    <string name="station_juan_alvarez" translatable="false">Juan Álvarez</string>
+    <string name="station_ciencias_de_la_salud" translatable="false">Ciencias de la Salud</string>
+    <string name="station_circunvalacion" translatable="false">Circunvalación</string>
+    <string name="station_monte_olivete" translatable="false">Monte Olivete</string>
+    <string name="station_monumental" translatable="false">Monumental</string>
+    <string name="station_igualdad" translatable="false">Igualdad</string>
+    <string name="station_san_patricio" translatable="false">San Patricio</string>
+    <string name="station_independencia_norte" translatable="false">Independencia Norte</string>
+    <string name="station_zoologico" translatable="false">Zoológico</string>
+    <string name="station_huentitan" translatable="false">Huentitán</string>
+    <string name="station_mirador" translatable="false">Mirador</string>
+    <string name="station_carretera_a_chapala" translatable="false">Carretera a Chapala</string>
+    <string name="station_las_pintas" translatable="false">Las Pintas</string>
+    <string name="station_artesanos" translatable="false">Artesanos</string>
+    <string name="station_adolf_horn" translatable="false">Adolf Horn</string>
+    <string name="station_toluquilla" translatable="false">Toluquilla</string>
+    <string name="station_8_de_julio" translatable="false">8 de Julio</string>
+    <string name="station_san_sebastianito" translatable="false">San Sebastianito</string>
+    <string name="station_terminal_sur_de_autobuses" translatable="false">Terminal Sur de Autobuses</string>
+    <string name="station_iteso" translatable="false">ITESO</string>
+    <string name="station_lopez_mateos" translatable="false">López Mateos</string>
+    <string name="station_agricola" translatable="false">Agrícola</string>
+    <string name="station_el_brisenno" translatable="false">El Briseño</string>
+    <string name="station_mariano_otero" translatable="false">Mariano Otero</string>
+    <string name="station_miramar" translatable="false">Miramar</string>
+    <string name="station_felipe_ruvalcaba" translatable="false">Felipe Ruvalcaba</string>
+    <string name="station_el_colli" translatable="false">El Colli</string>
+    <string name="station_chapalita_inn" translatable="false">Chapalita Inn</string>
+    <string name="station_parque_metropolitano" translatable="false">Parque Metropolitano</string>
+    <string name="station_ciudad_granja" translatable="false">Ciudad Granja</string>
+    <string name="station_ciudad_judicial" translatable="false">Ciudad Judicial</string>
+    <string name="station_estadio_chivas" translatable="false">Estadio Chivas</string>
+    <string name="station_vallarta" translatable="false">Vallarta</string>
+    <string name="station_san_juan_de_ocotan" translatable="false">San Juan de Ocotán</string>
+    <string name="station_5_de_mayo" translatable="false">5 de Mayo</string>
+    <string name="station_acueducto" translatable="false">Acueducto</string>
+    <string name="station_santa_margarita" translatable="false">Santa Margarita</string>
+    <string name="station_la_tuzania" translatable="false">La Tuzanía</string>
+    <string name="station_san_isidro" translatable="false">San Isidro</string>
+    <string name="station_centro_cultural_universitario" translatable="false">Centro Cultural Universitario</string>
+    <string name="station_constitucion" translatable="false">Constitución</string>
+    <string name="station_tabachines" translatable="false">Tabachines</string>
+    <string name="station_la_cantera" translatable="false">La Cantera</string>
+    <string name="station_el_batan" translatable="false">El Batán</string>
+    <string name="station_la_experiencia" translatable="false">La Experiencia</string>
+    <string name="station_rancho_nuevo" translatable="false">Rancho Nuevo</string>
+    <string name="station_lomas_del_paraiso" translatable="false">Lomas del Paraíso</string>
+    <string name="station_arena_guadalajara" translatable="false">Arena Guadalajara</string>
+    <string name="station_barranca_de_huentitan" translatable="false">Barranca de Huentitán</string>
+    <string name="station_vicente_fernandez" translatable="false">Vicente Fernández</string>
+    <string name="station_comisaria_de_guadalajara" translatable="false">Comisaría de Guadalajara</string>
+    <string name="station_betania" translatable="false">Betania</string>
+    <string name="station_colonia_jalisco" translatable="false">Colonia Jalisco</string>
+    <string name="station_zapotlanejo" translatable="false">Zapotlanejo</string>
+    <string name="station_los_conejos" translatable="false">Los Conejos</string>
+    <string name="station_las_juntas" translatable="false">Las Juntas</string>
+    <string name="station_lomas_del_cuatro" translatable="false">Acueducto</string>
+    <string name="station_jalisco_200_annos" translatable="false">Jalisco 200 Años</string>
+    <string name="station_real_del_valle" translatable="false">Real del Valle</string>
+    <string name="station_concepcion_del_valle" translatable="false">Concepción del Valle</string>
+    <string name="station_el_cuervo" translatable="false">El Cuervo</string>
+    <string name="station_lomas_del_sur" translatable="false">Lomas del Sur</string>
+    <string name="station_cutlajo" translatable="false">CUTLAJO</string>
+    <string name="station_tlajomulco_centro" translatable="false">Tlajomulco Centro</string>
+    <string name="company_sfinx" translatable="false">SFINX</string>
+
+    <string name="device_validator">Validador</string>
+    <string name="device_turnstile">Torniquete</string>
+    <string name="device_turnstile_numbered_debug">Torniquete %1$d (%2$d)</string>
+    <string name="device_turnstile_numbered">Torniquete %1$d</string>
+    <string name="device_ticket_vending_machine">Máquina de Venta y Recarga de Tarjetas (VRT)</string>
+    <string name="device_attention_module">Módulo de atención</string>
+    <string name="device_smartphone">Dispositivo móvil</string>
+    <string name="device_point_of_sale">Comercio</string>
+
+    <string name="profile_student">Estudiante</string>
+    <string name="profile_single_card">Tarjeta Única</string>
+    <string name="profile_general_fare">Tarifa general</string>
+    <string name="profile_visually_impaired">Discapacidad visual</string>
+    <string name="profile_hearing_impaired">Discapacidad auditiva</string>
+    <string name="profile_employee">Empleado</string>
+    <string name="profile_speech_impaired">Discapacidad oral</string>
+    <string name="profile_child_5_to_12">Niño de 5 a 12 años</string>
+    <string name="profile_disability">Discapacidad</string>
+    <string name="profile_senior_citizen">Adulto mayor</string>
+    <string name="profile_teacher">Maestro</string>
+    <string name="profile_security">Seguridad</string>
+    <string name="profile_service_animal">Animal de asistencia</string>
+    <string name="profile_police">Policía</string>
+    <string name="profile_visitor_provider">Visitante/proveedor</string>
+    <string name="profile_business">Negocios</string>
+    <string name="profile_bicycle">Bicicleta</string>
+    <string name="profile_social_service">Servicio social</string>
+    <string name="profile_mentally_impaired">Discapacidad mental</string>
+    <string name="profile_mobility_impaired">Discapacidad motriz</string>
+    <string name="profile_child_under_5">Menor de 5 años</string>
+    <string name="profile_family_member">Familiar</string>
+    <string name="profile_cleaning_staff">Limpieza</string>
+    <string name="profile_supervisor">Supervisor</string>
+
+    <string name="uid_format" translatable="false">UID: %1$s</string>
+    <string name="credits_intro">Consulta el saldo y los movimientos de tu tarjeta de transporte público, sin internet y sin complicaciones.</string>
+    <string name="credits_developer_title">Desarrollado por</string>
+    <string name="credits_developer_name">Nodo Central</string>
+    <string name="credits_email" translatable="false">nodocentral@nodocentral.org</string>
+    <string name="credits_repo">github.com/Nodo-Central/Mi-Viaje</string>
+    <string name="credits_mascot">Mascota: Víctor “Vi” Puentes</string>
+    <string name="credits_copyright">© 2026 Mi Viaje — Todos los derechos reservados</string>
+    <string name="credits_origin">Hecho con el corazón 🫀 desde Tlajomulco</string>
+    <string name="credits_acknowledgements_title">Agradecimientos</string>
+    <string name="credits_acknowledgement_early_users">• Personas que confiaron en las primeras versiones</string>
+    <string name="credits_acknowledgement_cucei">• Comunidad estudiantil del CUCEI</string>
+    <string name="credits_acknowledgement_dialogue">• Asamblea y espacios autónomos de diálogo universitario</string>
+    <string name="credits_acknowledgement_open_data">• Quienes impulsaron la apertura de datos del transporte público</string>
+    <string name="credits_acknowledgement_routes">• Rutas y operadores que siguen moviendo a la ciudad</string>
+    <string name="credits_inspiration_title">Inspirado por</string>
+    <string name="credits_inspiration">Una alternativa simple: sin anuncios, sin dependencias innecesarias, con control del usuario.</string>
+
+    <string name="money_mxn_format" translatable="false">$%1$.2f</string>
+    <plurals name="ticket_count">
+        <item quantity="one">%1$d boleto</item>
+        <item quantity="other">%1$d boletos</item>
+    </plurals>
+    <plurals name="ticket_count_plus">
+        <item quantity="one">+%1$d boleto</item>
+        <item quantity="other">+%1$d boletos</item>
+    </plurals>
+    <string name="free_of_charge">Sin costo</string>
+
+    <string name="operator_id_format">Operador %1$d</string>
+    <string name="import_data">Importar datos</string>
+    <string name="export_data">Exportar datos</string>
+    <string name="export_log">Exportar log</string>
+    <string name="unknown">Desconocido</string>
+    <string name="loading">Cargando…</string>
+    <string name="none">Ninguno</string>
+    <string name="count_badge_format">%1$d</string>
+    <string name="card_actions_applied">Modificaciones de tarjeta</string>
+    <string name="network_app_version">Aplicación de transporte</string>
+    <string name="network_id">Id. de la red</string>
+    <string name="network_app_expiration">Expiración de la aplicación</string>
+    <string name="user_name">Nombre</string>
+    <string name="user_birth_date">Fecha de nacimiento</string>
+    <string name="user_holder_id">CURP</string>
+    <string name="user_profile_type">Perfil</string>
+    <string name="user_profile_expiration">Fecha de expiración</string>
+
+    <string name="card_production_date">Fecha de producción</string>
+    <string name="card_country">País</string>
+    <string name="system_sn">Número de serie del sistema</string>
+    <string name="card_expiration_date">Fecha de expiración de la tarjeta</string>
+    <string name="network_owner_id">Propietario de la red de transporte</string>
+    <string name="network_company_id">Compañía de la red de transporte</string>
+    <string name="network_issuer_id">Id. de red de transporte emisora</string>
+    <string name="network_distributor_id">Id. de distribuidor de tarjeta</string>
+    <string name="sam_id">Id. de módulo de seguridad</string>
+    <string name="sam_algorithm_id">Id. de algoritmo de seguridad</string>
+    <string name="write_keys_version">Versión de llaves de escritura</string>
+    <string name="rename">Renombrar</string>
+    <string name="copy_uid">Copiar UID</string>
+    <string name="delete">Eliminar</string>
+    <string name="change_background">Personalizar imagen de fondo</string>
+    <string name="delete_card_confirm">¿Quieres eliminar esta tarjeta?</string>
+    <string name="rename_card_title">Renombrar tarjeta</string>
+    <string name="card_alias_hint">Alias de la tarjeta</string>
+    <string name="save">Guardar</string>
+    <string name="toast_alias_updated">Alias actualizado</string>
+    <string name="toast_alias_cleared">Alias eliminado</string>
+    <string name="toast_alias_update_error">No se pudo actualizar el alias</string>
+    <string name="toast_uid_copied">UID copiado: %1$s</string>
+    <string name="card_background_title">Seleccionar fondo de tarjeta</string>
+    <string name="manage_imported_backgrounds_title">Administrar fondos importados</string>
+    <string name="delete_imported_background_title">Eliminar fondo importado</string>
+    <string name="delete_imported_background_confirm">¿Eliminar \"%1$s\" de la galería?</string>
+    <string name="artwork_option_default">Usar diseño automático</string>
+    <string name="artwork_option_imported_named">Importado: %1$s</string>
+    <string name="artwork_option_import">Importar desde galería…</string>
+    <string name="artwork_option_manage">Administrar imágenes importadas...</string>
+    <string name="artwork_manager_entry">%1$s (%2$d tarjetas)</string>
+    <string name="artwork_default_name">Imagen sin nombre</string>
+    <string name="artwork_picker_import">Importar imagen</string>
+    <string name="artwork_import_as_is">Importar sin recortar</string>
+    <string name="artwork_crop_title">Recortar imagen</string>
+    <string name="artwork_selected">Seleccionada</string>
+    <string name="artwork_usage_count">Usada en %1$d tarjetas</string>
+    <string name="artwork_action_menu">Acciones de imagen</string>
+    <string name="rename_imported_artwork_title">Renombrar imagen</string>
+    <string name="artwork_name_hint">Nombre de la imagen</string>
+    <string name="artwork_delete_in_use_warning_title">Imagen en uso</string>
+    <string name="artwork_delete_in_use_warning_message">\"%1$s\" se usa en %2$d tarjetas. Si la eliminas, esas tarjetas volverán al diseño automático.</string>
+    <string name="artwork_delete_in_use_final_title">Eliminar de todos modos</string>
+    <string name="artwork_delete_in_use_final_message">Esta acción eliminará \"%1$s\" y no se puede deshacer.</string>
+    <string name="artwork_builtin_2020_general">Mi Movilidad</string>
+    <string name="artwork_builtin_2020_subsidy_50">Mi Pasaje Amarillo</string>
+    <string name="artwork_builtin_2020_subsidy_100">Mi Pasaje Verde</string>
+    <string name="artwork_builtin_2025_general">Mi Movilidad 2025</string>
+    <string name="artwork_builtin_2025_subsidy_50">Yo Jalisco 50%</string>
+    <string name="artwork_builtin_2025_subsidy_100">Yo Jalisco 100%</string>
+    <string name="artwork_builtin_2026_social">Tarjeta Única (Al Estilo Jalisco)</string>
+    <string name="toast_background_updated">Fondo actualizado</string>
+    <string name="toast_background_update_error">No se pudo actualizar el fondo</string>
+    <string name="toast_background_imported">Imagen importada y asignada</string>
+    <string name="toast_background_import_invalid_image">La imagen seleccionada no es válida o está dañada</string>
+    <string name="toast_background_import_error">No se pudo importar la imagen</string>
+    <string name="toast_background_crop_error">No se pudo recortar la imagen</string>
+    <string name="toast_background_sanitized">Fondos optimizados: %1$d. Fondos incompatibles eliminados: %2$d</string>
+    <string name="toast_background_sanitize_error">No se pudieron validar algunas imágenes importadas</string>
+    <string name="toast_background_deleted">Imagen eliminada</string>
+    <string name="toast_background_delete_error">No se pudo eliminar la imagen</string>
+    <string name="toast_artwork_renamed">Imagen renombrada</string>
+    <string name="toast_artwork_rename_error">No se pudo renombrar la imagen</string>
+    <string name="toast_artwork_in_use">No se puede eliminar: imagen en uso</string>
+    <string name="toast_no_imported_backgrounds">No hay imágenes importadas</string>
+    <string name="main_cards_empty_tip">Presiona el botón de tarjeta para escanear una tarjeta nueva</string>
+    <string name="toast_nfc_not_supported">Este dispositivo no tiene NFC</string>
+    <string name="toast_nfc_disabled">NFC desactivado. Por favor, actívalo.</string>
+    <string name="toast_log_export_success">Log exportado correctamente</string>
+    <string name="toast_log_export_capture_error">No se pudo capturar el log</string>
+    <string name="toast_log_export_save_error">No se pudo guardar el archivo de log</string>
+    <string name="toast_log_export_clear_error">Log exportado, pero no se pudo limpiar el buffer</string>
+
+    <string name="route_sitren_1" translatable="false">SiTren L1</string>
+    <string name="route_sitren_2" translatable="false">SiTren L2</string>
+    <string name="route_sitren_3" translatable="false">SiTren L3</string>
+    <string name="route_sitren_4" translatable="false">SiTren L4</string>
+    <string name="route_sitren_5" translatable="false">SiTren L5</string>
+    <string name="route_sitren_6" translatable="false">SiTren L6</string>
+    <string name="route_sitren_7" translatable="false">SiTren L7</string>
+    <string name="route_sitren_8" translatable="false">SiTren L8</string>
+    <string name="route_sitren_9" translatable="false">SiTren L9</string>
+
+    <string name="route_sitren_a01" translatable="false">SiTren A01</string>
+    <string name="route_sitren_a02" translatable="false">SiTren A02</string>
+    <string name="route_sitren_a03" translatable="false">SiTren A03</string>
+    <string name="route_sitren_a04" translatable="false">SiTren A04</string>
+    <string name="route_sitren_a05" translatable="false">SiTren A05</string>
+    <string name="route_sitren_1_b" translatable="false">SiTren L1-B</string>
+
+    <string name="route_calzada_a03" translatable="false">A03</string>
+    <string name="route_calzada_a05" translatable="false">A05</string>
+    <string name="route_calzada_a06" translatable="false">A06</string>
+    <string name="route_calzada_a07" translatable="false">A07</string>
+    <string name="route_calzada_a08" translatable="false">A08</string>
+    <string name="route_calzada_a09" translatable="false">A09</string>
+    <string name="route_calzada_a10" translatable="false">A10</string>
+    <string name="route_calzada_a11" translatable="false">A11</string>
+    <string name="route_calzada_a12" translatable="false">A12</string>
+    <string name="route_calzada_a13" translatable="false">A13</string>
+    <string name="route_calzada_a14" translatable="false">A14</string>
+    <string name="route_calzada_a15" translatable="false">A15</string>
+    <string name="route_calzada_a16" translatable="false">A16</string>
+    <string name="route_calzada_a17" translatable="false">A17</string>
+    <string name="route_calzada_a18" translatable="false">A18</string>
+    <string name="route_calzada_a19" translatable="false">A19</string>
+    <string name="route_calzada_a20" translatable="false">A20</string>
+    <string name="route_calzada_a21" translatable="false">A21</string>
+    <string name="route_calzada_a22" translatable="false">A22</string>
+
+    <string name="route_periferico_c01" translatable="false">C01</string>
+    <string name="route_periferico_c02" translatable="false">C02</string>
+    <string name="route_periferico_c03" translatable="false">C03</string>
+    <string name="route_periferico_t01" translatable="false">T01</string>
+    <string name="route_periferico_a01" translatable="false">A01</string>
+    <string name="route_periferico_a02" translatable="false">A02</string>
+    <string name="route_periferico_a03" translatable="false">A03</string>
+    <string name="route_periferico_a04" translatable="false">A04</string>
+    <string name="route_periferico_a05_1" translatable="false">A05-1</string>
+    <string name="route_periferico_a05_2" translatable="false">A05-2</string>
+    <string name="route_periferico_a06" translatable="false">A06</string>
+    <string name="route_periferico_a07" translatable="false">A07</string>
+    <string name="route_periferico_a08" translatable="false">A08</string>
+    <string name="route_periferico_a09" translatable="false">A09</string>
+    <string name="route_periferico_a10" translatable="false">A10</string>
+    <string name="route_periferico_a11" translatable="false">A11</string>
+    <string name="route_periferico_a12" translatable="false">A12</string>
+    <string name="route_periferico_a13" translatable="false">A13</string>
+
+    <string name="route_lopezmateos_v01" translatable="false">LM-V01</string>
+    <string name="route_lopezmateos_v02" translatable="false">LM-V02</string>
+    <string name="route_lopezmateos_v03" translatable="false">LM-V03</string>
+    <string name="route_lopezmateos_v04" translatable="false">LM-V04</string>
+    <string name="route_lopezmateos_v05" translatable="false">LM-V05</string>
+    <string name="route_lopezmateos_c01" translatable="false">LM-C01</string>
+    <string name="route_lopezmateos_c02" translatable="false">LM-C02</string>
+    <string name="route_lopezmateos_c03" translatable="false">LM-C03</string>
+    <string name="export_card">Exportar esta tarjeta</string>
+    <string name="profile_disability_assisted">Discapacidad asistida</string>
+    <string name="profile_missing_person_relative">Familiar de persona desaparecida</string>
+    <string name="profile_women_support">Apoyo a mujeres</string>
+    <string name="profile_zapopan">Zapopan te lleva</string>
+    <string name="setting_rebel_mode">Modo zen</string>
+    <string name="setting_rebel_mode_summary">Utiliza la nomenclatura anterior del sistema de transporte masivo.</string>
+    <string name="money_mxn_plus_format" translatable="false">+$%1$.2f</string>
+    <string name="transport_brt_feeder">Alimentadora de Mi Macro</string>
+    <string name="event_fare_refund">Devolución de tarifa</string>
+    <string name="transport_trunk">Troncal T%1$02d%2$s</string>
+    <string name="transport_route">Ruta %1$s</string>
+    <string name="transport_feeder">Alimentadora A%1$02d%2$s</string>
+    <string name="transport_station">Estación %1$s</string>
+    <string name="transport_pretren" translatable="false">PreTren R%1$02d%2$s</string>
+    <string name="transport_sitren" translatable="false">SiTren L%1$02d%2$s</string>
+    <string name="transport_pretren_feeder" translatable="false">PreTren A%1$02d%2$s</string>
+    <string name="transport_sitren_feeder" translatable="false">SiTren A%1$02d%2$s</string>
+</resources>

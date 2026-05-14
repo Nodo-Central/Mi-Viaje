@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings"
+        android:iconTint="?attr/colorOnSurface"
+        android:iconTintMode="src_over"
+        android:title="@string/settings"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_help"
+        android:icon="@drawable/ic_help"
+        android:iconTint="?attr/colorOnSurface"
+        android:iconTintMode="src_over"
+        android:title="@string/help"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_import"
+        android:icon="@drawable/ic_download"
+        android:iconTint="?attr/colorOnSurface"
+        android:iconTintMode="src_over"
+        android:title="@string/import_data"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_export"
+        android:icon="@drawable/ic_upload"
+        android:iconTint="?attr/colorOnSurface"
+        android:iconTintMode="src_over"
+        android:title="@string/export_data"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_export_log"
+        android:icon="@drawable/ic_frame_bug"
+        android:iconTint="?attr/colorOnSurface"
+        android:iconTintMode="src_over"
+        android:title="@string/export_log"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_about"
+        android:icon="@drawable/ic_info"
+        android:iconTint="?attr/colorOnSurface"
+        android:iconTintMode="src_over"
+        android:title="@string/about_app"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/help_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:orientation="vertical"
+    tools:context="org.nodocentral.miviaje.presentation.HelpActivity">
+
+    <include layout="@layout/view_toolbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/help_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:overScrollMode="ifContentScrolls">
+
+        <LinearLayout
+            android:id="@+id/help_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="32dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/help_intro_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="26dp"
+                app:cardBackgroundColor="?attr/colorSecondaryContainer"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="16dp"
+                        android:contentDescription="@null"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_contactless"
+                        app:tint="?attr/colorPrimary" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/MiViaje.Help.IntroTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/help_intro_title" />
+
+                        <TextView
+                            style="@style/MiViaje.Help.Intro"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="@string/help_intro" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                style="@style/MiViaje.Help.SectionHeader"
+                android:layout_marginBottom="14dp">
+
+                <ImageView
+                    style="@style/MiViaje.Help.SectionIcon"
+                    android:src="@drawable/ic_wallet" />
+
+                <TextView
+                    style="@style/MiViaje.Help.Section"
+                    android:text="@string/help_section_basic" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_balance_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_balance_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_card_expiration_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_card_expiration_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_no_write_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_no_write_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_saved_data_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_saved_data_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                style="@style/MiViaje.Help.SectionHeader"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="14dp">
+
+                <ImageView
+                    style="@style/MiViaje.Help.SectionIcon"
+                    android:src="@drawable/ic_bus_railway" />
+
+                <TextView
+                    style="@style/MiViaje.Help.Section"
+                    android:text="@string/help_section_routes" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_routes_wrong_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_routes_wrong_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_route_label_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_route_label_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_events_missing_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_events_missing_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_cards_differ_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_cards_differ_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                style="@style/MiViaje.Help.SectionHeader"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="14dp">
+
+                <ImageView
+                    style="@style/MiViaje.Help.SectionIcon"
+                    android:src="@drawable/ic_debug" />
+
+                <TextView
+                    style="@style/MiViaje.Help.Section"
+                    android:text="@string/help_section_technical" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_technical_button_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_technical_button_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_technical_fields_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_technical_fields_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_transport_type_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_transport_type_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                style="@style/MiViaje.Help.SectionHeader"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="14dp">
+
+                <ImageView
+                    style="@style/MiViaje.Help.SectionIcon"
+                    android:src="@drawable/ic_folder_code" />
+
+                <TextView
+                    style="@style/MiViaje.Help.Section"
+                    android:text="@string/help_section_project" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_not_official_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_not_official_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_internet_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_internet_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_contribute_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_contribute_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView style="@style/MiViaje.Help.Card">
+                <LinearLayout style="@style/MiViaje.Help.CardContent">
+                    <TextView
+                        style="@style/MiViaje.Help.Question"
+                        android:text="@string/help_support_question" />
+
+                    <TextView
+                        style="@style/MiViaje.Help.Answer"
+                        android:text="@string/help_support_answer" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/help_support_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="?attr/colorSecondaryContainer"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="16dp"
+                        android:contentDescription="@null"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_partner_heart"
+                        app:tint="?attr/colorPrimary" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/MiViaje.Help.Question"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/support_kofi_title" />
+
+                        <TextView
+                            style="@style/MiViaje.Help.Answer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/support_kofi_body" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/help_support_button"
+                            style="@style/Widget.Material3.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:text="@string/support_kofi_button"
+                            app:icon="@drawable/ic_cafe" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

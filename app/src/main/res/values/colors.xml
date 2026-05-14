@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="miviaje_mt_st">#D50000</color>
+
+    <color name="miviaje_mt_l1">#d50000</color>
+    <color name="miviaje_mt_l2">#1B5E20</color>
+    <color name="miviaje_mt_l3">#D81B60</color>
+    <color name="miviaje_mt_l4">#ef6c00</color>
+
+    <color name="miviaje_mm_ma">#0277BD</color>
+    <color name="miviaje_mm_mc">#0097A7</color>
+    <color name="miviaje_mm_mp">#311B92</color>
+
+    <color name="miviaje_tp_bus">#33691E</color>
+    <color name="miviaje_tp_lm">#D51B1B</color>
+    <color name="miviaje_pro">#283593</color>
+
+    <color name="miviaje_card_green">#3C9F40</color>
+    <color name="miviaje_card_top_up">#43A047</color>
+
+    <color name="miviaje_success">#3C9F40</color>
+    <color name="miviaje_warning">#FFA726</color>
+    <color name="miviaje_danger">#D51B1B</color>
+    <color name="miviaje_attention">#673AB7</color>
+
+    <color name="card_scan_status_waiting">@color/miviaje_warning</color>
+    <color name="card_scan_status_success">@color/miviaje_success</color>
+    <color name="card_scan_status_error">@color/miviaje_danger</color>
+    <color name="card_scan_status_icon">#FFFFFF</color>
+
+</resources>

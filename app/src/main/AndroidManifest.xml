@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.NFC" />
+
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true"
+        tools:ignore="UnnecessaryRequiredFeature" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="false"
+        android:theme="@style/Theme.MiViaje"
+        tools:targetApi="36">
+        <activity
+            android:name="org.nodocentral.miviaje.presentation.EventsActivity"
+            android:exported="false"
+            android:label="@string/card_event_history"/>
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
+        <activity
+            android:name="org.nodocentral.miviaje.presentation.SettingsActivity"
+            android:exported="false"
+            android:label="@string/settings"
+            android:parentActivityName="org.nodocentral.miviaje.presentation.MainActivity" />
+        <activity
+            android:name="org.nodocentral.miviaje.presentation.HelpActivity"
+            android:exported="false"
+            android:label="@string/help"
+            android:parentActivityName="org.nodocentral.miviaje.presentation.MainActivity" />
+        <activity
+            android:name="org.nodocentral.miviaje.presentation.AboutActivity"
+            android:exported="false"
+            android:label="@string/about_app"
+            android:parentActivityName="org.nodocentral.miviaje.presentation.MainActivity" />
+        <activity
+            android:name="org.nodocentral.miviaje.presentation.CardActivity"
+            android:exported="false"
+            android:label="@string/activity_card"
+            android:parentActivityName="org.nodocentral.miviaje.presentation.MainActivity" />
+        <activity
+            android:name="org.nodocentral.miviaje.presentation.ArtworkPickerActivity"
+            android:exported="false"
+            android:label="@string/activity_artwork_picker"
+            android:parentActivityName="org.nodocentral.miviaje.presentation.MainActivity" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MiViaje.UCrop" />
+        <activity
+            android:name="org.nodocentral.miviaje.presentation.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

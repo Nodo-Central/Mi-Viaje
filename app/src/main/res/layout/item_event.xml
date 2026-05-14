@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="4dp"
+    >
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/event_item_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorSurface"
+            android:padding="10dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_event_transport_icon_layout"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_chip"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+                <TextView
+                    android:id="@+id/item_event_transport_icon"
+                    android:foreground="@drawable/transport_bus"
+                    android:foregroundTint="#fff"
+                    android:textSize="24dp"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:visibility="visible"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:ignore="SpUsage" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                style="@style/TextAppearance.Material3.TitleSmall"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:id="@+id/item_event_id"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="3sp"
+                android:layout_marginStart="10sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/item_event_transport_icon_layout"
+                app:layout_constraintEnd_toStartOf="@id/item_event_title"
+                app:layout_constraintBottom_toBottomOf="@id/item_event_title"
+                tools:text="140."
+                />
+
+            <TextView
+                style="@style/TextAppearance.Material3.TitleSmall.Emphasized"
+                android:id="@+id/item_event_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10sp"
+                android:text="@string/loading"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/item_event_id"
+                app:layout_constraintEnd_toStartOf="@id/item_event_amount"
+                tools:text="Jalisco 200 Años"
+                />
+
+            <TextView
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:id="@+id/item_event_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="4dp"
+                tools:drawableEndCompat="@drawable/ic_ticket"
+                app:drawableTint="?attr/colorOnSurface"
+                app:layout_constraintTop_toTopOf="@+id/item_event_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="1 boleto"
+                />
+
+            <TextView
+                style="@style/TextAppearance.Material3.LabelLarge"
+                android:id="@+id/item_event_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/loading"
+                app:layout_constraintStart_toStartOf="@+id/item_event_id"
+                app:layout_constraintTop_toBottomOf="@+id/item_event_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="15 de diciembre 2025, 8:00:24 a.m."
+                />
+
+            <TextView
+                style="@style/TextAppearance.Material3.BodySmall.Emphasized"
+                android:layout_marginTop="5dp"
+                android:id="@+id/item_event_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/loading"
+                app:layout_constraintStart_toStartOf="@+id/item_event_id"
+                app:layout_constraintTop_toBottomOf="@+id/item_event_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Hacia Tlajomulco Centro"/>
+
+            <!-- Meta: entidad / tipo dispositivo / ubicación -->
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/item_event_meta_row"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="start"
+                app:layout_constraintStart_toStartOf="@id/item_event_id"
+                app:layout_constraintTop_toBottomOf="@id/item_event_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:alignItems="stretch"
+                app:flexWrap="wrap">
+
+                <TextView
+                    style="@style/MiViaje.Chip"
+                    android:id="@+id/item_event_device"
+                    android:text="@string/unknown"
+                    android:layout_marginBottom="6dp"
+                    tools:text="Torniquete 1"/>
+
+                <TextView
+                    style="@style/MiViaje.Chip"
+                    android:backgroundTint="?attr/colorOnTertiary"
+                    android:id="@+id/item_event_operator"
+                    android:text="@string/unknown"
+                    android:layout_marginBottom="6dp"
+                    tools:text="BEA"/>
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <LinearLayout
+                android:id="@+id/item_event_tech_block"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/item_event_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_event_meta_row"
+                tools:visibility="visible"
+                >
+
+                <TextView
+                    style="@style/TextAppearance.Material3.BodySmall"
+                    android:id="@+id/item_event_tech_line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    tools:text="SAM: 04 12 1C ..." />
+
+                <TextView
+                    style="@style/TextAppearance.Material3.BodySmall"
+                    android:id="@+id/item_event_tech_line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    tools:text="DevID: 2 · RouteId: 0 · Trans: UNSPEC"
+                    />
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextAppearance.Material3.BodySmall"
+                android:id="@+id/item_event_extra_info"
+                android:textStyle="italic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/unknown"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/item_event_tech_block"
+                app:layout_constraintStart_toStartOf="@id/item_event_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:visibility="visible"
+                tools:text="Event[...]"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
