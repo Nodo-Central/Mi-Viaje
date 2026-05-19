@@ -25,9 +25,9 @@ public class HelpActivity extends BaseActivity {
         applyInsetsToPadding(
                 binding.helpScroll,
                 WindowInsetsCompat.Type.navigationBars() | WindowInsetsCompat.Type.displayCutout(),
+                true,
                 false,
-                false,
-                false,
+                true,
                 true
         );
     }

@@ -142,7 +142,10 @@ public class CardActivity extends BaseActivity {
             alias.setVisibility(TextView.GONE);
         }
         TextView uid = findViewById(R.id.card_item_uid);
-        uid.setText(getString(R.string.uid_format, card.getUidString()));
+        uid.setText(getString(
+                R.string.uid_format,
+                CardUidFormatter.formatUid(card.getUidString(), CardUidFormatter.shouldHideCardUid(preferences))
+        ));
         TextView cash = findViewById(R.id.card_item_cash);
         cash.setText(getString(R.string.money_mxn_format, (float) card.getWalletValue() / 100));
         TextView expiry = findViewById(R.id.card_item_expiry);

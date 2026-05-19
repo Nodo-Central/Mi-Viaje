@@ -100,9 +100,9 @@ public class SettingsActivity extends BaseActivity implements SettingsAdapter.Li
         applyInsetsToPadding(
                 binding.settingsRecycler,
                 WindowInsetsCompat.Type.navigationBars() | WindowInsetsCompat.Type.displayCutout(),
+                true,
                 false,
-                false,
-                false,
+                true,
                 true
         );
     }
@@ -186,6 +186,16 @@ public class SettingsActivity extends BaseActivity implements SettingsAdapter.Li
                 false,
                 true
         ));
+        items.add(new SettingsAdapter.HeaderItem(R.string.settings_privacy, R.drawable.ic_shield_lock));
+        items.add(new SettingsAdapter.SwitchItem(
+                SettingsAdapter.SwitchKey.HIDE_CARD_UID,
+                R.string.setting_hide_card_uid,
+                R.string.setting_hide_card_uid_summary,
+                R.drawable.ic_lock,
+                CardUidFormatter.shouldHideCardUid(settingsPreferences),
+                true,
+                true
+        ));
         settingsAdapter.submitList(items);
     }
 
@@ -215,8 +225,9 @@ public class SettingsActivity extends BaseActivity implements SettingsAdapter.Li
     @Override
     public void onSwitchChanged(SettingsAdapter.SwitchKey key, boolean checked) {
         String preferenceKey = getPreferenceKey(key);
+        boolean defaultValue = getPreferenceDefault(key);
         settingsAdapter.updateSwitchChecked(key, checked);
-        if (settingsPreferences.getBoolean(preferenceKey, false) != checked) {
+        if (settingsPreferences.getBoolean(preferenceKey, defaultValue) != checked) {
             if (key == SettingsAdapter.SwitchKey.PURE_DARK) {
                 schedulePureDarkChange(checked);
             } else {
@@ -445,12 +456,28 @@ public class SettingsActivity extends BaseActivity implements SettingsAdapter.Li
         switch (key) {
             case PURE_DARK:
                 return KEY_PURE_DARK;
+            case HIDE_CARD_UID:
+                return CardUidFormatter.KEY_HIDE_CARD_UID;
             case ADVANCED_DATA:
                 return KEY_SHOW_TECHNICAL_DATA;
             case TECHNICAL_DATA:
                 return KEY_SHOW_DEBUG_DATA;
             case REBEL_MODE:
                 return KEY_REBEL_MODE;
+            default:
+                throw new IllegalArgumentException("Unknown switch key: " + key);
+        }
+    }
+
+    private boolean getPreferenceDefault(SettingsAdapter.SwitchKey key) {
+        switch (key) {
+            case HIDE_CARD_UID:
+                return CardUidFormatter.DEFAULT_HIDE_CARD_UID;
+            case PURE_DARK:
+            case ADVANCED_DATA:
+            case TECHNICAL_DATA:
+            case REBEL_MODE:
+                return false;
             default:
                 throw new IllegalArgumentException("Unknown switch key: " + key);
         }

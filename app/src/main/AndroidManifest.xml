@@ -59,7 +59,6 @@
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.MiViaje.UCrop" />
         <activity
             android:name="org.nodocentral.miviaje.presentation.MainActivity"

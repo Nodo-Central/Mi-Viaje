@@ -86,6 +86,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         preferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
 
         super.onCreate(savedInstanceState);
+        enableAppEdgeToEdge();
     }
 
     @Override
@@ -198,11 +199,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private void applySystemBars(Toolbar appBar) {
-        WindowInsetsControllerCompat ic =
-                WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
-        if (ic != null) {
-            ic.setAppearanceLightStatusBars(isLightTheme());
-        }
+        applySystemBarIconAppearance();
 
         applyInsetsToPadding(
                 appBar,
@@ -212,6 +209,21 @@ public abstract class BaseActivity extends AppCompatActivity {
                 false,
                 false
         );
+    }
+
+    private void enableAppEdgeToEdge() {
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        applySystemBarIconAppearance();
+    }
+
+    private void applySystemBarIconAppearance() {
+        WindowInsetsControllerCompat ic =
+                WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
+        if (ic != null) {
+            boolean lightTheme = isLightTheme();
+            ic.setAppearanceLightStatusBars(lightTheme);
+            ic.setAppearanceLightNavigationBars(lightTheme);
+        }
     }
 
     protected void applyInsetsToPadding(View view,

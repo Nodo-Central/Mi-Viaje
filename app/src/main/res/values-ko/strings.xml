@@ -79,6 +79,9 @@
     <string name="setting_show_technical_data">디버그 데이터 표시</string>
     <string name="setting_show_technical_data_summary">카드에 디버그 데이터를 표시합니다. 호기심 많은 사용자를 위한 설정입니다.</string>
     <string name="setting_show_more_data_summary">추가 기술 데이터를 표시합니다. 운영자, 구현자, 고급 사용자, 개발자에게 유용합니다.</string>
+    <string name="settings_privacy">개인정보 보호</string>
+    <string name="setting_hide_card_uid">카드 UID 숨기기</string>
+    <string name="setting_hide_card_uid_summary">개인정보 보호를 위해 UID의 마지막 4자만 표시합니다. 카드 메뉴에서 전체 UID를 계속 복사할 수 있습니다.</string>
 
     <string name="yes">예</string>
     <string name="cancel">취소</string>

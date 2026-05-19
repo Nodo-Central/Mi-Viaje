@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.card.MaterialCardView;
 
 import org.nodocentral.miviaje.R;
+import org.nodocentral.miviaje.presentation.CardUidFormatter;
 import org.nodocentral.miviaje.presentation.CardActivity;
 import org.nodocentral.miviaje.data.artwork.CardArtworkResolver;
 import org.nodocentral.miviaje.domain.artwork.Artwork;
@@ -41,6 +42,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     private List<Card> cardList;
     private Map<String, Artwork> artworksById;
     private final OnCardLongClickListener longClickListener;
+    private boolean hideCardUid;
 
     public static class CardViewHolder extends RecyclerView.ViewHolder {
         final MaterialCardView cardView;
@@ -67,10 +69,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         }
     }
 
-    public CardAdapter(OnCardLongClickListener longClickListener) {
+    public CardAdapter(OnCardLongClickListener longClickListener, boolean hideCardUid) {
         this.cardList = new ArrayList<>();
         this.artworksById = new HashMap<>();
         this.longClickListener = longClickListener;
+        this.hideCardUid = hideCardUid;
     }
 
     @NonNull
@@ -92,7 +95,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         );
 
         bindAlias(holder.cardAlias, card);
-        holder.cardUid.setText(holder.context.getString(R.string.uid_format, card.getUidString()));
+        holder.cardUid.setText(holder.context.getString(
+                R.string.uid_format,
+                CardUidFormatter.formatUid(card.getUidString(), hideCardUid)
+        ));
         setCardStatus(card, holder.cardStatus, holder.context);
         holder.cardTicketBalance.setVisibility(TextView.GONE);
 
@@ -223,5 +229,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     public void updateArtworks(Map<String, Artwork> artworksById) {
         this.artworksById = artworksById == null ? new HashMap<>() : new HashMap<>(artworksById);
+    }
+
+    public void setHideCardUid(boolean hideCardUid) {
+        if (this.hideCardUid == hideCardUid) {
+            return;
+        }
+        this.hideCardUid = hideCardUid;
+        notifyDataSetChanged();
     }
 }

@@ -82,6 +82,9 @@
     <string name="setting_show_technical_data_summary">カードにデバッグデータを表示します。好奇心のあるユーザー向け。</string>
 
     <string name="setting_show_more_data_summary">追加の技術データを表示します。運営者・実装者・上級ユーザー・開発者向け。</string>
+    <string name="settings_privacy">プライバシー</string>
+    <string name="setting_hide_card_uid">カードUIDを隠す</string>
+    <string name="setting_hide_card_uid_summary">プライバシー保護のため、UIDの最後の4文字だけを表示します。カードメニューから完全なUIDをコピーできます。</string>
 
     <string name="yes">はい</string>
     <string name="cancel">キャンセル</string>

@@ -2,6 +2,7 @@ package org.nodocentral.miviaje.presentation;
 
 import android.os.Bundle;
 
+import androidx.core.view.WindowInsetsCompat;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.ui.NavigationUI;
@@ -17,6 +18,7 @@ public class AboutActivity extends BaseActivity {
         ActivityAboutBinding binding = ActivityAboutBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         super.setToolbar(true);
+        configureInsets(binding);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment_activity_about);
@@ -24,6 +26,13 @@ public class AboutActivity extends BaseActivity {
             NavController navController = navHostFragment.getNavController();
             NavigationUI.setupWithNavController(binding.aboutNav, navController);
         }
+    }
+
+    private void configureInsets(ActivityAboutBinding binding) {
+        int navAndCutoutTypes = WindowInsetsCompat.Type.navigationBars()
+                | WindowInsetsCompat.Type.displayCutout();
+        applyInsetsToPadding(binding.navHostFragmentActivityAbout, navAndCutoutTypes, true, false, true, false);
+        applyInsetsToPadding(binding.aboutNav, navAndCutoutTypes, true, false, true, true);
     }
 
 }

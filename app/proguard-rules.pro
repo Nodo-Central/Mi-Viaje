@@ -21,5 +21,17 @@
 #-renamesourcefileattribute SourceFile
 
 -dontwarn com.yalantis.ucrop**
--keep class com.yalantis.ucrop** { *; }
--keep interface com.yalantis.ucrop** { *; }
+
+# uCrop 2.2.11 calls Activity.enableEdgeToEdge(), whose AndroidX implementation still contains
+# Android 15-deprecated system bar APIs. The crop screen already handles its own inset padding, so
+# release builds can drop this helper call and avoid Play Console edge-to-edge warnings.
+-assumenosideeffects class androidx.activity.EdgeToEdge {
+    public static void enable(androidx.activity.ComponentActivity, androidx.activity.SystemBarStyle, androidx.activity.SystemBarStyle);
+}
+
+# Material 1.14 guards these helpers on API 35+, but stripping the color writes entirely keeps the
+# release artifact free of deprecated system-bar color calls.
+-assumenosideeffects class com.google.android.material.internal.EdgeToEdgeUtils {
+    public static void setStatusBarColor(android.view.Window, int);
+    public static void setNavigationBarColor(android.view.Window, int);
+}

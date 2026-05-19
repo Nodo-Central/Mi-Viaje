@@ -94,6 +94,9 @@
     <string name="setting_show_technical_data_summary">Muestra datos de depuración en la tarjeta. Para usuarios curiosos.</string>
     <string name="setting_show_technical_data">Mostrar datos de depuración</string>
     <string name="setting_show_more_data_summary">Muestra datos técnicos adicionales. Útil para operadores, implementadores, usuarios avanzados y desarrolladores.</string>
+    <string name="settings_privacy">Privacidad</string>
+    <string name="setting_hide_card_uid">Ocultar UID de tarjeta</string>
+    <string name="setting_hide_card_uid_summary">Muestra solo los últimos cuatro caracteres del UID por privacidad. Aún puedes copiar el UID completo desde el menú de la tarjeta.</string>
 
     <string name="yes">Sí</string>
     <string name="cancel">Cancelar</string>

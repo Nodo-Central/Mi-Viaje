@@ -23,7 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.ColorUtils;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.color.MaterialColors;
@@ -64,6 +64,8 @@ public class MainActivity extends BaseActivity implements NfcAdapter.ReaderCallb
     private static final String TAG_IMPORT_DATA = "IMPORT_DATA";
     private static final String TAG_LOG_EXPORT = "LOG_EXPORT";
 
+    private static final int CARD_GRID_MIN_WIDTH_DP = 360;
+    private static final int CARD_GRID_MAX_SPAN_COUNT = 3;
     private static final int FAB_LAST_ITEM_EXTRA_SPACING_DP = 12;
     private static final int NFC_READER_FLAGS = NfcAdapter.FLAG_READER_NFC_A | NfcAdapter.FLAG_READER_SKIP_NDEF_CHECK;
     private static final String CARD_TRANSITION_NAME_PREFIX = "card_";
@@ -73,6 +75,7 @@ public class MainActivity extends BaseActivity implements NfcAdapter.ReaderCallb
     private MiViajeDatabase database;
     private CardAdapter cardAdapter;
     private RecyclerView cardRecycler;
+    private GridLayoutManager cardLayoutManager;
     private FloatingActionButton addCardButton;
     private LastItemBottomSpacingDecoration lastItemBottomSpacingDecoration;
     private CardScanSheetController scanSheetController;
@@ -90,6 +93,8 @@ public class MainActivity extends BaseActivity implements NfcAdapter.ReaderCallb
     private BackupService backupService;
     private ArtworkRepository artworkRepository;
     private CardRepository cardRepository;
+    private boolean hideCardUidPreference;
+    private boolean cardListSnapshotBound = false;
 
     private static String normalizeAlias(String alias) {
         return normalizeOptionalText(alias);
@@ -129,16 +134,20 @@ public class MainActivity extends BaseActivity implements NfcAdapter.ReaderCallb
         cardRepository = new CardRepository(database);
         artworkRepository = new ArtworkRepository(this, database);
         backupService = new BackupService(database, artworkRepository);
-        cardAdapter = new CardAdapter(this::onCardMenuAction);
+        hideCardUidPreference = CardUidFormatter.shouldHideCardUid(preferences);
+        cardAdapter = new CardAdapter(this::onCardMenuAction, hideCardUidPreference);
         lastItemBottomSpacingDecoration = new LastItemBottomSpacingDecoration();
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
 
     private void setupCardRecycler() {
         cardRecycler = cardListUiStateController.getCardRecycler();
-        cardRecycler.setLayoutManager(new LinearLayoutManager(this));
+        cardLayoutManager = new GridLayoutManager(this, 1);
+        cardRecycler.setLayoutManager(cardLayoutManager);
         cardRecycler.setAdapter(cardAdapter);
         cardRecycler.addItemDecoration(lastItemBottomSpacingDecoration);
+        cardRecycler.addOnLayoutChangeListener((view, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> updateCardGridSpan());
+        cardRecycler.post(this::updateCardGridSpan);
     }
 
     private void setupAddCardButton() {
@@ -148,7 +157,10 @@ public class MainActivity extends BaseActivity implements NfcAdapter.ReaderCallb
     }
 
     private void updateRecycler() {
-        cardListUiStateController.showLoading();
+        boolean shouldShowLoading = !cardListSnapshotBound;
+        if (shouldShowLoading) {
+            cardListUiStateController.showLoading();
+        }
 
         runInBackground(() -> {
             try {
@@ -157,7 +169,9 @@ public class MainActivity extends BaseActivity implements NfcAdapter.ReaderCallb
             } catch (Exception e) {
                 Log.w(TAG_CARD_LIST, "Error loading cards", e);
                 runOnUiThread(() -> {
-                    cardListUiStateController.showEmptyTip();
+                    if (shouldShowLoading) {
+                        cardListUiStateController.showEmptyTip();
+                    }
                     Toast.makeText(this, R.string.toast_background_sanitize_error, Toast.LENGTH_SHORT).show();
                 });
             }
@@ -203,6 +217,7 @@ public class MainActivity extends BaseActivity implements NfcAdapter.ReaderCallb
     private void bindCardListSnapshot(CardListSnapshot snapshot) {
         cardAdapter.updateArtworks(snapshot.artworksById);
         cardAdapter.updateCards(snapshot.cards);
+        cardListSnapshotBound = true;
         showArtworkSanitizationFeedback(snapshot.sanitizationResult);
         if (snapshot.cards.isEmpty()) {
             cardListUiStateController.showEmptyTip();
@@ -338,10 +353,32 @@ public class MainActivity extends BaseActivity implements NfcAdapter.ReaderCallb
 
     private void configureMainInsets() {
         int navAndCutoutTypes = WindowInsetsCompat.Type.navigationBars() | WindowInsetsCompat.Type.displayCutout();
+        applyInsetsToPadding(cardRecycler, navAndCutoutTypes, true, false, true, false);
         applyInsetsToMargins(addCardButton, navAndCutoutTypes, true, false, true, true);
 
         addCardButton.addOnLayoutChangeListener((view, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> updateLastItemBottomSpacing());
         addCardButton.post(this::updateLastItemBottomSpacing);
+    }
+
+    private void updateCardGridSpan() {
+        if (cardRecycler == null || cardLayoutManager == null) {
+            return;
+        }
+
+        int availableWidth = cardRecycler.getWidth()
+                - cardRecycler.getPaddingLeft()
+                - cardRecycler.getPaddingRight();
+        if (availableWidth <= 0) {
+            return;
+        }
+
+        int targetCardWidth = dpToPx(CARD_GRID_MIN_WIDTH_DP);
+        int spanCount = Math.max(1, availableWidth / targetCardWidth);
+        spanCount = Math.min(spanCount, CARD_GRID_MAX_SPAN_COUNT);
+        if (cardLayoutManager.getSpanCount() != spanCount) {
+            cardLayoutManager.setSpanCount(spanCount);
+            cardRecycler.invalidateItemDecorations();
+        }
     }
 
     private void updateLastItemBottomSpacing() {
@@ -502,8 +539,20 @@ public class MainActivity extends BaseActivity implements NfcAdapter.ReaderCallb
     @Override
     protected void onResume() {
         super.onResume();
+        refreshCardUidPrivacyPreference();
         if (shouldEnableReaderMode()) {
             enableReaderModeIfAvailable();
+        }
+    }
+
+    private void refreshCardUidPrivacyPreference() {
+        boolean hideCardUid = CardUidFormatter.shouldHideCardUid(preferences);
+        if (hideCardUidPreference == hideCardUid) {
+            return;
+        }
+        hideCardUidPreference = hideCardUid;
+        if (cardAdapter != null) {
+            cardAdapter.setHideCardUid(hideCardUid);
         }
     }
 
@@ -784,7 +833,19 @@ public class MainActivity extends BaseActivity implements NfcAdapter.ReaderCallb
                 return;
             }
 
-            outRect.bottom = position == adapter.getItemCount() - 1 ? bottomSpacingPx : 0;
+            int spanCount = 1;
+            RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
+            if (layoutManager instanceof GridLayoutManager) {
+                spanCount = ((GridLayoutManager) layoutManager).getSpanCount();
+            }
+
+            int itemCount = adapter.getItemCount();
+            int finalRowSize = itemCount % spanCount;
+            if (finalRowSize == 0) {
+                finalRowSize = spanCount;
+            }
+            int finalRowStart = itemCount - finalRowSize;
+            outRect.bottom = position >= finalRowStart ? bottomSpacingPx : 0;
         }
     }
 }

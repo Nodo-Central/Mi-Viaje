@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.annotation.IdRes;
 import androidx.core.util.Pair;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -65,6 +66,7 @@ public class EventsActivity extends BaseActivity {
         setContentView(R.layout.activity_events);
         super.setToolbar(true);
         setupFilterToggles();
+        configureInsets();
 
         long cardUid = getIntent().getLongExtra("CARD_UID", -1L);
         if (cardUid == -1L) {
@@ -90,6 +92,13 @@ public class EventsActivity extends BaseActivity {
                 applyActiveFilters();
             });
         });
+    }
+
+    private void configureInsets() {
+        int navAndCutoutTypes = WindowInsetsCompat.Type.navigationBars()
+                | WindowInsetsCompat.Type.displayCutout();
+        applyInsetsToPadding(findViewById(R.id.events_filter_scroll), navAndCutoutTypes, true, false, true, false);
+        applyInsetsToPadding(findViewById(R.id.events_recycler), navAndCutoutTypes, true, false, true, true);
     }
 
     private void setupFilterToggles() {

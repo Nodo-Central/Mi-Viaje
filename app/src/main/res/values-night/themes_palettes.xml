@@ -3,8 +3,6 @@
     <style name="Theme.MiViaje.Palette.MetroL1" parent="Theme.MiViaje">
         <item name="android:colorBackground">#1A1110</item>
         <item name="android:windowBackground">#1A1110</item>
-        <item name="android:statusBarColor">#73342B</item>
-        <item name="android:navigationBarColor">#1A1110</item>
         <item name="colorAccent">#FFB4A8</item>
         <item name="colorPrimary">#FFB4A8</item>
         <item name="colorOnPrimary">#561E16</item>
@@ -58,8 +56,6 @@
     <style name="Theme.MiViaje.Palette.MetroL2" parent="Theme.MiViaje">
         <item name="android:colorBackground">#10140F</item>
         <item name="android:windowBackground">#10140F</item>
-        <item name="android:statusBarColor">#245023</item>
-        <item name="android:navigationBarColor">#10140F</item>
         <item name="colorAccent">#A1D399</item>
         <item name="colorPrimary">#A1D399</item>
         <item name="colorOnPrimary">#0B390F</item>
@@ -113,8 +109,6 @@
     <style name="Theme.MiViaje.Palette.MetroL3" parent="Theme.MiViaje">
         <item name="android:colorBackground">#191113</item>
         <item name="android:windowBackground">#191113</item>
-        <item name="android:statusBarColor">#713341</item>
-        <item name="android:navigationBarColor">#191113</item>
         <item name="colorAccent">#FFB2BF</item>
         <item name="colorPrimary">#FFB2BF</item>
         <item name="colorOnPrimary">#561D2B</item>
@@ -168,8 +162,6 @@
     <style name="Theme.MiViaje.Palette.MetroL4" parent="Theme.MiViaje">
         <item name="android:colorBackground">#1A120D</item>
         <item name="android:windowBackground">#1A120D</item>
-        <item name="android:statusBarColor">#703714</item>
-        <item name="android:navigationBarColor">#1A120D</item>
         <item name="colorAccent">#FFB68F</item>
         <item name="colorPrimary">#FFB68F</item>
         <item name="colorOnPrimary">#532201</item>
@@ -223,8 +215,6 @@
     <style name="Theme.MiViaje.Palette.MacroAeropuerto" parent="Theme.MiViaje">
         <item name="android:colorBackground">#101418</item>
         <item name="android:windowBackground">#101418</item>
-        <item name="android:statusBarColor">#124A73</item>
-        <item name="android:navigationBarColor">#101418</item>
         <item name="colorAccent">#9DCBFB</item>
         <item name="colorPrimary">#9DCBFB</item>
         <item name="colorOnPrimary">#003355</item>
@@ -278,8 +268,6 @@
     <style name="Theme.MiViaje.Palette.MacroCalzada" parent="Theme.MiViaje">
         <item name="android:colorBackground">#0E1415</item>
         <item name="android:windowBackground">#0E1415</item>
-        <item name="android:statusBarColor">#004F58</item>
-        <item name="android:navigationBarColor">#0E1415</item>
         <item name="colorAccent">#82D3E0</item>
         <item name="colorPrimary">#82D3E0</item>
         <item name="colorOnPrimary">#00363D</item>
@@ -333,8 +321,6 @@
     <style name="Theme.MiViaje.Palette.MacroPeriferico" parent="Theme.MiViaje">
         <item name="android:colorBackground">#141318</item>
         <item name="android:windowBackground">#141318</item>
-        <item name="android:statusBarColor">#463F77</item>
-        <item name="android:navigationBarColor">#141318</item>
         <item name="colorAccent">#C7BFFF</item>
         <item name="colorPrimary">#C7BFFF</item>
         <item name="colorOnPrimary">#2F285F</item>
@@ -388,8 +374,6 @@
     <style name="Theme.MiViaje.Palette.MiTransporte" parent="Theme.MiViaje">
         <item name="android:colorBackground">#11140F</item>
         <item name="android:windowBackground">#11140F</item>
-        <item name="android:statusBarColor">#2C4F1D</item>
-        <item name="android:navigationBarColor">#11140F</item>
         <item name="colorAccent">#A8D292</item>
         <item name="colorPrimary">#A8D292</item>
         <item name="colorOnPrimary">#153808</item>
@@ -443,8 +427,6 @@
     <style name="Theme.MiViaje.Palette.Corporate" parent="Theme.MiViaje">
         <item name="android:colorBackground">#131318</item>
         <item name="android:windowBackground">#131318</item>
-        <item name="android:statusBarColor">#3B4279</item>
-        <item name="android:navigationBarColor">#131318</item>
         <item name="colorAccent">#BCC2FF</item>
         <item name="colorPrimary">#BCC2FF</item>
         <item name="colorOnPrimary">#242B61</item>

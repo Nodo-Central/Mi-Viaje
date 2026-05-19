@@ -116,6 +116,9 @@
     <string name="app_language_chinese">中文 (Chinese)</string>
     <string name="setting_show_technical_data">Display debug data</string>
     <string name="setting_show_technical_data_summary">Displays debug data on the card. For curious users.</string>
+    <string name="settings_privacy">Privacy</string>
+    <string name="setting_hide_card_uid">Hide card UID</string>
+    <string name="setting_hide_card_uid_summary">Shows only the last four UID characters for privacy. You can still copy the full UID from the card menu.</string>
 
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>

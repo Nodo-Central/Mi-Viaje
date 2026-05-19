@@ -30,6 +30,7 @@ public final class SettingsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public enum SwitchKey {
         PURE_DARK,
+        HIDE_CARD_UID,
         ADVANCED_DATA,
         TECHNICAL_DATA,
         REBEL_MODE

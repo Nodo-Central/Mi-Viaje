@@ -107,8 +107,6 @@ public class PaletteXml {
             System.out.println("    <style name=\"Theme.MiViaje.Palette." + palette.style() + "\" parent=\"Theme.MiViaje\">");
             System.out.println("        <item name=\"android:colorBackground\">" + hex(scheme.getSurface()) + "</item>");
             System.out.println("        <item name=\"android:windowBackground\">" + hex(scheme.getSurface()) + "</item>");
-            System.out.println("        <item name=\"android:statusBarColor\">" + hex(scheme.getPrimaryContainer()) + "</item>");
-            System.out.println("        <item name=\"android:navigationBarColor\">" + hex(scheme.getSurface()) + "</item>");
             System.out.println("        <item name=\"colorAccent\">" + hex(scheme.getPrimary()) + "</item>");
             for (String[] role : ROLES) {
                 System.out.println("        <item name=\"" + role[0] + "\">" + hex(get(scheme, role[1])) + "</item>");
