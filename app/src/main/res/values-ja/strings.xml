@@ -160,14 +160,19 @@
     <string name="transport_bus">バス</string>
     <string name="transport_train_feeder">電車連絡バス</string>
     <string name="events_filter_route">ルート</string>
+    <string name="events_filter_line_or_route">路線またはルート</string>
+    <string name="events_filter_line_or_route_hint">路線またはルートを検索...</string>
     <string name="events_filter_station">車両 / 駅</string>
+    <string name="events_filter_station_validator">駅または改札機</string>
     <string name="events_filter_station_hint">車両または駅を検索...</string>
+    <string name="events_filter_station_validator_hint">駅、車両、または改札機を検索...</string>
     <string name="events_filter_date_today">今日</string>
     <string name="events_filter_date_week">今週</string>
     <string name="events_filter_date_month">今月</string>
     <string name="events_filter_date_range">期間</string>
     <string name="events_filter_date_range_picker_title">期間を選択</string>
     <string name="events_filter_operator">運行者</string>
+    <string name="events_filter_operator_hint">運行者を検索...</string>
     <string name="events_filter_event_type_full">イベントの種類</string>
     <string name="events_filter_apply">フィルターを適用</string>
 

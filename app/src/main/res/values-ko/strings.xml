@@ -164,14 +164,19 @@
     <string name="events_filter_clear_all">모두 지우기</string>
     <string name="events_filter_transport_type">교통수단 종류</string>
     <string name="events_filter_route">경로</string>
+    <string name="events_filter_line_or_route">노선 또는 경로</string>
+    <string name="events_filter_line_or_route_hint">노선 또는 경로 검색...</string>
     <string name="events_filter_station">차량 / 역</string>
+    <string name="events_filter_station_validator">역 또는 검표기</string>
     <string name="events_filter_station_hint">차량 또는 역 검색...</string>
+    <string name="events_filter_station_validator_hint">역, 차량 또는 검표기 검색...</string>
     <string name="events_filter_date_today">오늘</string>
     <string name="events_filter_date_week">이번 주</string>
     <string name="events_filter_date_month">이번 달</string>
     <string name="events_filter_date_range">기간</string>
     <string name="events_filter_date_range_picker_title">날짜 범위 선택</string>
     <string name="events_filter_operator">운영자</string>
+    <string name="events_filter_operator_hint">운영자 검색...</string>
     <string name="events_filter_event_type_full">이벤트 유형</string>
     <string name="events_filter_apply">필터 적용</string>
 

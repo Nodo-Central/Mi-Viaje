@@ -116,24 +116,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/events_filter_route" />
+                android:text="@string/events_filter_line_or_route" />
 
-            <HorizontalScrollView
-                android:id="@+id/event_filters_route_scroll"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/event_filters_route_input_layout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:overScrollMode="never"
-                android:scrollbars="none">
+                android:layout_marginTop="8dp"
+                android:hint="@string/events_filter_line_or_route_hint"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomStart="30dp"
+                app:boxCornerRadiusBottomEnd="30dp"
+                app:boxCornerRadiusTopStart="30dp"
+                app:boxCornerRadiusTopEnd="30dp"
+                app:endIconMode="dropdown_menu"
+                app:startIconDrawable="@drawable/ic_search">
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/event_filters_route_group"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/event_filters_route_input"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:chipSpacingHorizontal="8dp"
-                    app:singleLine="true"
-                    app:singleSelection="false" />
-            </HorizontalScrollView>
+                    android:dropDownHeight="280dp"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/event_filters_route_token_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:chipSpacingHorizontal="8dp"
+                app:singleLine="false"
+                app:singleSelection="false" />
 
             <TextView
                 android:id="@+id/event_filters_station_label"
@@ -141,7 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/events_filter_station" />
+                android:text="@string/events_filter_station_validator" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/event_filters_station_input_layout"
@@ -149,24 +165,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="@string/events_filter_station_hint"
+                android:hint="@string/events_filter_station_validator_hint"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomStart="30dp"
                 app:boxCornerRadiusBottomEnd="30dp"
                 app:boxCornerRadiusTopStart="30dp"
                 app:boxCornerRadiusTopEnd="30dp"
-                app:endIconMode="clear_text"
-                app:endIconDrawable="@drawable/ic_close"
+                app:endIconMode="dropdown_menu"
                 app:startIconDrawable="@drawable/ic_search">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/event_filters_station_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:dropDownHeight="280dp"
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/event_filters_station_token_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:chipSpacingHorizontal="8dp"
+                app:singleLine="false"
+                app:singleSelection="false" />
 
             <TextView
                 android:id="@+id/event_filters_operator_label"
@@ -176,22 +200,38 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/events_filter_operator" />
 
-            <HorizontalScrollView
-                android:id="@+id/event_filters_operator_scroll"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/event_filters_operator_input_layout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:overScrollMode="never"
-                android:scrollbars="none">
+                android:layout_marginTop="8dp"
+                android:hint="@string/events_filter_operator_hint"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomStart="30dp"
+                app:boxCornerRadiusBottomEnd="30dp"
+                app:boxCornerRadiusTopStart="30dp"
+                app:boxCornerRadiusTopEnd="30dp"
+                app:endIconMode="dropdown_menu"
+                app:startIconDrawable="@drawable/ic_search">
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/event_filters_operator_group"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/event_filters_operator_input"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:chipSpacingHorizontal="8dp"
-                    app:singleLine="true"
-                    app:singleSelection="false" />
-            </HorizontalScrollView>
+                    android:dropDownHeight="280dp"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/event_filters_operator_token_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:chipSpacingHorizontal="8dp"
+                app:singleLine="false"
+                app:singleSelection="false" />
 
             <TextView
                 android:id="@+id/event_filters_date_label"

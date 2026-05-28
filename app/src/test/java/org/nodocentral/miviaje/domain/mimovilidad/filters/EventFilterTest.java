@@ -3,6 +3,7 @@ package org.nodocentral.miviaje.domain.mimovilidad.filters;
 import org.junit.Test;
 import org.nodocentral.miviaje.domain.mimovilidad.Operator;
 import org.nodocentral.miviaje.domain.mimovilidad.Route;
+import org.nodocentral.miviaje.domain.mimovilidad.Station;
 import org.nodocentral.miviaje.domain.mimovilidad.card.Event;
 
 import java.time.DayOfWeek;
@@ -10,7 +11,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -83,6 +86,193 @@ public class EventFilterTest {
 
         assertEquals(Arrays.asList(route3), routeFilteredEvents);
         assertEquals(Arrays.asList(macroCalzada), operatorFilteredEvents);
+    }
+
+    @Test
+    public void brtRouteFiltersUseDisplayedRouteWhenRawRouteIdIsAmbiguous() {
+        Event line6 = event(
+                Event.Type.PRODUCT_USE,
+                NOON,
+                Event.TransportType.BUS,
+                1,
+                Operator.MI_MACRO_CALZADA.getValue(),
+                0L,
+                1111,
+                0
+        );
+        Event line7 = event(
+                Event.Type.PRODUCT_USE,
+                NOON,
+                Event.TransportType.BUS,
+                1,
+                Operator.MI_MACRO_PERIFERICO_TRONCAL.getValue(),
+                0x0000000100000000L,
+                1,
+                0
+        );
+
+        List<Event> line6Events = EventFilter.filter(
+                Arrays.asList(line6, line7),
+                EventFilterCriteria.builder().routes(EnumSet.of(Route.LINE_6)).build()
+        );
+        List<Event> line7Events = EventFilter.filter(
+                Arrays.asList(line6, line7),
+                EventFilterCriteria.builder().routes(EnumSet.of(Route.LINE_7)).build()
+        );
+
+        assertEquals(Arrays.asList(line6), line6Events);
+        assertEquals(Arrays.asList(line7), line7Events);
+    }
+
+    @Test
+    public void routeTextTokensMatchRawRouteIds() {
+        Event route114 = event(Event.Type.PRODUCT_USE, NOON, Event.TransportType.BUS, 114, 0);
+        Event route14 = event(Event.Type.PRODUCT_USE, NOON, Event.TransportType.BUS, 14, 0);
+        EventFilterCriteria criteria = EventFilterCriteria.builder()
+                .routeTokens(tokens(EventFilterToken.text(EventFilterToken.Category.ROUTE, "114")))
+                .build();
+
+        List<Event> filteredEvents = EventFilter.filter(Arrays.asList(route114, route14), criteria);
+
+        assertEquals(Arrays.asList(route114), filteredEvents);
+    }
+
+    @Test
+    public void knownStationTokensMatchStationIdentity() {
+        Event urdaneta = event(
+                Event.Type.PRODUCT_USE,
+                NOON,
+                Event.TransportType.TRAIN,
+                1,
+                0,
+                0L,
+                7000,
+                0
+        );
+        Event washington = event(
+                Event.Type.PRODUCT_USE,
+                NOON,
+                Event.TransportType.TRAIN,
+                1,
+                0,
+                0L,
+                10000,
+                0
+        );
+        EventFilterCriteria criteria = EventFilterCriteria.builder()
+                .stationValidatorTokens(tokens(EventFilterToken.station(Station.URDANETA, "Urdaneta")))
+                .build();
+
+        List<Event> filteredEvents = EventFilter.filter(Arrays.asList(urdaneta, washington), criteria);
+
+        assertEquals(Arrays.asList(urdaneta), filteredEvents);
+    }
+
+    @Test
+    public void stationValidatorTextTokensMatchStationValidatorDeviceAndLocationIds() {
+        Event station7 = event(
+                Event.Type.PRODUCT_USE,
+                NOON,
+                Event.TransportType.TRAIN,
+                1,
+                0,
+                0L,
+                7000,
+                0
+        );
+        Event validator11420 = event(
+                Event.Type.PRODUCT_USE,
+                NOON,
+                Event.TransportType.BUS,
+                0,
+                0,
+                0L,
+                11420,
+                0
+        );
+        Event location42 = event(
+                Event.Type.PRODUCT_TOP_UP,
+                NOON,
+                Event.TransportType.BUS,
+                0,
+                0,
+                0L,
+                0,
+                42
+        );
+        Event other = event(Event.Type.PRODUCT_USE, NOON, Event.TransportType.BUS, 0, 0);
+
+        assertEquals(Arrays.asList(station7), EventFilter.filter(
+                Arrays.asList(station7, validator11420, location42, other),
+                EventFilterCriteria.builder()
+                        .stationValidatorTokens(tokens(EventFilterToken.text(EventFilterToken.Category.STATION_VALIDATOR, "Urdaneta")))
+                        .build()
+        ));
+        assertEquals(Arrays.asList(validator11420), EventFilter.filter(
+                Arrays.asList(station7, validator11420, location42, other),
+                EventFilterCriteria.builder()
+                        .stationValidatorTokens(tokens(EventFilterToken.text(EventFilterToken.Category.STATION_VALIDATOR, "U-11420")))
+                        .build()
+        ));
+        assertEquals(Arrays.asList(location42), EventFilter.filter(
+                Arrays.asList(station7, validator11420, location42, other),
+                EventFilterCriteria.builder()
+                        .stationValidatorTokens(tokens(EventFilterToken.text(EventFilterToken.Category.STATION_VALIDATOR, "42")))
+                        .build()
+        ));
+    }
+
+    @Test
+    public void operatorTokensMatchKnownOperatorsNamesAndIds() {
+        Event macroCalzada = event(Event.Type.PRODUCT_USE, NOON, Event.TransportType.BUS, 0, Operator.MI_MACRO_CALZADA.getValue());
+        Event bea = event(Event.Type.PRODUCT_USE, NOON, Event.TransportType.BUS, 0, Operator.BEA.getValue());
+        Event unknown83Name = event(Event.Type.PRODUCT_USE, NOON, Event.TransportType.BUS, 0, Operator.MI_MACRO_CALZADA.getValue());
+
+        assertEquals(Arrays.asList(macroCalzada, unknown83Name), EventFilter.filter(
+                Arrays.asList(macroCalzada, bea, unknown83Name),
+                EventFilterCriteria.builder()
+                        .operatorTokens(tokens(EventFilterToken.operator(Operator.MI_MACRO_CALZADA, "Mi Macro Calzada")))
+                        .build()
+        ));
+        assertEquals(Arrays.asList(macroCalzada, unknown83Name), EventFilter.filter(
+                Arrays.asList(macroCalzada, bea, unknown83Name),
+                EventFilterCriteria.builder()
+                        .operatorTokens(tokens(EventFilterToken.text(EventFilterToken.Category.OPERATOR, "Macro Calzada")))
+                        .build()
+        ));
+        assertEquals(Arrays.asList(macroCalzada, unknown83Name), EventFilter.filter(
+                Arrays.asList(macroCalzada, bea, unknown83Name),
+                EventFilterCriteria.builder()
+                        .operatorTokens(tokens(EventFilterToken.text(EventFilterToken.Category.OPERATOR, "83")))
+                        .build()
+        ));
+    }
+
+    @Test
+    public void tokenCategoriesUseOrWithinCategoryAndAndAcrossCategories() {
+        Event line6Macro = event(
+                Event.Type.PRODUCT_USE,
+                NOON,
+                Event.TransportType.BUS,
+                1,
+                Operator.MI_MACRO_CALZADA.getValue(),
+                0L,
+                1111,
+                0
+        );
+        Event route114Macro = event(Event.Type.PRODUCT_USE, NOON, Event.TransportType.BUS, 114, Operator.MI_MACRO_CALZADA.getValue());
+        Event route114Bea = event(Event.Type.PRODUCT_USE, NOON, Event.TransportType.BUS, 114, Operator.BEA.getValue());
+        EventFilterCriteria criteria = EventFilterCriteria.builder()
+                .routeTokens(tokens(
+                        EventFilterToken.route(Route.LINE_6, "L6"),
+                        EventFilterToken.text(EventFilterToken.Category.ROUTE, "114")
+                ))
+                .operatorTokens(tokens(EventFilterToken.operator(Operator.MI_MACRO_CALZADA, "Mi Macro Calzada")))
+                .build();
+
+        List<Event> filteredEvents = EventFilter.filter(Arrays.asList(line6Macro, route114Macro, route114Bea), criteria);
+
+        assertEquals(Arrays.asList(line6Macro, route114Macro), filteredEvents);
     }
 
     @Test
@@ -198,6 +388,17 @@ public class EventFilterTest {
                         Event.TransportType transportType,
                         int routeId,
                         int entityId) {
+        return event(type, dateTime, transportType, routeId, entityId, 0L, 0, 0);
+    }
+
+    private Event event(Event.Type type,
+                        LocalDateTime dateTime,
+                        Event.TransportType transportType,
+                        int routeId,
+                        int entityId,
+                        long samId,
+                        int deviceId,
+                        int locationId) {
         return new Event(
                 0,
                 0,
@@ -207,10 +408,10 @@ public class EventFilterTest {
                 type,
                 0,
                 0,
+                samId,
                 0,
-                0,
-                0,
-                0,
+                deviceId,
+                locationId,
                 transportType,
                 routeId,
                 0,
@@ -219,5 +420,9 @@ public class EventFilterTest {
                 Event.RefundReason.NO_REFUND,
                 Event.DeviceType.UNSPECIFIED
         );
+    }
+
+    private Set<EventFilterToken> tokens(EventFilterToken... tokens) {
+        return new LinkedHashSet<>(Arrays.asList(tokens));
     }
 }
