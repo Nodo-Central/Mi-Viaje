@@ -178,45 +178,26 @@ public final class StationMapper {
 
         // TODO: Use both location and detected route.
         register(ids, Station.CARRETERA_A_CHAPALA, 1);
-        //registerLocation(locations, Station.CARRETERA_A_CHAPALA, 1);
         register(ids, Station.LAS_PINTAS, 2);
-        //registerLocation(locations, Station.LAS_PINTAS, 2);
         register(ids, Station.ARTESANOS, 3);
-        //registerLocation(locations, Station.ARTESANOS, 3);
-        register(ids, Station.JALISCO_200_ANNOS_II, 0x4172b4, 0x4152b4);
-        //registerLocation(locations, Station.JALISCO_200_ANNOS_II, 99);
+        register(ids, Station.JALISCO_200_ANNOS_II, 0x4152b4, 0x4172b4);
         register(ids, Station.ADOLF_HORN, 4, 0x413294, 0x40d294);
-        //registerLocation(locations, Station.ADOLF_HORN, 4);
         register(ids, Station.TOLUQUILLA, 5);
-        //registerLocation(locations, Station.TOLUQUILLA, 5);
         register(ids, Station._8_DE_JULIO, 6);
-        //registerLocation(locations, Station._8_DE_JULIO, 6);
         register(ids, Station.SAN_SEBASTIANITO, 7);
-        //registerLocation(locations, Station.SAN_SEBASTIANITO, 7);
-        register(ids, Station.PERIFERICO_SUR_II, 8, 0x432274, 0x42f284, 0x431284, 0x429294);
-        //registerLocation(locations, Station.PERIFERICO_SUR_II, 8);
+        register(ids, Station.PERIFERICO_SUR_II, 8, 0x42f284, 0x431284, 0x432274, 0x429294);
         register(ids, Station.TERMINAL_SUR_DE_AUTOBUSES, 9);
-        //registerLocation(locations, Station.TERMINAL_SUR_DE_AUTOBUSES, 9);
         register(ids, Station.ITESO, 10);
-        //registerLocation(locations, Station.ITESO, 10);
         register(ids, Station.LOPEZ_MATEOS, 11, 0x439284);
-        //registerLocation(locations, Station.LOPEZ_MATEOS, 11);
         register(ids, Station.AGRICOLA, 12);
-        //registerLocation(locations, Station.AGRICOLA, 12);
         register(ids, Station.EL_BRISENNO, 13);
-        //registerLocation(locations, Station.EL_BRISENNO, 13);
         register(ids, Station.MARIANO_OTERO, 14);
-        //registerLocation(locations, Station.MARIANO_OTERO, 14);
         register(ids, Station.MIRAMAR, 15);
-        //registerLocation(locations, Station.MIRAMAR, 15);
         register(ids, Station.FELIPE_RUVALCABA, 16);
-        //registerLocation(locations, Station.FELIPE_RUVALCABA, 16);
-        register(ids, Station.EL_COLLI, 17);
-        //registerLocation(locations, Station.EL_COLLI, 17);
-        register(ids, Station.CHAPALITA_INN, 18, 0x40d284, 0x40e284);
-        //registerLocation(locations, Station.CHAPALITA_INN, 18);
+        register(ids, Station.EL_COLLI, 17, 0x413284);
+        register(ids, Station.CHAPALITA_INN, 18, 0x40d284, 0x40e284); // confirm ids 0x40c284 and 0x40f284
 
-        register(ids, Station.PARQUE_METROPOLITANO, 19);
+        register(ids, Station.PARQUE_METROPOLITANO, 19, 0x40a284);  // confirm id 0x40b284
         register(ids, Station.CIUDAD_GRANJA, 20);
         register(ids, Station.CIUDAD_JUDICIAL, 21);
         register(ids, Station.ESTADIO_CHIVAS, 22);
@@ -227,7 +208,6 @@ public final class StationMapper {
         register(ids, Station.SANTA_MARGARITA, 27);
         register(ids, Station.LA_TUZANIA, 28);
 
-        //register(ids, Station.PERIFERICO_BELENES_II, 1058, 1059, 1060); // Verify
         register(ids, Station.PERIFERICO_BELENES_II, 29, 0x436274, 0x4242b4);
         register(ids, Station.SAN_ISIDRO, 30);
         register(ids, Station.CENTRO_CULTURAL_UNIVERSITARIO, 31, 0x42b2b4, 0x42d2b4);
@@ -243,10 +223,11 @@ public final class StationMapper {
         register(ids, Station.ARENA_GUADALAJARA, 41);
         register(ids, Station.BARRANCA_DE_HUENTITAN, 42);
         //register(ids, Station.VICENTE_FERNANDEZ, 43);  // doesn't exist yet
+        // TODO: Verify these locations
         register(ids, Station.COMISARIA_DE_GUADALAJARA, 44);
-        //register(ids, Station.BETANIA, 45); // not open yet
+        register(ids, Station.BETANIA, 45);
         register(ids, Station.COLONIA_JALISCO, 46);
-        //register(ids, Station.ZAPOTLANEJO, 47); // not open yet
+        register(ids, Station.ZAPOTLANEJO, 47);
         register(ids, Station.LOS_CONEJOS, 48);
 
         ID_MAP = freeze(ids);
@@ -408,7 +389,15 @@ public final class StationMapper {
             return null;
         }
         Station station = getStation(event);
-        return station != null ? station.getRoute() : null;
+        if (station != null)
+            return station.getRoute();
+        else if (event.getOperator() == Operator.MI_MACRO_CALZADA) {
+            return Route.LINE_6;
+        } else if (event.getOperator() == Operator.MI_MACRO_PERIFERICO_TRONCAL) {
+            return Route.LINE_7;
+        } else {
+            return null;
+        }
     }
 
     private static Station fromId(int id, TransportType transportType, Route route) {

@@ -881,7 +881,7 @@ public class EventsActivity extends BaseActivity {
             return displayedRoute;
         }
         return RouteMapper.fromId(
-                event.getOperator(),
+                event.getEntityId(),
                 event.getRouteId(),
                 event.getDeviceId(),
                 event.getTransportType()

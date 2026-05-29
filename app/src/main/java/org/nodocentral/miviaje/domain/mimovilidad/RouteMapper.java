@@ -108,6 +108,7 @@ public final class RouteMapper {
         registerOperatorId(operatorIds, Route.MP_C01, 4, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
         registerOperatorId(operatorIds, Route.MP_C02, 5, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
         registerOperatorId(operatorIds, Route.MP_C03, 6, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
+        registerOperatorId(operatorIds, Route.MP_C03, 123, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
         registerOperatorId(operatorIds, Route.MP_A01, 7, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
         registerOperatorId(operatorIds, Route.MP_A02, 8, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
         registerOperatorId(operatorIds, Route.MP_A03, 9, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
@@ -117,7 +118,7 @@ public final class RouteMapper {
         registerOperatorId(operatorIds, Route.MP_A05_2, 12, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
         registerOperatorId(operatorIds, Route.MP_A05_2, 52, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
         registerOperatorId(operatorIds, Route.MP_A06, 13, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
-        registerOperatorId(operatorIds, Route.MP_A06, 106, Operator.BEA_V2);  // Reported as 106 without operator 1060
+        registerOperatorId(operatorIds, Route.MP_A06, 106, 255);  // Reported as 106 without operator 1060
         registerOperatorId(operatorIds, Route.MP_A07, 14, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
         registerOperatorId(operatorIds, Route.MP_A08, 15, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
         registerOperatorId(operatorIds, Route.MP_A09, 16, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
@@ -130,6 +131,7 @@ public final class RouteMapper {
         registerOperatorId(operatorIds, Route.LM_V02, 2, Operator.RUTA_LOPEZ_MATEOS);
         registerOperatorId(operatorIds, Route.LM_V03, 3, Operator.RUTA_LOPEZ_MATEOS);
         registerOperatorId(operatorIds, Route.LM_V04, 4, Operator.RUTA_LOPEZ_MATEOS);
+        registerId(ids, Route.LM_V04, 1602);
         registerOperatorId(operatorIds, Route.LM_V05, 5, Operator.RUTA_LOPEZ_MATEOS);
         registerOperatorId(operatorIds, Route.LM_C01, 6, Operator.RUTA_LOPEZ_MATEOS);
         registerOperatorId(operatorIds, Route.LM_C02, 7, Operator.RUTA_LOPEZ_MATEOS);
@@ -139,27 +141,30 @@ public final class RouteMapper {
     private static void registerBusRoutes(Map<Key, Route> ids,
                                           Map<OperatorKey, Route> operatorIds) {
         registerId(ids, Route.C14, 175);
+        registerOperatorId(operatorIds, Route.C25, 102, 24);
         registerId(ids, Route.C40_41, 4041);
         registerId(ids, Route.C52_87, 5287);
         registerId(ids, Route.C67_1, 671);
         registerId(ids, Route.C67_2, 672);
-        registerOperatorId(operatorIds, Route.C111_V2, 2, Operator.C111);
+        registerOperatorId(operatorIds, Route.C111_V2, 2, 5);
         registerId(ids, Route.C114_V1, 1141);
 
-        registerOperatorId(operatorIds, Route.T01, 100, Operator.ALIANZA_DE_CAMIONEROS);
-        registerOperatorId(operatorIds, Route.T06_2, 113, Operator.T06);
+        registerOperatorId(operatorIds, Route.T01, 100, Operator.EB_JALISCO);
+        registerOperatorId(operatorIds, Route.T06_2, 113, 78);
         registerId(ids, Route.T08, 8);
-        registerOperatorId(operatorIds, Route.T09_O, 1, Operator.T09);
-        registerOperatorId(operatorIds, Route.T09_B, 2, Operator.T09);
-        registerOperatorId(operatorIds, Route.T11_1, 11, Operator.T11_1);
-        registerOperatorId(operatorIds, Route.T11_2, 11, Operator.T11_2);
-        registerOperatorId(operatorIds, Route.T13A, 1301, Operator.TRANSBUS);
-        registerOperatorId(operatorIds, Route.T15, 15, Operator.T15);
+        registerOperatorId(operatorIds, Route.T09_O, 1, 14);
+        registerOperatorId(operatorIds, Route.T09_B, 2, 14);
+        registerOperatorId(operatorIds, Route.T11_1, 11, 224, 255);
+        registerOperatorId(operatorIds, Route.T11_2, 11, 56);
+        registerOperatorId(operatorIds, Route.T13A, 1301, Operator.TRANSBUS, Operator.TISA);
+        registerId(ids, Route.T13A_5, 135);
+        registerId(ids, Route.T13A_6, 136);
+        registerOperatorId(operatorIds, Route.T15, 15, 1015);
         registerOperatorId(operatorIds, Route.T15, 1501, Operator.TISA);
-        registerOperatorId(operatorIds, Route.T18A, 18, 1, 255, 1013);
+        registerOperatorId(operatorIds, Route.T18A, 18, 1, 49, 255, 1013);
         registerOperatorId(operatorIds, Route.T18A, 1801, 63);
         registerOperatorId(operatorIds, Route.T18B, 1801, Operator.TISA);
-        registerOperatorId(operatorIds, Route.T21_C01, 211, Operator.BEA_V2);
+        registerOperatorId(operatorIds, Route.T21_C01, 211, 255);
     }
 
     private static Route find(int operatorId, int routeId, int deviceId, TransportType transportType) {
@@ -181,8 +186,16 @@ public final class RouteMapper {
     }
 
     private static Route find(Operator operator, int routeId, int deviceId, TransportType transportType) {
-        int operatorId = operator != null ? operator.getValue() : Operator.UNSPECIFIED.getValue();
-        return find(operatorId, routeId, deviceId, transportType);
+        if (operator == null) {
+            return find(Operator.UNSPECIFIED.getValue(), routeId, deviceId, transportType);
+        }
+        for (int operatorId : operator.getValues()) {
+            Route route = find(operatorId, routeId, deviceId, transportType);
+            if (route != null) {
+                return route;
+            }
+        }
+        return null;
     }
 
     private static void registerId(Map<Key, Route> map, Route route, int routeId) {
@@ -211,7 +224,9 @@ public final class RouteMapper {
             if (operator == null) {
                 throw new IllegalArgumentException("operator must not be null");
             }
-            registerOperatorKey(map, route, operator.getValue(), routeId);
+            for (int operatorId : operator.getValues()) {
+                registerOperatorKey(map, route, operatorId, routeId);
+            }
         }
     }
 

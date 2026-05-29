@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MiViaje.Dashboard.InfoRow">
+
+    <TextView
+        android:id="@+id/analytics_metric_label"
+        style="@style/MiViaje.Dashboard.InfoLabel"
+        tools:text="Gasto acumulado" />
+
+    <TextView
+        android:id="@+id/analytics_metric_value"
+        style="@style/MiViaje.Dashboard.InfoValue"
+        tools:text="$128.00" />
+</LinearLayout>

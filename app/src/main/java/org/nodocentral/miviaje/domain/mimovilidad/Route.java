@@ -102,11 +102,13 @@ public enum Route {
     T09_O(9, " Oblatos", TransportType.BUS, true),
     T09_B(9, " Belisario", TransportType.BUS, true),
     T10(10, TransportType.BUS, true),
-    T11_1(11, "-V1", TransportType.BUS, true),
-    T11_2(11, "-V2", TransportType.BUS, true),
-    T11_3(11, "-V3", TransportType.BUS, true),
+    T11_1(11, "A", TransportType.BUS, true),
+    T11_2(11, "A-C01", TransportType.BUS, true),
+    T11_3(11, "A-C02", TransportType.BUS, true),
     // T12 is Vallarta corridor, i.e. PreTren 1
     T13A(13, "A", TransportType.BUS, true),
+    T13A_5(13, "A-C05", TransportType.BUS, true),
+    T13A_6(13, "A-C06", TransportType.BUS, true),
     T13B(13, "B", TransportType.BUS, true),
     T13C(13, "C", TransportType.BUS, true),
     T14A(14, "A", TransportType.BUS, true),
@@ -141,6 +143,7 @@ public enum Route {
      * don't include it.
      */
     C14(14, TransportType.BUS),
+    C25(25, TransportType.BUS),
     C40_41(40, "/41", TransportType.BUS),
     C52_87(52, "/87", TransportType.BUS),
     C67_1(67, "-V1", TransportType.BUS),

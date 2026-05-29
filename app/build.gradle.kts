@@ -21,8 +21,8 @@ android {
         applicationId = "org.nodocentral.miviaje"
         minSdk = 26
         targetSdk = 36
-        versionCode = 24
-        versionName = "1.0.2"
+        versionCode = 25
+        versionName = "1.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -51,6 +51,12 @@ android {
             releaseKeyPassword != null
 
     signingConfigs {
+        getByName("debug") {
+            storeFile = file("${System.getProperty("user.home")}/.android/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
         create("release") {
             if (hasReleaseSigning) {
                 storeFile = file(requireNotNull(releaseKeystoreFile))
@@ -62,6 +68,9 @@ android {
     }
 
     buildTypes {
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("debug")
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true

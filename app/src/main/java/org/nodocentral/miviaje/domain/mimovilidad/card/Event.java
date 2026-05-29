@@ -315,7 +315,6 @@ public class Event {
                     return TransportType.BRT;
                 case RUTA_LOPEZ_MATEOS:
                 case MI_MACRO_PERIFERICO_COMPLEMENTARIO:
-                case MI_MACRO_PERIFERICO_ALIMENTADOR:
                     return TransportType.BRT_FEEDER_BUS;
                 default:
                     if ((samId & 0xFFFFFFFFL) == 0xfa4d7a80L ||

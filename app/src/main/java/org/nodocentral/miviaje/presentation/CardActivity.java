@@ -129,6 +129,19 @@ public class CardActivity extends BaseActivity {
     }
 
     void setView() {
+        MaterialCardView cardLayoutContainer = findViewById(R.id.card_item);
+        cardLayoutContainer.setOnClickListener(null);
+        cardLayoutContainer.setClickable(false);
+        cardLayoutContainer.setFocusable(false);
+
+        View analyticsLayout = findViewById(R.id.card_analytics_layout);
+        analyticsLayout.setOnClickListener(v -> {
+            Intent analytics = new Intent(this, MobilityAnalyticsActivity.class);
+            analytics.putExtra("CARD_UID", card.getUid());
+            startActivity(analytics);
+        });
+        analyticsLayout.setContentDescription(getString(R.string.analytics_open_card_content_description));
+
         ConstraintLayout cardView = findViewById(R.id.card_item_layout);
         TextView tickets = findViewById(R.id.card_item_tickets);
         tickets.setVisibility(TextView.GONE);

@@ -249,6 +249,27 @@ public class EventFilterTest {
     }
 
     @Test
+    public void operatorAliasIdsMatchTheSameKnownOperator() {
+        Event primary = event(Event.Type.PRODUCT_USE, NOON, Event.TransportType.BUS, 0, Operator.RUTA_LOPEZ_MATEOS.getValue());
+        Event alias = event(Event.Type.PRODUCT_USE, NOON, Event.TransportType.BUS, 0, 2580);
+        Event bea = event(Event.Type.PRODUCT_USE, NOON, Event.TransportType.BUS, 0, Operator.BEA.getValue());
+
+        assertEquals(Operator.RUTA_LOPEZ_MATEOS, alias.getOperator());
+        assertEquals(Arrays.asList(primary, alias), EventFilter.filter(
+                Arrays.asList(primary, alias, bea),
+                EventFilterCriteria.builder()
+                        .operatorTokens(tokens(EventFilterToken.operator(Operator.RUTA_LOPEZ_MATEOS, "Ruta López Mateos")))
+                        .build()
+        ));
+        assertEquals(Arrays.asList(primary, alias), EventFilter.filter(
+                Arrays.asList(primary, alias, bea),
+                EventFilterCriteria.builder()
+                        .operatorTokens(tokens(EventFilterToken.text(EventFilterToken.Category.OPERATOR, "2580")))
+                        .build()
+        ));
+    }
+
+    @Test
     public void tokenCategoriesUseOrWithinCategoryAndAndAcrossCategories() {
         Event line6Macro = event(
                 Event.Type.PRODUCT_USE,

@@ -52,18 +52,34 @@ public class RouteMapperTest {
     }
 
     @Test
-    public void operatorObjectDisambiguatesBusRoutes() {
+    public void operatorAliasesResolveToTheSameOperatorAndRoutes() {
+        assertEquals(Operator.RUTA_LOPEZ_MATEOS, Operator.fromInt(1070));
+        assertEquals(Operator.RUTA_LOPEZ_MATEOS, Operator.fromInt(2580));
+        assertTrue(Operator.RUTA_LOPEZ_MATEOS.matches(2580));
+
+        assertEquals(
+                Route.LM_V01,
+                RouteMapper.fromId(2580, 1, UNKNOWN_DEVICE_ID, TransportType.BRT_FEEDER_BUS)
+        );
+        assertEquals(
+                Route.LM_V01,
+                RouteMapper.fromId(Operator.RUTA_LOPEZ_MATEOS, 1, UNKNOWN_DEVICE_ID, TransportType.BRT_FEEDER_BUS)
+        );
+    }
+
+    @Test
+    public void operatorIdDisambiguatesBusRoutes() {
         assertEquals(
                 Route.T11_1,
-                RouteMapper.fromId(Operator.T11_1, 11, UNKNOWN_DEVICE_ID, TransportType.BUS)
+                RouteMapper.fromId(224, 11, UNKNOWN_DEVICE_ID, TransportType.BUS)
         );
         assertEquals(
                 Route.T11_2,
-                RouteMapper.fromId(Operator.T11_2, 11, UNKNOWN_DEVICE_ID, TransportType.BUS)
+                RouteMapper.fromId(56, 11, UNKNOWN_DEVICE_ID, TransportType.BUS)
         );
         assertEquals(
                 Route.T18A,
-                RouteMapper.fromId(Operator.T18A, 18, UNKNOWN_DEVICE_ID, TransportType.BUS)
+                RouteMapper.fromId(1013, 18, UNKNOWN_DEVICE_ID, TransportType.BUS)
         );
     }
 
@@ -72,7 +88,7 @@ public class RouteMapperTest {
         assertEquals(
                 Route.T06_2,
                 RouteMapper.fromId(
-                        Operator.T06.getValue(),
+                        78,
                         113,
                         UNKNOWN_DEVICE_ID,
                         TransportType.BUS)
@@ -127,11 +143,23 @@ public class RouteMapperTest {
         );
         assertEquals(
                 Route.T18A,
+                RouteMapper.fromId(49, 18, 18144, TransportType.BUS)
+        );
+        assertEquals(
+                Route.T18A,
                 RouteMapper.fromId(63, 1801, UNKNOWN_DEVICE_ID, TransportType.BUS)
         );
         assertEquals(
                 Route.T18B,
                 RouteMapper.fromId(Operator.TISA, 1801, UNKNOWN_DEVICE_ID, TransportType.BUS)
+        );
+    }
+
+    @Test
+    public void sampleComplementaryRoutesCanUseRawOperatorIds() {
+        assertEquals(
+                Route.C25,
+                RouteMapper.fromId(24, 102, 3011, TransportType.BUS)
         );
     }
 

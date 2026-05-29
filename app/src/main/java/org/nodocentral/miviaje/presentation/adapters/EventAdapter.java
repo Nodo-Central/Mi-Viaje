@@ -137,6 +137,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                     case TRAIN:
                         Route route = StationMapper.getRoute(event);
                         if (route == null) {
+                            Log.w("EVENT_ADAPTER", "Route is null!");
                             break;
                         }
                         switch (route) {
@@ -494,7 +495,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     }
 
     String getRouteName(Context context, Event event) {
-        Route route = RouteMapper.fromInt(event.getOperator(), event.getRouteId(), event.getDeviceId(), event.getTransportType());
+        Route route = RouteMapper.fromInt(event.getEntityId(), event.getRouteId(), event.getDeviceId(), event.getTransportType());
         if (route != null) {
             return getRouteName(context, route);
         } else {
@@ -512,14 +513,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         if (station != null) {
             return getStationName(context, station);
         } else if (route == Route.LINE_7) {
-            Route mappedRoute = RouteMapper.fromInt(event.getOperator(), event.getRouteId(), event.getDeviceId(), event.getTransportType());
-            String routeName = (mappedRoute != null ? getRouteName(context, mappedRoute) : null);
             String stationId = Integer.toHexString(StationMapper.getStationId(event)).toUpperCase();
-            return routeName != null ? routeName + " (" + stationId + ")" : stationId;
+            return context.getString(R.string.transport_station, stationId);
         } else if (route == Route.LINE_4) {
             return String.valueOf(StationMapper.getStationId(event));
         } else {
-            return String.valueOf(event.getRouteId());
+            return context.getString(R.string.transport_station, String.valueOf(event.getRouteId()));
         }
     }
 

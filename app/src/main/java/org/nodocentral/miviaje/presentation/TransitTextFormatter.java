@@ -31,12 +31,6 @@ public final class TransitTextFormatter {
                     }
                 }
             case BRT_FEEDER_BUS:
-                if (route.isTrunk()) {
-                    return context.getString(R.string.transport_complementary, route.getId(), route.getVariantTagSafe());
-                } else {
-                    return context.getString(R.string.transport_feeder, route.getId(), route.getVariantTagSafe());
-                }
-            case BRT:
                 switch (route) {
                     case LM_V01:
                         return context.getString(R.string.route_lopezmateos_v01);
@@ -56,9 +50,9 @@ public final class TransitTextFormatter {
                         return context.getString(R.string.route_lopezmateos_c03);
                     default:
                         if (route.isTrunk()) {
-                            return context.getString(R.string.transport_trunk, route.getId(), route.getVariantTagSafe());
-                        } else {
                             return context.getString(R.string.transport_complementary, route.getId(), route.getVariantTagSafe());
+                        } else {
+                            return context.getString(R.string.transport_feeder, route.getId(), route.getVariantTagSafe());
                         }
                 }
             case BUS:

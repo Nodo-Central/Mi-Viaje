@@ -132,11 +132,22 @@ public final class EventFilter {
             return operator == token.getOperator();
         }
         String query = token.getText();
-        return textMatches(query,
-                operator != null ? operator.name() : null,
-                operator != null ? operator.getName() : null,
-                operator != null ? String.valueOf(operator.getValue()) : null,
-                event.getEntityId());
+        return textMatches(query, operatorSearchValues(operator, event.getEntityId()));
+    }
+
+    private static Object[] operatorSearchValues(Operator operator, int entityId) {
+        if (operator == null) {
+            return new Object[]{entityId};
+        }
+        int[] operatorIds = operator.getValues();
+        Object[] values = new Object[operatorIds.length + 3];
+        values[0] = operator.name();
+        values[1] = operator.getName();
+        for (int i = 0; i < operatorIds.length; i++) {
+            values[i + 2] = operatorIds[i];
+        }
+        values[values.length - 1] = entityId;
+        return values;
     }
 
     private static Route resolveRoute(Event event) {
@@ -145,7 +156,7 @@ public final class EventFilter {
             return displayedRoute;
         }
         Route route = RouteMapper.fromId(
-                event.getOperator(),
+                event.getEntityId(),
                 event.getRouteId(),
                 event.getDeviceId(),
                 event.getTransportType()
