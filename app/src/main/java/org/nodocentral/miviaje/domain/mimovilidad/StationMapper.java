@@ -142,10 +142,16 @@ public final class StationMapper {
         registerLocation(locations, Station.CUTLAJO, 55);
         register(ids, Station.TLAJOMULCO_CENTRO, 56, 1060, 1067);
         registerLocation(locations, Station.TLAJOMULCO_CENTRO, 56);
-        // Presentes
-        // 1042                1046 1047                1051      1053      1055 1056      1058      1060 1061 1067;
-        //      1043 1044 1045           1048 1049 1050      1052      1054           1057      1059
-        // ¿Faltantes?
+
+        register(ids, Station.CARRETERA_A_CHAPALA_II, 11, 1);
+        register(ids, Station.LAS_LIEBRES, 12, 2);
+        register(ids, Station.PARQUE_MONTENEGRO, 13, 3);
+        register(ids, Station.LAS_TORRES, 14, 4);
+        register(ids, Station.LAS_PINTITAS, 15, 5);
+        register(ids, Station.LA_GIGANTERA, 16, 6);
+        register(ids, Station.LA_PIEDRERA, 17, 7);
+        register(ids, Station.SAN_JOSE_DEL_QUINCE, 18, 8);
+        register(ids, Station.AEROPUERTO, 19, 9);
 
         register(ids, Station.MIRADOR, 11);
         register(ids, Station.HUENTITAN, 12);
@@ -178,7 +184,7 @@ public final class StationMapper {
 
         // TODO: Use both location and detected route.
         register(ids, Station.CARRETERA_A_CHAPALA, 1);
-        register(ids, Station.LAS_PINTAS, 2);
+        register(ids, Station.LAS_PINTAS, 2, 0x43b294);
         register(ids, Station.ARTESANOS, 3);
         register(ids, Station.JALISCO_200_ANNOS_II, 0x4152b4, 0x4172b4);
         register(ids, Station.ADOLF_HORN, 4, 0x413294, 0x40d294);
@@ -261,8 +267,11 @@ public final class StationMapper {
             return fromId(stationId, Route.LINE_6);
         } else if (event.getOperator() == Operator.MI_MACRO_PERIFERICO_TRONCAL) {
             return fromId(location, Route.LINE_7);
-        } else if ((event.getSamId() & 0xFFFFF) == 0xD7A80 && location != 0) {  // Is it a SamUID from a Route 4 VRT?
-            return fromLocation(location + 48);
+        } else if ((event.getSamId() & 0xFFFFF) == 0xD7A80 && location != 0) {  // Is it a SamUID from a Line 4 VRT?
+            if (event.getRouteId() == 0)
+                return fromLocation(location + 48);
+            else
+                return fromId(location, Route.LINE_5);
         }
 
         return fromLocation(location);
@@ -284,10 +293,10 @@ public final class StationMapper {
                 return rawValidator;
             }
         } else if (transportType == TransportType.BRT) {
-            if (event.getOperator() == Operator.MI_MACRO_CALZADA) {
-                return (event.getDeviceId() / 100) % 10;
-            } else {
+            if (event.getOperator() == Operator.MI_MACRO_PERIFERICO_TRONCAL) {
                 return event.getDeviceId() + 1;
+            } else {
+                return (event.getDeviceId() / 100) % 10;
             }
         } else {
             // TODO: Handle BEA cases like route 114, device ID 11407
@@ -309,10 +318,10 @@ public final class StationMapper {
                 return event.getDeviceId() / DIVIDER_ROUTES_1_2_3;
             }
         } else if (transportType == TransportType.BRT) {
-            if (event.getOperator() == Operator.MI_MACRO_CALZADA) {
-                return event.getDeviceId() % 100;
-            } else {
+            if (event.getOperator() == Operator.MI_MACRO_PERIFERICO_TRONCAL) {
                 return (int) (event.getSamId() >> 28); // 0x43B2BFA4D7A80;
+            } else {
+                return event.getDeviceId() % 100;
             }
         } else {
             return 0;
@@ -389,14 +398,10 @@ public final class StationMapper {
             return null;
         }
         Station station = getStation(event);
-        if (station != null)
+        if (station != null) {
             return station.getRoute();
-        else if (event.getOperator() == Operator.MI_MACRO_CALZADA) {
-            return Route.LINE_6;
-        } else if (event.getOperator() == Operator.MI_MACRO_PERIFERICO_TRONCAL) {
-            return Route.LINE_7;
         } else {
-            return null;
+            return getRawRoute(event);
         }
     }
 

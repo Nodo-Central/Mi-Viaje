@@ -498,4 +498,5 @@
     <string name="transport_route">路線 %1$s</string>
     <string name="transport_feeder">支線 A%1$02d%2$s</string>
     <string name="transport_station">%1$s駅</string>
+    <string name="transfer_limit">乗り継ぎは%1$sまで有効です</string>
 </resources>

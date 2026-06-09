@@ -8,10 +8,10 @@ public enum Operator {
     UNSPECIFIED(0),
     TISA("TISA/Viaxer", 1),
     BEA("BEA", 4, 255),
-    EB_JALISCO("EB Jalisco", 13),
+    EB_JALISCO("EB Jalisco", 13, 24),
     MI_MACRO_CALZADA("Mi Macro Calzada", 83),
-    MI_MACRO_PERIFERICO_COMPLEMENTARIO("Mi Macro Periférico Complementarias y Alimentadoras", 1059, 39754),
-    MI_MACRO_PERIFERICO_TRONCAL("Mi Macro Periférico Troncal", 1060),
+    MI_MACRO_PERIFERICO_COMPLEMENTARIO("Complementaria MP", 1059, 39754, 42543, 10),
+    MI_MACRO_PERIFERICO_TRONCAL("Troncal MP", 1060),
     TRANSBUS("Transbus El Salto", 1062),
     RUTA_LOPEZ_MATEOS("Ruta López Mateos", 1070, 2580);
 

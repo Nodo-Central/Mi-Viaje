@@ -105,16 +105,12 @@ public class CardActivity extends BaseActivity {
         }).start();
     }
 
+    private String formatDate(LocalDateTime date) {
+        return date != null ? formatDate(date.toLocalDate()) : null;
+    }
+
     private String formatDate(LocalDate date) {
-        return date != null ? date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) : "Desconocido";
-    }
-
-    private String formatTime(LocalTime time) {
-        return time != null ? time.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM)) : "Desconocido";
-    }
-
-    private String formatDateTime(LocalDateTime dateTime) {
-        return dateTime != null ? dateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.MEDIUM)) : "Desconocido";
+        return date != null ? date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) : getString(R.string.unknown);
     }
 
     @SuppressLint("DefaultLocale")
@@ -411,9 +407,9 @@ public class CardActivity extends BaseActivity {
         value.setText(formatPaymentMethodRow(R.string.payment_method_value, ProductAdapter.formatMethodValue(sheetView, product)));
 
         setOptionalPaymentMethodRow(validFrom, R.string.payment_method_valid_from,
-                validity == null ? null : validity.getValidFrom());
+                validity == null ? null : formatDate(validity.getValidFrom()));
         setOptionalPaymentMethodRow(validUntil, R.string.payment_method_valid_until,
-                validity == null ? null : validity.getValidTo());
+                validity == null ? null : formatDate(validity.getValidTo()));
         boolean hasDailyStart = validity != null && validity.getDailyStartTime() != null;
         boolean hasDailyEnd = validity != null && validity.getDailyEndTime() != null;
         setOptionalPaymentMethodRow(validTime, R.string.payment_method_valid_time,

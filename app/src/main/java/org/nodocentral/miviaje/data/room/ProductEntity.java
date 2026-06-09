@@ -38,7 +38,7 @@ public class ProductEntity {
     public int distributorNetworkId;
     public short distributorCompanyId;
     public LocalDateTime distributionDateTime;
-    public int distributionSamId;
+    public long distributionSamId;
     public short distributingDeviceId;
     public LocalDateTime validFrom;
     public LocalDateTime validTo;
@@ -61,4 +61,3 @@ public class ProductEntity {
     public int lastDebitRouteStationId;
     public int lastDebitDeviceId;
 }
-

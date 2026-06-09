@@ -7,6 +7,7 @@ import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.nodocentral.miviaje.Helpers;
 import org.robolectric.RobolectricTestRunner;
 
 import java.nio.ByteBuffer;
@@ -29,33 +30,33 @@ import org.nodocentral.miviaje.domain.mimovilidad.card.User;
 public class MiMovilidadParserTest {
     @Test
     public void parseBcd_decodesValue() {
-        assertEquals(42, MiMovilidadParser.parseBcd(0x42));
+        assertEquals(42, Helpers.parseBcd(0x42));
     }
 
     @Test
     public void parseBcdDate_decodesDate() {
-        assertEquals(LocalDate.of(2024, 12, 31), MiMovilidadParser.parseBcdDate(encodeBcdDate(2024, 12, 31)));
+        assertEquals(LocalDate.of(2024, 12, 31), Helpers.parseBcdDate(encodeBcdDate(2024, 12, 31)));
     }
 
     @Test
     public void parseDateCompact_decodesDate() {
         LocalDate date = LocalDate.of(2026, 4, 24);
 
-        assertEquals(date, MiMovilidadParser.parseDateCompact(encodeDateCompact(date)));
+        assertEquals(date, Helpers.parseDateCompact(encodeDateCompact(date)));
     }
 
     @Test
     public void parseDateTimeCompact_decodesDateTime() {
         LocalDateTime dateTime = LocalDateTime.of(2026, 4, 24, 13, 18, 20);
 
-        assertEquals(dateTime, MiMovilidadParser.parseDateTimeCompact(encodeDateTimeCompact(dateTime)));
+        assertEquals(dateTime, Helpers.parseDateTimeCompact(encodeDateTimeCompact(dateTime)));
     }
 
     @Test
     public void parseCompactValues_returnNullForInvalidInput() {
-        assertNull(MiMovilidadParser.parseDateCompact(encodeInvalidDateCompact(2026, 13, 1)));
-        assertNull(MiMovilidadParser.parseDateTimeCompact(encodeInvalidDateTimeCompact(2026, 12, 10, 25, 0, 0)));
-        assertNull(MiMovilidadParser.parseTimeCompact((25 << 11)));
+        assertNull(Helpers.parseDateCompact(encodeInvalidDateCompact(2026, 13, 1)));
+        assertNull(Helpers.parseDateTimeCompact(encodeInvalidDateTimeCompact(2026, 12, 10, 25, 0, 0)));
+        assertNull(Helpers.parseTimeCompact((25 << 11)));
     }
 
     @Test

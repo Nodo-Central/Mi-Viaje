@@ -73,6 +73,7 @@ public class BackupImportServiceTest {
         );
         assertEquals(LocalDate.ofEpochDay(19756), result.getSnapshot().cards.get(0).productionDate);
         assertEquals("imported:art-1", result.getSnapshot().cards.get(0).artworkRef);
+        assertEquals(0x00000001FFFFFFFFL, result.getSnapshot().products.get(0).distributionSamId);
     }
 
     private static String buildValidBackupJson(int schemaVersion) {
@@ -125,7 +126,7 @@ public class BackupImportServiceTest {
                 + "\"distributorNetworkId\":50,"
                 + "\"distributorCompanyId\":60,"
                 + "\"distributionDateTime\":1713924000,"
-                + "\"distributionSamId\":\"0000000A\","
+                + "\"distributionSamId\":\"00000001FFFFFFFF\","
                 + "\"distributingDeviceId\":70,"
                 + "\"validFrom\":1713924000,"
                 + "\"validTo\":1714010400,"

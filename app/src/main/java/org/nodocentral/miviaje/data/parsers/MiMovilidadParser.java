@@ -5,8 +5,8 @@ import static org.nodocentral.miviaje.Helpers.unsignLong;
 import static org.nodocentral.miviaje.Helpers.unsignShort;
 
 import android.nfc.tech.IsoDep;
-import android.util.Log;
 
+import org.nodocentral.miviaje.Helpers;
 import org.nodocentral.miviaje.data.nfc.desfire.DesfireManager;
 import org.nodocentral.miviaje.data.nfc.responses.ApduResponse;
 import org.nodocentral.miviaje.data.nfc.desfire.CardVersion;
@@ -24,12 +24,10 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -255,8 +253,8 @@ public class MiMovilidadParser implements MiMovilidadProductReader {
                 (unsignLong(buffer.get()) << 8) |
                 unsignLong(buffer.get());
         long batch = (unsignLong(buffer.getInt()) << 8) | unsignLong(buffer.get());
-        int week = parseBcd(buffer.get() & 0x7F);
-        int year = parseBcd(buffer.get());
+        int week = Helpers.parseBcd(buffer.get() & 0x7F);
+        int year = Helpers.parseBcd(buffer.get());
         return new CardVersion(
                 hardware,
                 software,
@@ -291,7 +289,7 @@ public class MiMovilidadParser implements MiMovilidadProductReader {
         int serialNumber = buffer.getInt();
 
         /* Bytes 6–7: EndDate (days since 1990-01-01) as unsigned 16-bit */
-        LocalDate expirationDate = parseDateCompact(unsign(buffer.getShort()));
+        LocalDate expirationDate = Helpers.parseDateCompact(unsign(buffer.getShort()));
 
         /* Bytes 8–10: ApplicationOwner NetworkId (24-bit unsigned) */
         int ownerNetworkId = ((buffer.get() & 0xFF) << 16)
@@ -367,7 +365,7 @@ public class MiMovilidadParser implements MiMovilidadProductReader {
 
         // Bytes 4–5: EndDate as "days since 1997-01-01" (16-bit big-endian)
         int daysSinceEpoch = unsign(buffer.getShort());
-        LocalDate expirationDate = parseDateCompact(daysSinceEpoch);
+        LocalDate expirationDate = Helpers.parseDateCompact(daysSinceEpoch);
 
         return new Environment(applicationVersion, networkId, expirationDate);
     }
@@ -387,7 +385,7 @@ public class MiMovilidadParser implements MiMovilidadProductReader {
         }
 
         // ── 1) birthDate (bytes 0–3, BCD “YYYYMMDD”) ────────────────────────────────────
-        LocalDate birthDate = parseBcdDate(buffer.getInt());
+        LocalDate birthDate = Helpers.parseBcdDate(buffer.getInt());
 
         // ── 2) profileCode (byte 4, lower 6 bits valid) ─────────────────────────────────
         // “CódigoPerfil”: 6-bit value stored in the low bits of data[4].
@@ -396,7 +394,7 @@ public class MiMovilidadParser implements MiMovilidadProductReader {
         // ── 3) profileExpirationDate (bytes 5–6, 16-bit days since EPOCH) ───────────────
         // “FechaFinPerfil”: unsigned 16-bit big-endian count of days
         int daysSinceEpoch = unsign(buffer.getShort());
-        LocalDate profileExpirationDate = parseDateCompact(daysSinceEpoch);
+        LocalDate profileExpirationDate = Helpers.parseDateCompact(daysSinceEpoch);
 
         // ── 4) name (bytes 7–45, 39 bytes UTF-8) ────────────────────────────────────────
         //   Indice inicial de name = 7, longitud = 39 bytes
@@ -535,7 +533,7 @@ public class MiMovilidadParser implements MiMovilidadProductReader {
             int productId = unsign(r.getShort());
             int productPointer = r.get() & 0x0F;           // low‐nibble, kept for compatibility reasons
             int entityId = unsign(r.getShort());
-            LocalDateTime eventDateTime = parseDateTimeCompact(r.getInt());
+            LocalDateTime eventDateTime = Helpers.parseDateTimeCompact(r.getInt());
             int eventType = unsign(r.get());
             int amount = unsign(r.getShort());
             int appSeq = (unsign(r.get()) << 16) | (unsign(r.get()) << 8) | unsign(r.get());
@@ -664,12 +662,11 @@ public class MiMovilidadParser implements MiMovilidadProductReader {
 
         // ── 11) distributionInfo (bytes 26–35) ─────────────────────────────────────────────
         //     FechaDistribución    (bytes 26–29, DateTimeCompact)
-        //int raw = Integer.rotateRight(buffer.getInt(), 8);
         int raw = buffer.getInt();
-        LocalDateTime distributionDateTime = parseDateTimeCompact(raw);
+        LocalDateTime distributionDateTime = Helpers.parseDateTimeCompact(raw);
 
-        //     IdSAMDistribución    (bytes 30–33, 32-bit unsigned)
-        int samIdDistribution = buffer.getInt();
+        //     IdSAMDistribución    (bytes 30–36, 32-bit unsigned)
+        long samIdDistribution = getUInt56BE(buffer);
 
         //     IdDispositivoDistribución (bytes 34–35, 16-bit unsigned)
         short deviceIdDistribution = buffer.getShort();
@@ -687,20 +684,16 @@ public class MiMovilidadParser implements MiMovilidadProductReader {
 
         // ── 12) validity (bytes 36–47) ──────────────────────────────────────────────────────
         //     validFrom            (bytes 36–39, DateTimeCompact)
-        //raw = Integer.rotateRight(buffer.getInt(), 16);
-        raw = buffer.getInt();
-        LocalDateTime validFrom = parseDateTimeCompact(raw);
+        LocalDateTime validFrom = Helpers.parseDateTimeCompact(buffer.getInt());
 
         //     validTo              (bytes 40–43, DateTimeCompact)
-        raw = Integer.rotateLeft(buffer.getInt(), 8);
-        //raw = buffer.getInt();
         LocalDateTime validTo;
-        validTo = parseDateTimeCompact(raw, false);
+        validTo = Helpers.parseDateTimeCompact(buffer.getInt());
 
         //     dailyStartTime       (bytes 44–45, 11-bit StartTimeStamp in minutes since midnight)
-        LocalTime dailyStartTime = parseTimeCompact(unsign(buffer.getShort()));
+        LocalTime dailyStartTime = Helpers.parseTimeCompact(unsign(buffer.getShort()));
         //     dailyEndTime         (bytes 46–47, 11-bit EndTimeStamp in minutes since midnight)
-        LocalTime dailyEndTime = parseTimeCompact(unsign(buffer.getShort()));
+        LocalTime dailyEndTime = Helpers.parseTimeCompact(unsign(buffer.getShort()));
         ProductContract.Validity validity = new ProductContract.Validity(
                 validFrom,
                 validTo,
@@ -789,7 +782,7 @@ public class MiMovilidadParser implements MiMovilidadProductReader {
 
         // Bytes 6‒9: FechaUltimoDebito (32-bit compact representation)
         int compactDate = buffer.getInt();
-        LocalDateTime lastDebitDateTime = parseDateTimeCompact(compactDate);
+        LocalDateTime lastDebitDateTime = Helpers.parseDateTimeCompact(compactDate);
 
         // Bytes 10‒11: IdEntidadUltimoDebito (16-bit unsigned)
         int lastDebitEntityId = unsign(buffer.getShort());
@@ -816,154 +809,13 @@ public class MiMovilidadParser implements MiMovilidadProductReader {
         );
     }
 
-    static LocalDate parseDateCompact(int timestamp) {
-        int year = (timestamp >> 9) + EPOCH_DATE_TIME_COMPACT.getYear();
-        int month = (timestamp >> 5 & 0xF);
-        int day = (timestamp & 0x1F);
+    static long getUInt56BE(ByteBuffer buffer) {
+        long value = 0;
 
-        try {
-            return LocalDate.of(year, month, day);
-        } catch (DateTimeException e) {
-            Log.e("PARSE_DATE_COMPACT", String.format("Error parsing date (%s): %s", to32(timestamp), e));
-            return null;
+        for (int i = 0; i < 7; i++) {
+            value = (value << 8) | Byte.toUnsignedLong(buffer.get());
         }
-    }
 
-    static LocalTime parseTimeCompact(int timestamp) {
-        /* ---- TimeCompact ---- */
-        int hour = (timestamp >> 11);
-        int minute = (timestamp >> 5 & 0x3F);
-        int second = (timestamp & 0x1F) * 2;
-        // F.25  F.5    F.25
-        // HHHHH MMMMMM SSSSS
-
-        try {
-            return LocalTime.of(hour, minute, second);
-        } catch (DateTimeException e) {
-            Log.e("PARSE_TIME_COMPACT", String.format("Error parsing time (%s): %s", to32(timestamp), e));
-            return null;
-        }
-    }
-
-    /**
-     * Decodes a 32-bit DateTimeCompact value into date and time components.
-     *
-     * @param timestamp compact timestamp with year, month, day, hour, minute, and second fields.
-     * @return a LocalDateTime corresponding to the decoded timestamp.
-     */
-    static LocalDateTime parseDateTimeCompact(int timestamp) {
-        return parseDateTimeCompact(timestamp, true);
-    }
-
-    /**
-     * Decodes a 32-bit DateTimeCompact value into date and time components.
-     *
-     * @param timestamp compact timestamp with year, month, day, hour, minute, and second fields.
-     * @param silent whether to log errors or not.
-     * @return a LocalDateTime corresponding to the decoded timestamp.
-     *
-     * Bit layout:
-     * [  YY   ][ MM ][ DD  ][ 24H ][ 60M ][60S/2]
-     * [0000000][0000][00000][00000][00000][00000]
-     */
-    static LocalDateTime parseDateTimeCompact(int timestamp, boolean silent) {
-        LocalDate epoch = EPOCH_DATE_TIME_COMPACT;
-
-        int date = (timestamp >>> 16) & 0xFFFF;
-        int time = timestamp & 0xFFFF;
-
-        /* ---- DateCompact ---- */
-        int year = (date >> 9) + epoch.getYear();
-        int month = ((date >> 5) & 0xF);
-        int day = (date & 0x1F);
-
-        /* ---- TimeCompact ---- */
-        int hour = (time >> 11 & 0x1F);
-        int minute = (time >> 5 & 0x3F);
-        int second = (time & 0x1F) * 2;
-
-        try {
-            return LocalDateTime.of(year, month, day, hour, minute, second);
-        } catch (DateTimeException e) {
-            if (!silent)
-                Log.e("PARSE_DATETIME_COMPACT",
-                        String.format("Error parsing datetime (%s): %s",
-                                to32(timestamp),
-                                Arrays.toString(new int[]{year, month, day, hour, minute, second})),
-                        e
-                );
-            return null;
-        }
-    }
-
-    static int toDateTimeCompact(LocalDateTime dateTime) {
-        LocalDate epoch = EPOCH_DATE_TIME_COMPACT;
-
-        int year = dateTime.getYear() - epoch.getYear();
-        int month = dateTime.getMonthValue();
-        int day = dateTime.getDayOfMonth();
-
-        int hour = dateTime.getHour();
-        int minute = dateTime.getMinute();
-        int second = (dateTime.getSecond() + 1) / 2;
-
-        int timestamp = 0;
-
-        /* ---- DateCompact ---- */
-        timestamp |= (year & 0x7F) << 25;
-        timestamp |= (month & 0xF) << 21;
-        timestamp |= (day & 0x1F) << 16;
-
-        /* ---- TimeCompact ---- */
-        timestamp |= (hour & 0x1F) << 11;
-        timestamp |= (minute & 0x3F) << 5;
-        timestamp |= ((second / 2) & 0x1F);
-
-        return timestamp;
-    }
-
-    static int parseBcd(int bcd) {
-        return Integer.parseInt(Integer.toHexString(bcd));
-    }
-
-    static LocalDate parseBcdDate(int n) {
-        //  BCD “YYYYMMDD”
-        // We will read four bytes in sequence: b0, b1, b2, b3.
-        ByteBuffer buffer = ByteBuffer.allocate(4);
-        buffer.putInt(n);
-        buffer.position(0);
-        byte b0 = buffer.get(); // n[0]
-        byte b1 = buffer.get(); // n[1]
-        byte b2 = buffer.get(); // n[2]
-        byte b3 = buffer.get(); // n[3]
-
-        // Decode BCD:
-        int year = ((b0 & 0xF0) >> 4) * 1000
-                + ((b0 & 0x0F)) * 100
-                + ((b1 & 0xF0) >> 4) * 10
-                + (b1 & 0x0F);
-
-        int month = ((b2 & 0xF0) >> 4) * 10
-                + (b2 & 0x0F);
-
-        int day = ((b3 & 0xF0) >> 4) * 10
-                + (b3 & 0x0F);
-
-        if (year > 0 && month > 0 && day > 0)
-            return LocalDate.of(year, month, day);
-        else
-            return null;
-    }
-
-    static String to32(int timestamp) {
-        String string = String.format("%32s", Integer.toBinaryString(timestamp)).replace(" ", "0");
-        return String.format("%s %s %s %s %s %s",
-                string.substring(0, 7),
-                string.substring(7, 11),
-                string.substring(11, 16),
-                string.substring(16, 21),
-                string.substring(21, 27),
-                string.substring(27)
-        );
+        return value;
     }
 }

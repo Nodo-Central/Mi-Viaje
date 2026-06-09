@@ -91,7 +91,7 @@ public class BackupSchemaV2Mapper extends BackupMapperSupport implements BackupS
             productEntity.distributorNetworkId = getRequiredInt(obj, "distributorNetworkId", path);
             productEntity.distributorCompanyId = (short) getRequiredInt(obj, "distributorCompanyId", path);
             productEntity.distributionDateTime = intToDateTime(getNullableInt(obj, "distributionDateTime"));
-            productEntity.distributionSamId = hexToInt(getRequiredString(obj, "distributionSamId", path));
+            productEntity.distributionSamId = hexToUnsignedLong(getRequiredString(obj, "distributionSamId", path));
             productEntity.distributingDeviceId = (short) getRequiredInt(obj, "distributingDeviceId", path);
             productEntity.validFrom = intToDateTime(getNullableInt(obj, "validFrom"));
             productEntity.validTo = intToDateTime(getNullableInt(obj, "validTo"));

@@ -478,4 +478,5 @@
     <string name="transport_route">路线 %1$s</string>
     <string name="transport_feeder">接驳线 A%1$02d%2$s</string>
     <string name="transport_station">%1$s站</string>
+    <string name="transfer_limit">换乘有效期至 %1$s</string>
 </resources>

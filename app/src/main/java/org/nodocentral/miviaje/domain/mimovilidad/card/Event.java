@@ -2,6 +2,7 @@ package org.nodocentral.miviaje.domain.mimovilidad.card;
 
 import androidx.annotation.NonNull;
 
+import org.nodocentral.miviaje.Helpers;
 import org.nodocentral.miviaje.domain.mimovilidad.Operator;
 
 import java.time.LocalDateTime;
@@ -250,6 +251,14 @@ public class Event {
         return productPointer;
     }
 
+    public ProductContract.ValueUnit getValueUnit() {
+        if (product != null && product.getContract() != null) {
+            return product.getContract().getValueUnit();
+        } else {
+            return ProductContract.ValueUnit.MXN_CENT;
+        }
+    }
+
     public Product getProduct() {
         return product;
     }
@@ -308,7 +317,8 @@ public class Event {
         Operator operator = getOperator();
         if (operator != null &&
                 (transportType == TransportType.BUS ||
-                transportType == TransportType.TRAIN)) {
+                transportType == TransportType.TRAIN ||
+                transportType == TransportType.TRAIN_FEEDER_BUS)) {
             switch (operator) {
                 case MI_MACRO_CALZADA:
                 case MI_MACRO_PERIFERICO_TRONCAL:
@@ -320,10 +330,14 @@ public class Event {
                     if ((samId & 0xFFFFFFFFL) == 0xfa4d7a80L ||
                             (samId & 0xFFFFFFFL) == 0xa077c80 ||
                             (samId & 0xFFFFFFFL) == 0xade7980) {
-                        return TransportType.TRAIN_FEEDER_BUS;
+                        if (routeId > 20) {
+                            return TransportType.BRT;
+                        } else {
+                            return TransportType.TRAIN_FEEDER_BUS;
+                        }
                     } else if ((samId & 0xFFFFFFFFL) == 0x42294f80) {
                         return TransportType.TRAIN;
-                    } else if ((samId & 0xFFFFFFFL) == 0xa057180) {
+                    } else if ((samId & 0xFFFFFFFL) == 0xa057180 || (samId & 0xFFFFFFFL) == 0xa294f80) {
                         return TransportType.BRT_FEEDER_BUS;
                     } else {
                         return transportType;
@@ -342,8 +356,12 @@ public class Event {
         return transferCount;
     }
 
-    public int getTransferLimit() {
+    public int getTransferLimitTimestamp() {
         return transferLimit;
+    }
+
+    public LocalDateTime getTransferLimit() {
+        return Helpers.parseDateTimeCompact(transferLimit);
     }
 
     public int getPassbackCount() {

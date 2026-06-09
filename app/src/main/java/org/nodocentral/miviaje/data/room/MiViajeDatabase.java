@@ -13,7 +13,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import org.nodocentral.miviaje.data.room.converters.DateConverters;
 
-@Database(entities = {CardEntity.class, ProductEntity.class, EventEntity.class, ArtworkEntity.class}, version = 6)
+@Database(entities = {CardEntity.class, ProductEntity.class, EventEntity.class, ArtworkEntity.class}, version = 7)
 @TypeConverters({DateConverters.class})
 public abstract class MiViajeDatabase extends RoomDatabase {
     public abstract CardDao cardDao();
@@ -37,12 +37,24 @@ public abstract class MiViajeDatabase extends RoomDatabase {
                             .addMigrations(MIGRATION_3_4)
                             .addMigrations(MIGRATION_4_5)
                             .addMigrations(MIGRATION_5_6)
+                            .addMigrations(MIGRATION_6_7)
                             .build();
                 }
             }
         }
         return INSTANCE;
     }
+
+    public static final Migration MIGRATION_6_7 = new Migration(6, 7) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase db) {
+            db.execSQL(
+                    "UPDATE `products` " +
+                            "SET `distributionSamId` = `distributionSamId` + 4294967296 " +
+                            "WHERE `distributionSamId` < 0"
+            );
+        }
+    };
 
     public static final Migration MIGRATION_5_6 = new Migration(5, 6) {
         @Override

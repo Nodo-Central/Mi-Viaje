@@ -156,7 +156,7 @@ public class BackupExporter {
         mapped.addProperty("distributorNetworkId", product.distributorNetworkId);
         mapped.addProperty("distributorCompanyId", product.distributorCompanyId);
         mapped.addProperty("distributionDateTime", product.distributionDateTime != null ? product.distributionDateTime.toEpochSecond(EXPORT_ZONE_OFFSET) : null);
-        mapped.addProperty("distributionSamId", Helpers.longToHex(product.distributionSamId, 8));
+        mapped.addProperty("distributionSamId", Helpers.longToHex(product.distributionSamId, 16));
         mapped.addProperty("distributingDeviceId", product.distributingDeviceId);
         mapped.addProperty("validFrom", product.validFrom != null ? product.validFrom.toEpochSecond(EXPORT_ZONE_OFFSET) : null);
         mapped.addProperty("validTo", product.validTo != null ? product.validTo.toEpochSecond(EXPORT_ZONE_OFFSET) : null);

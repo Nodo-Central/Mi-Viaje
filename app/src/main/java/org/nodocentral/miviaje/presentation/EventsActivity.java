@@ -36,6 +36,7 @@ import org.nodocentral.miviaje.domain.mimovilidad.filters.EventFilterCriteria;
 import org.nodocentral.miviaje.domain.mimovilidad.filters.EventFilterToken;
 import org.nodocentral.miviaje.presentation.adapters.EventAdapter;
 
+import java.sql.Array;
 import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -272,10 +273,7 @@ public class EventsActivity extends BaseActivity {
             return;
         }
         group.removeAllViews();
-        for (Event.TransportType transportType : Event.TransportType.values()) {
-            if (transportType == Event.TransportType.UNSPECIFIED) {
-                continue;
-            }
+        for (Event.TransportType transportType : getTransportTypes()) {
             Chip chip = createFilterChip(getTransportTypeLabel(transportType), draftTransportTypes.contains(transportType));
             chip.setOnCheckedChangeListener((buttonView, isChecked) -> updateEnumSet(draftTransportTypes, transportType, isChecked));
             group.addView(chip);
@@ -288,10 +286,7 @@ public class EventsActivity extends BaseActivity {
             return;
         }
         group.removeAllViews();
-        for (Event.Type eventType : Event.Type.values()) {
-            if (!isDisplayableEventType(eventType)) {
-                continue;
-            }
+        for (Event.Type eventType : getEventTypes()) {
             Chip chip = createFilterChip(getEventTypeLabel(eventType), draftEventTypes.contains(eventType));
             chip.setOnCheckedChangeListener((buttonView, isChecked) -> updateEnumSet(draftEventTypes, eventType, isChecked));
             group.addView(chip);
@@ -940,20 +935,26 @@ public class EventsActivity extends BaseActivity {
         return TransitTextFormatter.normalize(value);
     }
 
-    private boolean isDisplayableEventType(Event.Type eventType) {
-        switch (eventType) {
-            case PRODUCT_DISTRIBUTION:
-            case PRODUCT_USE:
-            case PRODUCT_TOP_UP:
-            case TRANSFER:
-            case REFUND:
-            case FARE_REFUND:
-            case PAYMENT_METHOD_EMISSION:
-                return true;
-            case UNSPECIFIED:
-            default:
-                return false;
-        }
+    private static Event.TransportType[] getTransportTypes() {
+        return new Event.TransportType[]{
+                Event.TransportType.BUS,
+                Event.TransportType.TRAIN,
+                Event.TransportType.TRAIN_FEEDER_BUS,
+                Event.TransportType.BRT,
+                Event.TransportType.BRT_FEEDER_BUS,
+        };
+    }
+
+    private static Event.Type[] getEventTypes() {
+        return new Event.Type[]{
+                Event.Type.PRODUCT_USE,
+                Event.Type.PRODUCT_TOP_UP,
+                Event.Type.TRANSFER,
+                Event.Type.REFUND,
+                Event.Type.FARE_REFUND,
+                Event.Type.PRODUCT_DISTRIBUTION,
+                Event.Type.PAYMENT_METHOD_EMISSION,
+        };
     }
 
     private String getEventTypeLabel(Event.Type eventType) {

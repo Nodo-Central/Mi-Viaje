@@ -98,6 +98,9 @@ public class BackupExporterTest {
                 LocalDateTime.of(2026, 4, 24, 10, 0).toEpochSecond(ZoneOffset.ofHours(-6)),
                 card.get("lastUpdated").getAsLong()
         );
+
+        JsonObject product = root.getAsJsonArray("products").get(0).getAsJsonObject();
+        assertEquals("00000001FFFFFFFF", product.get("distributionSamId").getAsString());
     }
 
     private static CardEntity buildCardEntity() {
@@ -138,6 +141,7 @@ public class BackupExporterTest {
         entity.valueUnit = 0;
         entity.distributorNetworkId = 50;
         entity.distributorCompanyId = 60;
+        entity.distributionSamId = 0x00000001FFFFFFFFL;
         entity.state = 1;
         entity.weekOfYear = 17;
         entity.tripsPerDayOfWeek = 3;

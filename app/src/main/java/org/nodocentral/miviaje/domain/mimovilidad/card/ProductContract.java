@@ -104,11 +104,11 @@ public class ProductContract {
 
     public static class DistributionInfo {
         private final LocalDateTime distributionDateTime;  // FechaDistribución (32-bit compact)
-        private final int samId;               // IdSAMDistribución (32 bits)
+        private final long samId;              // IdSAMDistribución
         private final short distributingDeviceId;            // IdDispositivoDistribución (16 bits)
 
         public DistributionInfo(LocalDateTime distributionDateTime,
-                                int samId,
+                                long samId,
                                 short distributingDeviceId
         ) {
             this.distributionDateTime = distributionDateTime;
@@ -120,7 +120,7 @@ public class ProductContract {
             return distributionDateTime;
         }
 
-        public int getSamId() {
+        public long getSamId() {
             return samId;
         }
 

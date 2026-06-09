@@ -145,6 +145,7 @@ public enum Route {
     C14(14, TransportType.BUS),
     C25(25, TransportType.BUS),
     C40_41(40, "/41", TransportType.BUS),
+    C49_50(49, "/50/51", TransportType.BUS),
     C52_87(52, "/87", TransportType.BUS),
     C67_1(67, "-V1", TransportType.BUS),
     C67_2(67, "-V2", TransportType.BUS),

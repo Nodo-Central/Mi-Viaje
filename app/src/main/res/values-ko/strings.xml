@@ -488,5 +488,6 @@
     <string name="transport_route">노선 %1$s</string>
     <string name="transport_feeder">지선 A%1$02d%2$s</string>
     <string name="transport_station">%1$s역</string>
+    <string name="transfer_limit">환승은 %1$s까지 유효합니다</string>
 
 </resources>

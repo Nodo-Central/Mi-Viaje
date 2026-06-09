@@ -3,7 +3,7 @@ package org.nodocentral.miviaje.domain.mimovilidad;
 import org.nodocentral.miviaje.domain.mimovilidad.card.Event.TransportType;
 
 public enum Station {
-    // Route 1
+    // Line 1
     PERIFERICO_SUR(Route.LINE_1),
     SANTUARIO_MARTIRES(Route.LINE_1),
     ESPANNA(Route.LINE_1),
@@ -25,7 +25,7 @@ public enum Station {
     PERIFERICO_NORTE(Route.LINE_1),
     AUDITORIO(Route.LINE_1),
 
-    // Route 2
+    // Line 2
     TETLAN(Route.LINE_2),
     LA_AURORA(Route.LINE_2),
     SAN_JACINTO(Route.LINE_2),
@@ -37,7 +37,7 @@ public enum Station {
     PLAZA_UNIVERSIDAD(Route.LINE_2),
     JUAREZ_II(Route.LINE_2),
 
-    // Route 3
+    // Line 3
     ARCOS_DE_ZAPOPAN(Route.LINE_3),
     PERIFERICO_BELENES(Route.LINE_3),
     MERCADO_DEL_MAR(Route.LINE_3),
@@ -57,7 +57,7 @@ public enum Station {
     LAZARO_CARDENAS(Route.LINE_3),
     CENTRAL_DE_AUTOBUSES(Route.LINE_3),
 
-    // Route 4
+    // Line 4
     LAS_JUNTAS(Route.LINE_4),
     LOMAS_DEL_CUATRO(Route.LINE_4),
     JALISCO_200_ANNOS(Route.LINE_4),
@@ -68,7 +68,18 @@ public enum Station {
     CUTLAJO(Route.LINE_4),
     TLAJOMULCO_CENTRO(Route.LINE_4),
 
-    // Route 6
+    // Line 5
+    AEROPUERTO(Route.LINE_5),
+    SAN_JOSE_DEL_QUINCE(Route.LINE_5),
+    LA_PIEDRERA(Route.LINE_5),
+    LA_GIGANTERA(Route.LINE_5),
+    LAS_PINTITAS(Route.LINE_5),
+    LAS_TORRES(Route.LINE_5),
+    PARQUE_MONTENEGRO(Route.LINE_5),
+    LAS_LIEBRES(Route.LINE_5),
+    CARRETERA_A_CHAPALA_II(Route.LINE_5),
+
+    // Line 6
     LAS_JUNTAS_II(Route.LINE_6),
     FRAY_ANGELICO(Route.LINE_6),
     ESCULTURAS(Route.LINE_6),
@@ -98,7 +109,7 @@ public enum Station {
     HUENTITAN(Route.LINE_6),
     MIRADOR(Route.LINE_6),
 
-    // Route 7
+    // Line 7
     CARRETERA_A_CHAPALA(Route.LINE_7),
     LAS_PINTAS(Route.LINE_7),
     ARTESANOS(Route.LINE_7),

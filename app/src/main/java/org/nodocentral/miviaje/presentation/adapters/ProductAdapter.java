@@ -17,6 +17,10 @@ import org.nodocentral.miviaje.domain.mimovilidad.card.Product;
 import org.nodocentral.miviaje.domain.mimovilidad.card.ProductContract;
 import org.nodocentral.miviaje.domain.mimovilidad.card.ProductService;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
 
 public final class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.VH> {
@@ -78,13 +82,13 @@ public final class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.VH
 
             ProductContract contract = product.getContract();
             ProductContract.Validity validity = contract == null ? null : contract.getValidity();
-            Object validTo = validity == null ? null : validity.getValidTo();
+            LocalDateTime validTo = validity == null ? null : validity.getValidTo();
             if (validTo == null) {
                 expiration.setVisibility(View.GONE);
             } else {
                 expiration.setText(getString(R.string.payment_method_row_format,
                         getString(R.string.payment_method_valid_until),
-                        validTo));
+                        formatDate(validTo)));
                 expiration.setVisibility(View.VISIBLE);
             }
         }
@@ -138,6 +142,10 @@ public final class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.VH
 
         String getString(int resId, Object... formatArgs) {
             return itemView.getContext().getString(resId, formatArgs);
+        }
+
+        String formatDate(LocalDateTime date) {
+            return date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
         }
     }
 

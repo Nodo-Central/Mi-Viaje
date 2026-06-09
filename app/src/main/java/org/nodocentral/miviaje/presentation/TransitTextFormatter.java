@@ -233,6 +233,7 @@ public final class TransitTextFormatter {
             case MIRADOR:
                 return context.getString(R.string.station_mirador);
             case CARRETERA_A_CHAPALA:
+            case CARRETERA_A_CHAPALA_II:
                 return context.getString(R.string.station_carretera_a_chapala);
             case LAS_PINTAS:
                 return context.getString(R.string.station_las_pintas);
@@ -348,6 +349,22 @@ public final class TransitTextFormatter {
                 return context.getString(R.string.station_cutlajo);
             case TLAJOMULCO_CENTRO:
                 return context.getString(R.string.station_tlajomulco_centro);
+            case AEROPUERTO:
+                return context.getString(R.string.station_aeropuerto);
+            case SAN_JOSE_DEL_QUINCE:
+                return context.getString(R.string.station_san_jose_del_quince);
+            case LA_PIEDRERA:
+                return context.getString(R.string.station_la_piedrera);
+            case LA_GIGANTERA:
+                return context.getString(R.string.station_la_gigantera);
+            case LAS_PINTITAS:
+                return context.getString(R.string.station_las_pintitas);
+            case LAS_TORRES:
+                return context.getString(R.string.station_las_torres);
+            case PARQUE_MONTENEGRO:
+                return context.getString(R.string.station_parque_montenegro);
+            case LAS_LIEBRES:
+                return context.getString(R.string.station_las_liebres);
             default:
                 return null;
         }

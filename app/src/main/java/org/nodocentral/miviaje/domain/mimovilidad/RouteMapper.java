@@ -15,7 +15,7 @@ public final class RouteMapper {
         Map<Key, Route> ids = new LinkedHashMap<>();
         Map<OperatorKey, Route> operatorIds = new LinkedHashMap<>();
 
-        registerTrainRoutes(ids);
+        registerMassTransitRoutes(ids);
         registerTrainFeederBusRoutes(ids);
         registerBrtRoutes(ids);
         registerBrtFeederBusRoutes(ids, operatorIds);
@@ -48,12 +48,13 @@ public final class RouteMapper {
         return fromId(operator, routeId, deviceId, transportType);
     }
 
-    private static void registerTrainRoutes(Map<Key, Route> ids) {
+    private static void registerMassTransitRoutes(Map<Key, Route> ids) {
         registerId(ids, Route.LINE_1, 1);
         registerId(ids, Route.LINE_2, 2);
         registerId(ids, Route.LINE_3, 8);
         registerId(ids, Route.LINE_4, 4);
         registerId(ids, Route.LINE_4, 15);
+        registerId(ids, Route.LINE_5, 21);
     }
 
     private static void registerTrainFeederBusRoutes(Map<Key, Route> ids) {
@@ -113,10 +114,11 @@ public final class RouteMapper {
         registerOperatorId(operatorIds, Route.MP_A02, 8, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
         registerOperatorId(operatorIds, Route.MP_A03, 9, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
         registerOperatorId(operatorIds, Route.MP_A04, 10, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
+        registerOperatorId(operatorIds, Route.MP_A04, 104, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
         registerOperatorId(operatorIds, Route.MP_A05_1, 11, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
-        registerOperatorId(operatorIds, Route.MP_A05_1, 51, 39754);
+        registerOperatorId(operatorIds, Route.MP_A05_1, 51, 1059, 255, 39754, 42543, 0);
         registerOperatorId(operatorIds, Route.MP_A05_2, 12, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
-        registerOperatorId(operatorIds, Route.MP_A05_2, 52, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
+        registerOperatorId(operatorIds, Route.MP_A05_2, 52, 1059, 255, 39754, 42543, 0);
         registerOperatorId(operatorIds, Route.MP_A06, 13, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
         registerOperatorId(operatorIds, Route.MP_A06, 106, 255);  // Reported as 106 without operator 1060
         registerOperatorId(operatorIds, Route.MP_A07, 14, Operator.MI_MACRO_PERIFERICO_COMPLEMENTARIO);
@@ -143,6 +145,7 @@ public final class RouteMapper {
         registerId(ids, Route.C14, 175);
         registerOperatorId(operatorIds, Route.C25, 102, 24);
         registerId(ids, Route.C40_41, 4041);
+        registerId(ids, Route.C49_50, 4950);
         registerId(ids, Route.C52_87, 5287);
         registerId(ids, Route.C67_1, 671);
         registerId(ids, Route.C67_2, 672);
@@ -161,10 +164,10 @@ public final class RouteMapper {
         registerId(ids, Route.T13A_6, 136);
         registerOperatorId(operatorIds, Route.T15, 15, 1015);
         registerOperatorId(operatorIds, Route.T15, 1501, Operator.TISA);
-        registerOperatorId(operatorIds, Route.T18A, 18, 1, 49, 255, 1013);
+        registerOperatorId(operatorIds, Route.T18A, 18, 1, 49, 255, 1013, 41290);
         registerOperatorId(operatorIds, Route.T18A, 1801, 63);
         registerOperatorId(operatorIds, Route.T18B, 1801, Operator.TISA);
-        registerOperatorId(operatorIds, Route.T21_C01, 211, 255);
+        registerId(ids, Route.T21_C01, 211);
     }
 
     private static Route find(int operatorId, int routeId, int deviceId, TransportType transportType) {

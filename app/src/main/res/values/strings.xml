@@ -296,18 +296,18 @@
     <string name="transport_train_feeder">PreTren</string>
     <string name="events_filter_route">Ruta</string>
     <string name="events_filter_line_or_route">Línea o ruta</string>
-    <string name="events_filter_line_or_route_hint">Buscar línea o ruta...</string>
+    <string name="events_filter_line_or_route_hint">Buscar línea o ruta…</string>
     <string name="events_filter_station">Unidad / Estación</string>
     <string name="events_filter_station_validator">Estación o validador</string>
-    <string name="events_filter_station_hint">Buscar unidad o estación...</string>
-    <string name="events_filter_station_validator_hint">Buscar estación, unidad o validador...</string>
+    <string name="events_filter_station_hint">Buscar unidad o estación…</string>
+    <string name="events_filter_station_validator_hint">Buscar estación, unidad o validador…</string>
     <string name="events_filter_date_today">Hoy</string>
     <string name="events_filter_date_week">Esta semana</string>
     <string name="events_filter_date_month">Este mes</string>
     <string name="events_filter_date_range">Rango</string>
     <string name="events_filter_date_range_picker_title">Seleccionar rango de fechas</string>
     <string name="events_filter_operator">Operador</string>
-    <string name="events_filter_operator_hint">Buscar operador...</string>
+    <string name="events_filter_operator_hint">Buscar operador…</string>
     <string name="events_filter_event_type_full">Tipo de evento</string>
     <string name="events_filter_apply">Aplicar filtros</string>
     <string name="card_emission_info">Información de la tarjeta</string>
@@ -558,7 +558,7 @@
     <string name="artwork_option_default">Usar diseño automático</string>
     <string name="artwork_option_imported_named">Importado: %1$s</string>
     <string name="artwork_option_import">Importar desde galería…</string>
-    <string name="artwork_option_manage">Administrar imágenes importadas...</string>
+    <string name="artwork_option_manage">Administrar imágenes importadas…</string>
     <string name="artwork_manager_entry">%1$s (%2$d tarjetas)</string>
     <string name="artwork_default_name">Imagen sin nombre</string>
     <string name="artwork_picker_import">Importar imagen</string>
@@ -684,4 +684,13 @@
     <string name="transport_sitren" translatable="false">SiTren L%1$02d%2$s</string>
     <string name="transport_pretren_feeder" translatable="false">PreTren A%1$02d%2$s</string>
     <string name="transport_sitren_feeder" translatable="false">SiTren A%1$02d%2$s</string>
+    <string name="station_aeropuerto" translatable="false">Aeropuerto</string>
+    <string name="station_san_jose_del_quince" translatable="false">San José del Quince</string>
+    <string name="station_la_piedrera" translatable="false">La Piedrera</string>
+    <string name="station_la_gigantera" translatable="false">La Gigantera</string>
+    <string name="station_las_pintitas" translatable="false">Las Pintitas</string>
+    <string name="station_las_torres" translatable="false">Las Torres</string>
+    <string name="station_parque_montenegro" translatable="false">Parque Montenegro</string>
+    <string name="station_las_liebres" translatable="false">Las Liebres</string>
+    <string name="transfer_limit">Transferencia válida hasta %1$s</string>
 </resources>

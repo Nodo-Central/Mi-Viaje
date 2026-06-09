@@ -11,7 +11,7 @@ fun releaseSigningValue(name: String): String? {
 
 android {
     namespace = "org.nodocentral.miviaje"
-    compileSdk = 36
+    compileSdk = 37
 
     androidResources {
         generateLocaleConfig = true
@@ -20,9 +20,10 @@ android {
     defaultConfig {
         applicationId = "org.nodocentral.miviaje"
         minSdk = 26
+        //noinspection OldTargetApi
         targetSdk = 36
-        versionCode = 25
-        versionName = "1.1.0"
+        versionCode = 26
+        versionName = "1.1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

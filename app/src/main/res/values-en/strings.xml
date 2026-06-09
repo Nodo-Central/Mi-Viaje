@@ -477,4 +477,5 @@
     <string name="transport_route">Route %1$s</string>
     <string name="transport_feeder">Feeder A%1$02d%2$s</string>
     <string name="transport_station">%1$s station</string>
+    <string name="transfer_limit">Transfer valid until %1$s</string>
 </resources>

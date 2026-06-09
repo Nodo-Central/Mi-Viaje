@@ -64,7 +64,7 @@ public final class EventMapper {
         entity.transportType = event.getTransportType().getValue();
         entity.routeStationId = event.getRouteId();
         entity.transferCount = event.getTransferCount();
-        entity.transferLimit = event.getTransferLimit();
+        entity.transferLimit = event.getTransferLimitTimestamp();
         entity.passbackCount = event.getPassbackCount();
         entity.refundReason = event.getRefundReason().getValue();
         entity.deviceType = event.getDeviceType().getValue();

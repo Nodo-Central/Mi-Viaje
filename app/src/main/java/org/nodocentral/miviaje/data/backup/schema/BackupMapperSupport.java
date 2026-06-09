@@ -15,6 +15,10 @@ public abstract class BackupMapperSupport {
         return Long.parseLong(hex, 16);
     }
 
+    protected static long hexToUnsignedLong(String hex) {
+        return Long.parseUnsignedLong(hex, 16);
+    }
+
     protected static int hexToInt(String hex) {
         return Integer.parseInt(hex, 16);
     }

@@ -36,6 +36,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
     private List<Event> eventList;
@@ -54,9 +55,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         return new EventAdapter.EventViewHolder(v);
     }
 
-    private String formatDateTime(LocalDateTime dateTime) {
-        FormatStyle dateStyle = FormatStyle.MEDIUM, timeStyle = showTechnicalData ? FormatStyle.MEDIUM : FormatStyle.SHORT;
-        return dateTime.format(DateTimeFormatter.ofLocalizedDateTime(dateStyle, timeStyle));
+    private String formatDate(LocalDateTime dateTime) {
+        FormatStyle dateStyle = FormatStyle.MEDIUM;
+        return dateTime.format(DateTimeFormatter.ofLocalizedDate(dateStyle));
+    }
+
+    private String formatTime(LocalDateTime dateTime) {
+        FormatStyle timeStyle = FormatStyle.MEDIUM;
+        return dateTime.format(DateTimeFormatter.ofLocalizedTime(timeStyle));
     }
 
     @Override
@@ -70,8 +76,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         try {
             setEventIcon(event, holder);
             setEventTitle(event, holder);
-            setEventDate(event, holder);
+            setEventDirection(event, holder);
             setEventAmount(event, holder);
+            setEventDateTime(event, holder);
+            setEventTransferInfo(event, holder);
             setEventInfo(event, holder);
             setEventExtraInfo(holder, event);
             setEventOperator(event, holder);
@@ -115,6 +123,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
                             case MI_MACRO_PERIFERICO_TRONCAL:
                             case MI_MACRO_PERIFERICO_COMPLEMENTARIO:
+                            case BEA:
+                            case UNSPECIFIED:
                                 holder.setEventIconTintColor(R.color.miviaje_mm_mp);
                                 break;
 
@@ -157,6 +167,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                                 holder.setEventIconTintColor(R.color.miviaje_mt_l4);
                                 holder.setEventIconText("L4");
                                 break;
+                            case LINE_5:
+                                if (rebelMode) holder.setEventIcon(R.drawable.transport_brt);
+                                else holder.setEventIconText("L5");
+                                holder.setEventIconTintColor(R.color.miviaje_mm_ma);
+                                break;
                             case LINE_6:
                                 if (rebelMode) holder.setEventIcon(R.drawable.transport_brt);
                                 else holder.setEventIconText("L6");
@@ -190,6 +205,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     void setEventTitle(Event event, EventViewHolder holder) {
         String title;
         switch (event.getType()) {
+            case PRODUCT_DISTRIBUTION:
+            case PAYMENT_METHOD_EMISSION:
             case PRODUCT_TOP_UP:
                 Station station = StationMapper.getLocation(event);
                 if (station != null) {
@@ -210,55 +227,65 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         holder.eventTitle.setText(title);
     }
 
+    void setEventDirection(Event event, EventViewHolder holder) {
+        String direction;
+        Terminal terminal = StationMapper.getTerminal(event);
+        if (terminal != null) {
+            direction = holder.getString(R.string.transport_direction,
+                    getRawStationName(holder.context, terminal.station));
+            holder.eventDirection.setVisibility(TextView.VISIBLE);
+            holder.eventDirection.setText(direction);
+        } else {
+            holder.eventDirection.setVisibility(TextView.GONE);
+        }
+    }
+
     void setEventAmount(Event event, EventViewHolder holder) {
         switch (event.getType()) {
             case PRODUCT_USE:
             case TRANSFER:
             case FARE_REFUND:
             case PRODUCT_TOP_UP:
+            case PAYMENT_METHOD_EMISSION:
                 holder.eventAmount.setVisibility(TextView.VISIBLE);
-                try {
-                    int amount = event.getAmount();
-                    ProductContract.ValueUnit valueUnit = event.getProduct().getContract().getValueUnit();
-                    String amountText;
-                    Integer amountIcon;
-                    if (amount > 0) {
-                        int color;
-                        if (event.isPayment())
-                            color = holder.getAttrColor(com.google.android.material.R.attr.colorOnSurface);
-                        else
-                            color = holder.getAttrColor(com.google.android.material.R.attr.colorTertiary);
-                        holder.eventAmount.setTextColor(color);
-                        TextViewCompat.setCompoundDrawableTintList(holder.eventAmount, ColorStateList.valueOf(color));
-                        if (valueUnit == ProductContract.ValueUnit.MXN_CENT) {
-                            amountText = holder.context.getString(
-                                    (event.isPayment()) ? R.string.money_mxn_format :
-                                            R.string.money_mxn_plus_format,
-                                    ((float) amount) / 100);
-                            amountIcon = R.drawable.ic_coin;
-                        } else if (valueUnit == ProductContract.ValueUnit.TICKET) {
-                            amountText = holder.context.getResources().getQuantityString(
-                                    (event.isPayment()) ? R.plurals.ticket_count :
-                                            R.plurals.ticket_count_plus,
-                                    amount,
-                                    amount);
-                            amountIcon = R.drawable.ic_ticket;
-                        } else {
-                            amountText = String.valueOf(amount);
-                            amountIcon = null;
-                        }
+                int amount = event.getAmount();
+                ProductContract.ValueUnit valueUnit = event.getValueUnit();
+                String amountText;
+                Integer amountIcon;
+                if (amount > 0) {
+                    int color;
+                    if (event.isPayment())
+                        color = holder.getAttrColor(com.google.android.material.R.attr.colorOnSurface);
+                    else
+                        color = holder.getAttrColor(com.google.android.material.R.attr.colorTertiary);
+                    holder.eventAmount.setTextColor(color);
+                    TextViewCompat.setCompoundDrawableTintList(holder.eventAmount, ColorStateList.valueOf(color));
+                    if (valueUnit == ProductContract.ValueUnit.MXN_CENT) {
+                        amountText = holder.context.getString(
+                                (event.isPayment()) ? R.string.money_mxn_format :
+                                        R.string.money_mxn_plus_format,
+                                ((float) amount) / 100);
+                        amountIcon = R.drawable.ic_coin;
+                    } else if (valueUnit == ProductContract.ValueUnit.TICKET) {
+                        amountText = holder.context.getResources().getQuantityString(
+                                (event.isPayment()) ? R.plurals.ticket_count :
+                                        R.plurals.ticket_count_plus,
+                                amount,
+                                amount);
+                        amountIcon = R.drawable.ic_ticket;
                     } else {
-                        holder.eventAmount.setTextColor(holder.getAttrColor(com.google.android.material.R.attr.colorTertiary));
-                        amountText = holder.context.getString(R.string.free_of_charge);
+                        amountText = String.valueOf(amount);
                         amountIcon = null;
                     }
-                    holder.eventAmount.setText(amountText);
-                    Drawable drawable = amountIcon != null ? holder.getDrawable(amountIcon) : null;
-                    holder.eventAmount.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                            null, null, drawable, null);
-                } catch (NullPointerException e) {
-                    Log.e("CONTRACT_ERROR", e.toString());
+                } else {
+                    holder.eventAmount.setTextColor(holder.getAttrColor(com.google.android.material.R.attr.colorTertiary));
+                    amountText = holder.context.getString(R.string.free_of_charge);
+                    amountIcon = null;
                 }
+                holder.eventAmount.setText(amountText);
+                Drawable drawable = amountIcon != null ? holder.getDrawable(amountIcon) : null;
+                holder.eventAmount.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                        null, null, drawable, null);
                 break;
             default:
                 holder.eventAmount.setVisibility(TextView.GONE);
@@ -266,14 +293,33 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         }
     }
 
-    void setEventDate(Event event, EventViewHolder holder) {
-        String dateTime;
-        if (event.getEventDateTime() != null) {
-            dateTime = formatDateTime(event.getEventDateTime());
+    void setEventTransferInfo(Event event, EventViewHolder holder) {
+        LocalDateTime transferOffset = event.getTransferLimit();
+        if (transferOffset != null && transferOffset.isAfter(event.getEventDateTime())) {
+            holder.eventTransferInfo.setVisibility(TextView.VISIBLE);
+            holder.eventTransferInfo.setText(holder.getString(R.string.transfer_limit,
+                    formatTime(transferOffset)));
         } else {
-            dateTime = holder.getString(R.string.unknown);
+            holder.eventTransferInfo.setVisibility(TextView.GONE);
         }
-        holder.eventDate.setText(dateTime);
+    }
+
+    void setEventDateTime(Event event, EventViewHolder holder) {
+        String date, time;
+        if (event.getEventDateTime() != null) {
+            date = formatDate(event.getEventDateTime());
+            time = formatTime(event.getEventDateTime());
+        } else {
+            date = holder.getString(R.string.unknown);
+            time = null;
+        }
+        holder.eventDate.setText(date);
+        if (time != null) {
+            holder.eventTime.setVisibility(TextView.VISIBLE);
+            holder.eventTime.setText(time);
+        } else {
+            holder.eventTime.setVisibility(TextView.GONE);
+        }
     }
 
     void setEventInfo(Event event, EventViewHolder holder) {
@@ -338,11 +384,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                         builder.append(deviceType);
                     }
                 }
-                Terminal terminal = StationMapper.getTerminal(event);
-                if (terminal != null) {
-                    if (builder.length() > 0) builder.append("\n");
-                    builder.append(holder.getString(R.string.transport_direction, getRawStationName(holder.context, terminal.station)));
-                }
                 if (builder.length() > 0) {
                     holder.eventInfo.setVisibility(TextView.VISIBLE);
                     holder.eventInfo.setText(builder.toString());
@@ -374,28 +415,32 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                 }
                 break;
 
+            case PAYMENT_METHOD_EMISSION:
+            case PRODUCT_DISTRIBUTION:
             case PRODUCT_TOP_UP:
-                switch (event.getDeviceType()) {
-                    case TICKET_MACHINE:
-                        eventDevice = holder.context.getString(R.string.vrt_id_format, event.getDeviceId());
-                        break;
+                if (event.getDeviceId() != 0) {
+                    switch (event.getDeviceType()) {
+                        case TICKET_MACHINE:
+                            eventDevice = holder.context.getString(R.string.vrt_id_format, event.getDeviceId());
+                            break;
 
-                    case POS_MACHINE:
-                    case SMARTPHONE:
-                        switch (event.getDeviceId()) {
-                            case 39321:
-                                eventDevice = holder.getString(R.string.company_sfinx);
-                                break;
-                            default:
-                                eventDevice = holder.getString(R.string.event_location, event.getDeviceId());
-                                break;
-                        }
-                        break;
+                        case POS_MACHINE:
+                        case SMARTPHONE:
+                            switch (event.getDeviceId()) {
+                                case 39321:
+                                    eventDevice = holder.getString(R.string.company_sfinx);
+                                    break;
+                                default:
+                                    eventDevice = holder.getString(R.string.event_location, event.getDeviceId());
+                                    break;
+                            }
+                            break;
 
-                    default:
-                        eventDevice = holder.context.getString(R.string.device_id_format, String.valueOf(event.getDeviceId()));
-                        break;
-                }
+                        default:
+                            eventDevice = holder.context.getString(R.string.device_id_format, String.valueOf(event.getDeviceId()));
+                            break;
+                    }
+                } else eventDevice = null;
                 break;
 
             default:
@@ -436,13 +481,26 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     }
 
     public void setEventExtraInfo(EventViewHolder holder, Event event) {
-        LocalDateTime transferOffset;
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(holder.context);
+        LocalDateTime transferOffsetObj = event.getTransferLimit();
 
         // TODO: Improve displaying of technical data
         if (showTechnicalData) {
-            holder.techLine1.setText("SamId: " + Long.toHexString(event.getSamId()).toUpperCase() + " · SamSeq: " + Long.toHexString(event.getSamSequence()).toUpperCase());
-            holder.techLine2.setText("DvceID: " + event.getDeviceId() + " · RouteStatnId: " + event.getRouteId() + " · TransportType: " + (event.getRawTransportType() != null ? event.getRawTransportType().name() : "NULL") + " (" + (event.getTransportType() != null ? event.getTransportType().name() : "NULL") + ")" + " · Location: " + event.getLocationId() + " · Operator/Entity: " + event.getEntityId());
+            String[] data = new String[]{
+                    "SamId: " + Long.toHexString(event.getSamId()).toUpperCase(),
+                    "SamSeq: " + Long.toHexString(event.getSamSequence()).toUpperCase(),
+                    "RoutID: " + event.getRouteId(),
+                    "DevcID: " + event.getDeviceId(),
+                    "Oprtr(Ent): " + event.getEntityId(),
+                    "Location: " + event.getLocationId(),
+                    "TsprtTyp: " + Objects.requireNonNullElse(event.getRawTransportType().name(), "NULL") + " (" + Objects.requireNonNullElse(event.getTransportType().name(), "NULL") + ")",
+                    "TsfrCnt: " + event.getTransferCount(),
+                    "TsfrLim: " + event.getTransferLimitTimestamp(),
+                    "Amount: " + event.getAmount(),
+                    "PassbkCnt: " + event.getPassbackCount(),
+                    "PrdID: " + event.getProductId(),
+                    "PrdPtr: " + event.getProductPointer(),
+            };
+            holder.techLine1.setText(String.join(" • ", data));
             holder.techBlock.setVisibility(View.VISIBLE);
         } else {
             holder.techBlock.setVisibility(View.GONE);
@@ -460,7 +518,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         String eventTitle;
         switch (event.getType()) {
             case PRODUCT_DISTRIBUTION:
-                eventTitle = context.getString(R.string.event_card_activation);
+                eventTitle = context.getString(R.string.event_card_emission);
                 break;
             case PRODUCT_USE:
                 eventTitle = context.getString(R.string.event_fare_payment);
@@ -475,7 +533,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                 eventTitle = context.getString(R.string.event_refund);
                 break;
             case PAYMENT_METHOD_EMISSION:
-                eventTitle = context.getString(R.string.event_card_emission);
+                eventTitle = context.getString(R.string.event_card_activation);
                 break;
             case UNSPECIFIED:
             default:
@@ -548,6 +606,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         public TextView eventTitle;
         public TextView eventAmount;
         public TextView eventDate;
+        public TextView eventTime;
+        public TextView eventDirection;
+        public TextView eventTransferInfo;
         public TextView eventInfo;
         public TextView eventExtraInfo;
         public TextView eventOperator;
@@ -555,7 +616,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
         public View techBlock;
         public TextView techLine1;
-        public TextView techLine2;
 
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -563,8 +623,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             eventId = itemView.findViewById(R.id.item_event_id);
             eventTitle = itemView.findViewById(R.id.item_event_title);
             eventAmount = itemView.findViewById(R.id.item_event_amount);
-            eventInfo = itemView.findViewById(R.id.item_event_info);
             eventDate = itemView.findViewById(R.id.item_event_date);
+            eventTime = itemView.findViewById(R.id.item_event_time);
+            eventDirection = itemView.findViewById(R.id.item_event_direction);
+            eventTransferInfo = itemView.findViewById(R.id.item_event_transfer_limit);
+            eventInfo = itemView.findViewById(R.id.item_event_info);
             eventExtraInfo = itemView.findViewById(R.id.item_event_extra_info);
             eventIconLayout = itemView.findViewById(R.id.item_event_transport_icon_layout);
             eventIconText = itemView.findViewById(R.id.item_event_transport_icon);
@@ -573,7 +636,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
             techBlock = itemView.findViewById(R.id.item_event_tech_block);
             techLine1 = itemView.findViewById(R.id.item_event_tech_line1);
-            techLine2 = itemView.findViewById(R.id.item_event_tech_line2);
 
         }
 
