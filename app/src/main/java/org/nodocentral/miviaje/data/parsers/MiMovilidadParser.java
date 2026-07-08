@@ -16,6 +16,7 @@ import org.nodocentral.miviaje.domain.mimovilidad.card.Emission;
 import org.nodocentral.miviaje.domain.mimovilidad.card.Environment;
 import org.nodocentral.miviaje.domain.mimovilidad.card.Event;
 import org.nodocentral.miviaje.domain.mimovilidad.card.Product;
+import org.nodocentral.miviaje.domain.mimovilidad.card.Product.State;
 import org.nodocentral.miviaje.domain.mimovilidad.card.ProductContract;
 import org.nodocentral.miviaje.domain.mimovilidad.card.ProductService;
 import org.nodocentral.miviaje.domain.mimovilidad.card.User;
@@ -798,7 +799,7 @@ public class MiMovilidadParser implements MiMovilidadProductReader {
         buffer.position(23);
 
         return new ProductService(
-                ProductService.State.fromInt(state),
+                State.fromInt(state),
                 weekOfYear,
                 tripsPerDayOfWeek,
                 totalUsages,

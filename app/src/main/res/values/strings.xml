@@ -693,4 +693,5 @@
     <string name="station_parque_montenegro" translatable="false">Parque Montenegro</string>
     <string name="station_las_liebres" translatable="false">Las Liebres</string>
     <string name="transfer_limit">Transferencia válida hasta %1$s</string>
+    <string name="payment_method_status_expired">Expirado</string>
 </resources>

@@ -33,6 +33,7 @@ import org.nodocentral.miviaje.domain.mimovilidad.card.Emission;
 import org.nodocentral.miviaje.domain.mimovilidad.card.Environment;
 import org.nodocentral.miviaje.domain.mimovilidad.card.Event;
 import org.nodocentral.miviaje.domain.mimovilidad.card.Product;
+import org.nodocentral.miviaje.domain.mimovilidad.card.Product.State;
 import org.nodocentral.miviaje.domain.mimovilidad.card.ProductContract;
 import org.nodocentral.miviaje.domain.mimovilidad.card.ProductService;
 import org.nodocentral.miviaje.domain.mimovilidad.card.User;
@@ -400,7 +401,7 @@ public class CardActivity extends BaseActivity {
         ProductContract.Validity validity = contract == null ? null : contract.getValidity();
         ProductContract.Restrictions restrictions = contract == null ? null : contract.getRestrictions();
 
-        ProductService.State state = service == null ? null : service.getState();
+        State state = service == null ? null : service.getState();
         title.setText(formatProductTitle(product));
         status.setText(formatPaymentMethodState(state));
         tintPaymentMethodStatus(status, state);
@@ -513,14 +514,16 @@ public class CardActivity extends BaseActivity {
         }
     }
 
-    private String formatPaymentMethodState(ProductService.State state) {
+    private String formatPaymentMethodState(State state) {
         if (state == null) {
             return getString(R.string.unknown);
         }
         switch (state) {
             case INITIALIZED:
                 return getString(R.string.payment_method_status_initialized);
-            case ACTIVATED:
+            case EXPIRED:
+                return getString(R.string.payment_method_status_expired);
+            case ACTIVE:
                 return getString(R.string.payment_method_status_active);
             case SUSPENDED:
                 return getString(R.string.payment_method_status_suspended);
@@ -529,13 +532,13 @@ public class CardActivity extends BaseActivity {
         }
     }
 
-    private void tintPaymentMethodStatus(TextView view, ProductService.State state) {
+    private void tintPaymentMethodStatus(TextView view, State state) {
         int color;
-        if (state == ProductService.State.ACTIVATED) {
+        if (state == State.ACTIVE) {
             color = ContextCompat.getColor(this, R.color.miviaje_success);
-        } else if (state == ProductService.State.SUSPENDED) {
+        } else if (state == State.SUSPENDED) {
             color = ContextCompat.getColor(this, R.color.miviaje_danger);
-        } else if (state == ProductService.State.INITIALIZED) {
+        } else if (state == State.INITIALIZED || state == State.EXPIRED) {
             color = ContextCompat.getColor(this, R.color.miviaje_warning);
         } else {
             color = MaterialColors.getColor(view, com.google.android.material.R.attr.colorOutlineVariant, 0);

@@ -279,6 +279,11 @@ public class ProductContract {
         return lastAppliedActionNumber;
     }
 
+    public boolean isValid() {
+        return (validity.validFrom == null || LocalDateTime.now().isAfter(validity.validFrom)) &&
+                (validity.validTo == null || LocalDateTime.now().isBefore(validity.validTo));
+    }
+
     public Retailer getRetailer() {
         return retailer;
     }

@@ -24,7 +24,7 @@ import org.nodocentral.miviaje.presentation.CardActivity;
 import org.nodocentral.miviaje.data.artwork.CardArtworkResolver;
 import org.nodocentral.miviaje.domain.artwork.Artwork;
 import org.nodocentral.miviaje.domain.mimovilidad.card.Card;
-import org.nodocentral.miviaje.domain.mimovilidad.card.ProductService;
+import org.nodocentral.miviaje.domain.mimovilidad.card.Product.State;
 import org.nodocentral.miviaje.domain.mimovilidad.card.User.Profile.Type;
 
 import java.time.format.DateTimeFormatter;
@@ -213,7 +213,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         Type profileType = card.getUser().getProfile().getType();
         return profileType != Type.GENERAL_FARE
                 && profileType != Type.SINGLE_CARD
-                && card.getBPDState() == ProductService.State.ACTIVATED;
+                && card.getBPDState() == State.ACTIVE;
     }
 
     @Override

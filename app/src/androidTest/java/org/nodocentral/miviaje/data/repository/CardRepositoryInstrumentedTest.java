@@ -203,7 +203,7 @@ public class CardRepositoryInstrumentedTest {
                         ),
                         new ProductContract.Restrictions((byte) 0, 20, (short) 30, (byte) 2, (short) 45, (byte) 1)
                 ),
-                new ProductService(ProductService.State.ACTIVATED, 17, 5, 9, lastDebitDateTime, 10, 11, 12)
+                new ProductService(Product.State.ACTIVE, 17, 5, 9, lastDebitDateTime, 10, 11, 12)
         );
     }
 

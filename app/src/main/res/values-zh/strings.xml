@@ -187,6 +187,7 @@
     <string name="payment_method_status_active">已启用</string>
     <string name="payment_method_status_initialized">已初始化</string>
     <string name="payment_method_status_suspended">已暂停</string>
+    <string name="payment_method_status_expired">已过期</string>
 
     <string name="event_fare_payment">乘车支付</string>
     <string name="event_top_up">充值</string>

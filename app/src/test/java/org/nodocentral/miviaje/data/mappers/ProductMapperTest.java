@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.nodocentral.miviaje.data.room.ProductEntity;
 import org.nodocentral.miviaje.domain.mimovilidad.card.Product;
+import org.nodocentral.miviaje.domain.mimovilidad.card.Product.State;
 import org.nodocentral.miviaje.domain.mimovilidad.card.ProductContract;
 import org.nodocentral.miviaje.domain.mimovilidad.card.ProductService;
 
@@ -58,7 +59,7 @@ public class ProductMapperTest {
         entity.restrictionAllowedPassbacks = 2;
         entity.restrictionTransferTimeLimitMinutes = 45;
         entity.restrictionAllowedInterchanges = 1;
-        entity.state = ProductService.State.ACTIVATED.getValue();
+        entity.state = State.ACTIVE.getValue();
         entity.weekOfYear = 17;
         entity.tripsPerDayOfWeek = 5;
         entity.totalUsages = 9;
@@ -100,7 +101,7 @@ public class ProductMapperTest {
                         new ProductContract.Restrictions((byte) 0, 20, (short) 30, (byte) 2, (short) 45, (byte) 1)
                 ),
                 new ProductService(
-                        ProductService.State.ACTIVATED,
+                        State.ACTIVE,
                         17,
                         5,
                         9,

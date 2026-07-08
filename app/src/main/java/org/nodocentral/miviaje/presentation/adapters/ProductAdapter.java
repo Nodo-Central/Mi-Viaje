@@ -14,10 +14,10 @@ import com.google.android.material.color.MaterialColors;
 
 import org.nodocentral.miviaje.R;
 import org.nodocentral.miviaje.domain.mimovilidad.card.Product;
+import org.nodocentral.miviaje.domain.mimovilidad.card.Product.State;
 import org.nodocentral.miviaje.domain.mimovilidad.card.ProductContract;
 import org.nodocentral.miviaje.domain.mimovilidad.card.ProductService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -75,8 +75,7 @@ public final class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.VH
             title.setText(formatProductTitle(product));
             value.setText(formatMethodValue(itemView, product));
 
-            ProductService service = product.getService();
-            ProductService.State state = service == null ? null : service.getState();
+            State state = product.getState();
             status.setText(formatState(state));
             tintStatus(status, state);
 
@@ -110,29 +109,26 @@ public final class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.VH
             }
         }
 
-        String formatState(ProductService.State state) {
+        String formatState(Product.State state) {
             if (state == null) {
                 return getString(R.string.unknown);
             }
             switch (state) {
-                case INITIALIZED:
-                    return getString(R.string.payment_method_status_initialized);
-                case ACTIVATED:
-                    return getString(R.string.payment_method_status_active);
-                case SUSPENDED:
-                    return getString(R.string.payment_method_status_suspended);
-                default:
-                    return String.valueOf(state);
+                case INITIALIZED: return getString(R.string.payment_method_status_initialized);
+                case ACTIVE: return getString(R.string.payment_method_status_active);
+                case EXPIRED: return getString(R.string.payment_method_status_expired);
+                case SUSPENDED: return getString(R.string.payment_method_status_suspended);
+                default: return String.valueOf(state);
             }
         }
 
-        void tintStatus(TextView view, ProductService.State state) {
+        void tintStatus(TextView view, State state) {
             int color;
-            if (state == ProductService.State.ACTIVATED) {
+            if (state == State.ACTIVE) {
                 color = ContextCompat.getColor(itemView.getContext(), R.color.miviaje_success);
-            } else if (state == ProductService.State.SUSPENDED) {
+            } else if (state == State.SUSPENDED) {
                 color = ContextCompat.getColor(itemView.getContext(), R.color.miviaje_danger);
-            } else if (state == ProductService.State.INITIALIZED) {
+            } else if (state == State.INITIALIZED || state == State.EXPIRED) {
                 color = ContextCompat.getColor(itemView.getContext(), R.color.miviaje_warning);
             } else {
                 color = MaterialColors.getColor(view, com.google.android.material.R.attr.colorOutlineVariant, 0);

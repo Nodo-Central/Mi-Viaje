@@ -1,5 +1,7 @@
 package org.nodocentral.miviaje.domain.mimovilidad.card;
 
+import org.nodocentral.miviaje.domain.mimovilidad.card.Product.State;
+
 import androidx.annotation.NonNull;
 
 import java.time.LocalDateTime;
@@ -51,37 +53,6 @@ public class ProductService {
      * (DeviceId, 16 bits)
      */
     private final int lastDebitDeviceId;
-
-    public enum State {
-        INITIALIZED(0, 1),
-        ACTIVATED(1, 2),
-        SUSPENDED(2, 0);
-
-        private final int value;     // raw card value
-        private final int sortRank;  // UI/business ordering
-
-        State(int value, int sortRank) {
-            this.value = value;
-            this.sortRank = sortRank;
-        }
-
-        public static State fromInt(int valueUnitId) {
-            for (State valueUnit : State.values()) {
-                if (valueUnit.value == valueUnitId) {
-                    return valueUnit;
-                }
-            }
-            return null;
-        }
-
-        public int getValue() {
-            return this.value;
-        }
-
-        public int getSortRank() {
-            return this.sortRank;
-        }
-    }
 
     public ProductService(State state,
                           int weekOfYear,

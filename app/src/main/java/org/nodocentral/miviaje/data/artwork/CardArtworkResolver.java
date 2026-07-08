@@ -13,7 +13,7 @@ import androidx.annotation.StringRes;
 import org.nodocentral.miviaje.R;
 import org.nodocentral.miviaje.domain.artwork.Artwork;
 import org.nodocentral.miviaje.domain.mimovilidad.card.Card;
-import org.nodocentral.miviaje.domain.mimovilidad.card.ProductService;
+import org.nodocentral.miviaje.domain.mimovilidad.card.Product.State;
 import org.nodocentral.miviaje.domain.mimovilidad.card.User.Profile.Type;
 
 import java.io.File;
@@ -132,7 +132,7 @@ public final class CardArtworkResolver {
         if (productionYear >= BRANDING_SHIFT_YEAR_2) {
             return R.drawable.card_2026_single_card;
         }
-        if (card.getBPDState() == ProductService.State.ACTIVATED) {
+        if (card.getBPDState() == State.ACTIVE) {
             return productionYear >= BRANDING_SHIFT_YEAR
                     ? R.drawable.card_2025_subsidy_100
                     : R.drawable.card_2020_subsidy_100;

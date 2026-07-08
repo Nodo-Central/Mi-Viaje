@@ -275,7 +275,7 @@ public class MiMovilidadParserTest {
 
     private static ProductService buildService(LocalDateTime lastDebitDateTime) {
         return new ProductService(
-                ProductService.State.ACTIVATED,
+                Product.State.ACTIVE,
                 17,
                 5,
                 9,

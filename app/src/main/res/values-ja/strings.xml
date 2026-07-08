@@ -192,6 +192,7 @@
     <string name="payment_method_status_active">有効</string>
     <string name="payment_method_status_initialized">初期化済み</string>
     <string name="payment_method_status_suspended">停止中</string>
+    <string name="payment_method_status_expired">期限切れ</string>
 
     <string name="event_fare_payment">運賃支払い</string>
     <string name="event_top_up">チャージ</string>

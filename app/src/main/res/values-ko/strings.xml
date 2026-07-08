@@ -191,6 +191,7 @@
     <string name="payment_method_status_active">활성</string>
     <string name="payment_method_status_initialized">초기화됨</string>
     <string name="payment_method_status_suspended">중지됨</string>
+    <string name="payment_method_status_expired">만료됨</string>
 
     <string name="event_fare_payment">운임 결제</string>
     <string name="event_top_up">충전</string>

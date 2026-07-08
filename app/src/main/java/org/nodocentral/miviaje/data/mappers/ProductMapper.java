@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import org.nodocentral.miviaje.data.room.ProductEntity;
 import org.nodocentral.miviaje.domain.mimovilidad.card.Product;
+import org.nodocentral.miviaje.domain.mimovilidad.card.Product.State;
 import org.nodocentral.miviaje.domain.mimovilidad.card.ProductContract;
 import org.nodocentral.miviaje.domain.mimovilidad.card.ProductService;
 
@@ -40,7 +41,7 @@ public final class ProductMapper {
         ProductContract contract = getContract(entity, retailer, distributionInfo);
 
         ProductService service = new ProductService(
-                ProductService.State.fromInt(entity.state),
+                State.fromInt(entity.state),
                 entity.weekOfYear,
                 entity.tripsPerDayOfWeek,
                 entity.totalUsages,

@@ -82,8 +82,11 @@ public class Product {
         return service;
     }
 
-    public ProductService.State getState() {
-        return service.getState();
+    public State getState() {
+        if (service.getState() == State.ACTIVE && !contract.isValid())
+            return State.EXPIRED;
+        else
+            return service.getState();
     }
 
     public int getValue() {
@@ -108,5 +111,37 @@ public class Product {
                 ", value=" + value +
                 ", priority=" + priority +
                 "]";
+    }
+
+    public enum State {
+        INITIALIZED(0, 1),
+        ACTIVE(1, 3),
+        EXPIRED(-1, 2),
+        SUSPENDED(2, 0);
+
+        private final int value;     // raw card value
+        private final int sortRank;  // UI/business ordering
+
+        State(int value, int sortRank) {
+            this.value = value;
+            this.sortRank = sortRank;
+        }
+
+        public static State fromInt(int valueUnitId) {
+            for (State valueUnit : State.values()) {
+                if (valueUnit.value == valueUnitId) {
+                    return valueUnit;
+                }
+            }
+            return null;
+        }
+
+        public int getValue() {
+            return this.value;
+        }
+
+        public int getSortRank() {
+            return this.sortRank;
+        }
     }
 }

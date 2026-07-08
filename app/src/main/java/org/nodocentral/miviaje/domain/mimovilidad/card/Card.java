@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import org.nodocentral.miviaje.Helpers;
+import org.nodocentral.miviaje.domain.mimovilidad.card.Product.State;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -83,27 +84,27 @@ public class Card implements Serializable {
 
     public int getTicketValue() {
         int value = 0;
-        try {
-            value += Objects.requireNonNull(productList.get(TICKET1_PRODUCT_ID)).getValue();
-        } catch (NullPointerException ignored) {}
-        try {
-            value += Objects.requireNonNull(productList.get(TICKET2_PRODUCT_ID)).getValue();
-        } catch (NullPointerException ignored) {}
+        Product tickets1 = productList.get(TICKET1_PRODUCT_ID),
+                tickets2 = productList.get(TICKET2_PRODUCT_ID);
+        if (tickets1 != null && tickets1.getState() == State.ACTIVE)
+            value += tickets1.getValue();
+        if (tickets2 != null && tickets2.getState() == State.ACTIVE)
+            value += tickets2.getValue();
         return value;
     }
 
-    public ProductService.State getBPDState() {
-        ProductService.State state1;
-        ProductService.State state2;
+    public State getBPDState() {
+        State state1;
+        State state2;
         try {
             state1 = Objects.requireNonNull(productList.get(TICKET1_PRODUCT_ID)).getService().getState();
         } catch (NullPointerException ignored) {
-            state1 = ProductService.State.INITIALIZED;
+            state1 = State.INITIALIZED;
         }
         try {
             state2 = Objects.requireNonNull(productList.get(TICKET2_PRODUCT_ID)).getService().getState();
         } catch (NullPointerException ignored) {
-            state2 = ProductService.State.INITIALIZED;
+            state2 = State.INITIALIZED;
         }
         if (state1.getValue() > state2.getValue())
             return state1;
